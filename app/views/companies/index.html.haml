@@ -1,2 +1,34 @@
-%h1 Companies#index
-%p Find me in app/views/companies/index.html.haml
+%h3
+  Зарегистрированые компании
+  = button_tag type: 'button', id: 'new-company', class: 'btn btn-blue btn-icon icon-left pull-right' do
+    Новая компания
+    %i.entypo-plus
+%br
+%table#table-companies.table.table-bordered.datatable
+  %thead
+    %tr
+      %th Имя компании
+      %th Контакты
+      %th Основной контакт
+      %th Email
+      %th Параметры
+  %tbody
+    - @companies.each do |company|
+      %tr
+        %td= company.name
+        %td Контакты
+        %td Основной
+        %td= company.email
+        %td= company.website
+
+#new-company-modal.modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header
+        = button_tag '×', type: 'button', class: 'close', data: { dismiss: 'modal'}, html: { 'aria-hidden' => 'true' }
+        %h4.modal-title Новая компания
+      .modal-body
+        = form_for @company
+      .modal-footer
+        = button_tag 'Закрыть', type: 'button', class: 'btn btn-default', data: { dismiss: 'modal'}
+        = button_tag 'Сохранить', type: 'button', class: 'btn btn-info'

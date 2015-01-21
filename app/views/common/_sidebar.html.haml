@@ -1,0 +1,33 @@
+.sidebar-menu
+  .sidebar-menu-inner
+    %header.logo-env
+      .logo
+        = link_to root_path do
+          = image_tag 'logo@2x.png', width: 120
+      .sidebar-collapse
+        = link_to '#', class: 'sidebar-collapse-icon' do
+          %i.entypo-menu
+      .sidebar-mobile-menu.visible-xs
+        = link_to '#', class: 'with-animation' do
+          %i.entypo-menu
+  %ul#main-menu.main-menu
+    %li.root-level
+      = link_to '#' do
+        %i.entypo-gauge
+        %span.title Главная
+    %li.root-level
+      = link_to companies_path do
+        %i.entypo-users
+        %span.title Клиенты
+    %li.root-level
+      = link_to '#' do
+        %i.entypo-cup
+        %span.title Проекты
+    %li.root-level
+      = link_to '#' do
+        %i.entypo-cog
+        %span.title Настройки
+    %li.root-level
+      = link_to '#' do
+        %i.entypo-lock
+        %span.title Пользователи

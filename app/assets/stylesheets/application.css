@@ -10,6 +10,18 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+
+ * NEON theme
+ *= require neon/jquery-ui-1.10.3.custom.min
+ *= require neon/entypo/entypo
+ *= require neon/bootstrap
+ *= require neon/neon-core
+ *= require neon/neon-theme
+ *= require neon/neon-forms
+ *= require neon/datatables.responsive
+ *= require neon/select2-bootstrap
+ *= require neon/select2
+
  *= require_tree .
  *= require_self
  */
