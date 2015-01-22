@@ -1,0 +1,47 @@
+%h3
+  Пользователи
+  = button_tag type: 'button', id: 'new-user', class: 'btn btn-blue btn-icon icon-left pull-right' do
+    Новый пользователь
+    %i.entypo-plus
+%br
+%table#users-table.table.table-bordered.datatable
+  %thead
+    %tr
+      %th Полное имя
+      %th Логин
+      %th Компания
+      %th Роль
+      %th Зарегистрирован
+      %th Аватар
+      %th Параметры
+  %tbody
+    - @users.each do |user|
+      %tr
+        %td= user.full_name
+        %td= user.username
+        %td Компания
+        %td Роль
+        %td= user.created_at
+        %td Аватар
+        %td
+          = link_to '#', type: 'button', class: 'btn btn-default btn-icon icon-left btn-xs' do
+            Login Details
+            %i.entypo-lock
+          = link_to '#', type: 'button', class: 'btn btn-default btn-xs' do
+            %i.entypo-tools
+          = link_to edit_user_registration_path, type: 'button', class: 'btn btn-default btn-xs', method: :delete, data: { confirm: 'Вы уверены?'} do
+            %i.entypo-trash
+
+#user-new-modal.modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header
+        = button_tag '×', type: 'button', class: 'close', data: { dismiss: 'modal'}, html: { 'aria-hidden' => 'true' }
+        %h4.modal-title Новая компания
+      .modal-body
+        = form_tag nil, class: 'validate' do
+          = render 'form'
+      .modal-footer
+        = button_tag 'Закрыть', type: 'button', class: 'btn btn-default', data: { dismiss: 'modal'}
+        = button_tag 'Сохранить', type: 'button', id: 'user-save', class: 'btn btn-info'
+

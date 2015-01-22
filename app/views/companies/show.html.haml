@@ -1,2 +1,45 @@
-%h1 Companies#show
-%p Find me in app/views/companies/show.html.haml
+.panel.panel-default
+  .panel-body
+    .col-md-6
+      %h4 Детали компании
+      .row
+        .col-md-4 Название
+        .col-md-6= @company.name
+      .row
+        .col-md-4 Email
+        .col-md-6= @company.email
+      .row
+        .col-md-4 Контакт
+        .col-md-6 Контакт
+      %h4 Другие детали
+      .row
+        .col-md-4 Город
+        .col-md-6= @company.city
+    .col-md-6
+      %h4 Полученные платежи
+  .panel-body
+    .col-md-12
+      .panel.panel-default.panel-shadow
+        .panel-heading
+          .panel-title
+            %i.entypo-user
+            Контакты
+        .panel-body
+    .col-md-6
+      .panel.panel-default.panel-shadow
+        .panel-heading
+          .panel-title
+            %i.entypo-doc-text
+            Счета
+        .panel-body
+    .col-md-6
+      .panel.panel-default.panel-shadow
+        .panel-heading
+          .panel-title
+            %i.entypo-folder
+            Проекты
+        .panel-body
+
+
+
+

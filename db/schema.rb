@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20150119143712) do
     t.string   "address",    default: "", null: false
     t.string   "city"
     t.string   "website"
+    t.integer  "phone"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
   end

@@ -6,6 +6,7 @@ class CreateCompanies < ActiveRecord::Migration
       t.string :address, null: false, default: ""
       t.string :city
       t.string :website
+      t.integer :phone
 
       t.timestamps null: false
     end

@@ -1,0 +1,27 @@
+.row
+  .col-md-6
+    .form-group
+      = label_tag 'Имя компании', nil, class: 'control-label'
+      = text_field_tag 'name', nil, class: 'form-control', data: {validate: 'required', 'message-required' => 'Необходимое поле'}
+  .col-md-6
+    .form-group
+      = label_tag 'Email', nil, class: 'control-label'
+      = text_field_tag 'email', nil, class: 'form-control', data: {validate: 'required,email', 'message-required' => 'Необходимое поле'}
+.row
+  .col-md-12
+    .form-group
+      = label_tag 'Адрес', nil, class: 'control-label'
+      = text_field_tag 'address', nil, class: 'form-control', data: {validate: 'required', 'message-required' => 'Необходимое поле'}
+.row
+  .col-md-4
+    .form-group
+      = label_tag 'Город', nil, class: 'control-label'
+      = text_field_tag 'city', nil, class: 'form-control'
+  .col-md-4
+    .form-group
+      = label_tag 'Вебсайт', nil, class: 'control-label'
+      = text_field_tag 'website', nil, class: 'form-control', data: {validate: 'url'}
+  .col-md-4
+    .form-group
+      = label_tag 'Телефон', nil, class: 'control-label'
+      = text_field_tag 'phone', nil, class: 'form-control'

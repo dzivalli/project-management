@@ -12,6 +12,7 @@
 
 //= require jquery
 //= require jquery_ujs
+//= require turbolinks
 
 // NEON theme
 //= require neon/gsap/main-gsap
@@ -26,6 +27,8 @@
 //= require neon/datatable/lodash.min
 //= require neon/datatable/datatables.responsive
 //= require neon/select2.min
+//= require neon/jquery.validate.min
+//= require neon/toastr
 //= require neon/neon-custom
 
 //= require_tree .

@@ -3,7 +3,9 @@ Rails.application.routes.draw do
 
   # get 'home/index'
 
-  devise_for :users
+  devise_for :users, :controllers => { :registrations => "users" }
+  resources :users, only: [:index]
+  # resources :accounts, controller: :users, only: [:index]
 
   resources :companies
   resources :projects
