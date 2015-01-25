@@ -1,27 +1,27 @@
 .row
   .col-md-6
     .form-group
-      = label_tag 'Имя компании', nil, class: 'control-label'
-      = text_field_tag 'name', nil, class: 'form-control', data: {validate: 'required', 'message-required' => 'Необходимое поле'}
+      =f.label 'Имя компании', nil, class: 'control-label'
+      =f.text_field :name, class: 'form-control'
   .col-md-6
     .form-group
-      = label_tag 'Email', nil, class: 'control-label'
-      = text_field_tag 'email', nil, class: 'form-control', data: {validate: 'required,email', 'message-required' => 'Необходимое поле'}
+      =f.label 'Email', nil, class: 'control-label'
+      =f.text_field :email, class: 'form-control'
 .row
   .col-md-12
     .form-group
-      = label_tag 'Адрес', nil, class: 'control-label'
-      = text_field_tag 'address', nil, class: 'form-control', data: {validate: 'required', 'message-required' => 'Необходимое поле'}
+      =f.label 'Адрес', nil, class: 'control-label'
+      =f.text_field :address, class: 'form-control'
 .row
   .col-md-4
     .form-group
-      = label_tag 'Город', nil, class: 'control-label'
-      = text_field_tag 'city', nil, class: 'form-control'
+      =f.label 'Город', nil, class: 'control-label'
+      =f.text_field :city, class: 'form-control'
   .col-md-4
     .form-group
-      = label_tag 'Вебсайт', nil, class: 'control-label'
-      = text_field_tag 'website', nil, class: 'form-control', data: {validate: 'url'}
+      =f.label 'Вебсайт', nil, class: 'control-label'
+      =f.text_field :website, class: 'form-control'
   .col-md-4
     .form-group
-      = label_tag 'Телефон', nil, class: 'control-label'
-      = text_field_tag 'phone', nil, class: 'form-control'
+      =f.label 'Телефон', nil, class: 'control-label'
+      =f.text_field :phone, class: 'form-control'

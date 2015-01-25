@@ -10,7 +10,8 @@ var public_vars = public_vars || {};
 
 	"use strict";
 
-	$(document).ready(function()
+	var init = function()
+	//$(document).ready(function()
 	{
 		// Sidebar Menu var
 		public_vars.$body	 	 	= $("body");
@@ -1429,9 +1430,10 @@ var public_vars = public_vars || {};
 		// Apply Page Transition
 		onPageAppear(init_page_transitions);
 
-	});
+	};
 
-
+	$(document).ready(init);
+	$(document).on('page:load', init);
 
 	// Enable/Disable Resizable Event
 	var wid = 0;

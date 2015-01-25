@@ -1,6 +1,6 @@
 %h3
   Зарегистрированые компании
-  = button_tag type: 'button', id: 'new-company', class: 'btn btn-blue btn-icon icon-left pull-right' do
+  = link_to new_company_path, type: 'button', class: 'btn btn-blue btn-icon icon-left pull-right get-modal' do
     Новая компания
     %i.entypo-plus
 %br
@@ -25,18 +25,4 @@
             %i.entypo-home
           = link_to company_path(company), type: 'button', class: 'btn btn-default btn-xs', method: :delete, data: { confirm: 'Вы уверены?'} do
             %i.entypo-trash
-
-
-
 #company-new-modal.modal.fade
-  .modal-dialog
-    .modal-content
-      .modal-header
-        = button_tag '×', type: 'button', class: 'close', data: { dismiss: 'modal'}, html: { 'aria-hidden' => 'true' }
-        %h4.modal-title Новая компания
-      .modal-body
-        = form_tag nil, class: 'validate' do
-          = render 'form'
-      .modal-footer
-        = button_tag 'Закрыть', type: 'button', class: 'btn btn-default', data: { dismiss: 'modal'}
-        = button_tag 'Сохранить', type: 'button', id: 'company-save', class: 'btn btn-info'

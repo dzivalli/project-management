@@ -7,6 +7,10 @@ class CompaniesController < ApplicationController
     @company = Company.find(params[:id])
   end
 
+  def new
+    @company = Company.new
+    render layout: false
+  end
   def create
     if Company.create(permitted(params))
       redirect_to companies_path
@@ -33,6 +37,7 @@ class CompaniesController < ApplicationController
   private
 
   def permitted(params)
-    params.permit(:name, :email, :address, :phone, :website, :city)
+    params.require(:company).permit(:name, :email, :address, :phone,
+                                    :website, :city)
   end
 end

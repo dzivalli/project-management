@@ -30,5 +30,9 @@
 //= require neon/jquery.validate.min
 //= require neon/toastr
 //= require neon/neon-custom
+//= require neon/messages_ru
+
+// common settings and functions
+//= require common
 
 //= require_tree .
