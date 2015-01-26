@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150119143712) do
+ActiveRecord::Schema.define(version: 20150126145252) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,18 +23,36 @@ ActiveRecord::Schema.define(version: 20150119143712) do
     t.string   "city"
     t.string   "website"
     t.integer  "phone"
+    t.integer  "user_id"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
   end
 
+  create_table "milestones", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.date     "start_date"
+    t.date     "due_date"
+    t.integer  "project_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "milestones", ["project_id"], name: "index_milestones_on_project_id", using: :btree
+
   create_table "projects", force: :cascade do |t|
     t.string   "title",           null: false
     t.text     "description"
-    t.date     "start"
-    t.date     "due"
+    t.date     "start_date"
+    t.date     "due_date"
+    t.boolean  "fixed_price"
+    t.float    "fixed_rate"
+    t.float    "hourly_rate"
+    t.string   "status"
+    t.boolean  "deleted"
+    t.text     "notes"
     t.integer  "estimated_hours"
-    t.boolean  "fixed"
-    t.integer  "rate"
+    t.integer  "progress"
     t.integer  "company_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
@@ -46,6 +64,48 @@ ActiveRecord::Schema.define(version: 20150119143712) do
   end
 
   add_index "projects_users", ["user_id", "project_id"], name: "index_projects_users_on_user_id_and_project_id", unique: true, using: :btree
+
+  create_table "settings", id: false, force: :cascade do |t|
+    t.string   "key",        null: false
+    t.string   "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "settings", ["key"], name: "index_settings_on_key", unique: true, using: :btree
+
+  create_table "tasks", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.date     "start_date"
+    t.date     "due_date"
+    t.integer  "project_id"
+    t.integer  "milestone_id"
+    t.boolean  "visible"
+    t.integer  "progress"
+    t.integer  "user_id"
+    t.boolean  "auto_progress"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "tasks", ["milestone_id"], name: "index_tasks_on_milestone_id", using: :btree
+  add_index "tasks", ["project_id"], name: "index_tasks_on_project_id", using: :btree
+  add_index "tasks", ["user_id"], name: "index_tasks_on_user_id", using: :btree
+
+  create_table "time_entries", force: :cascade do |t|
+    t.date     "start_time"
+    t.date     "end_time"
+    t.integer  "project_id"
+    t.integer  "user_id"
+    t.integer  "task_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "time_entries", ["project_id"], name: "index_time_entries_on_project_id", using: :btree
+  add_index "time_entries", ["task_id"], name: "index_time_entries_on_task_id", using: :btree
+  add_index "time_entries", ["user_id"], name: "index_time_entries_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "username",               default: "", null: false
@@ -70,4 +130,11 @@ ActiveRecord::Schema.define(version: 20150119143712) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "milestones", "projects"
+  add_foreign_key "tasks", "milestones"
+  add_foreign_key "tasks", "projects"
+  add_foreign_key "tasks", "users"
+  add_foreign_key "time_entries", "projects"
+  add_foreign_key "time_entries", "tasks"
+  add_foreign_key "time_entries", "users"
 end

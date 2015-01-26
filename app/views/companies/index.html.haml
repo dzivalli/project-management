@@ -17,7 +17,7 @@
       %tr
         %td= link_to company.name, company_path(company), class: 'text-info'
         %td
-          %span.badge.badge-primary 0
+          %span.badge.badge-primary= company.users.count
         %td Основной
         %td= company.email
         %td

@@ -1,0 +1,11 @@
+.tabs-vertical-env
+  = render 'menu'
+  .tab-content
+    .panel.panel-primary
+      .panel-heading
+        .panel-title Настройки email
+      .panel-body
+    .form-group.default-padding
+      = button_to 'Сохранить', '#', class: 'btn btn-success'
+= render 'common/flash'
+

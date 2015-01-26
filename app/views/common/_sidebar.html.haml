@@ -11,23 +11,23 @@
         = link_to '#', class: 'with-animation' do
           %i.entypo-menu
   %ul#main-menu.main-menu
-    %li.root-level
+    %li
       = link_to '#' do
         %i.entypo-gauge
         %span.title Главная
-    %li.root-level
+    %li
       = link_to companies_path do
         %i.entypo-users
         %span.title Клиенты
-    %li.root-level
-      = link_to '#' do
+    %li
+      = link_to projects_path do
         %i.entypo-cup
         %span.title Проекты
-    %li.root-level
-      = link_to '#' do
+    %li
+      = link_to settings_general_path do
         %i.entypo-cog
         %span.title Настройки
-    %li.root-level
+    %li
       = link_to users_path do
         %i.entypo-lock
         %span.title Пользователи

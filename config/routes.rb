@@ -9,10 +9,16 @@ Rails.application.routes.draw do
       get 'password'
     end
   end
-  # resources :accounts, controller: :users, only: [:index]
 
   resources :companies
   resources :projects
+
+  #  routes for settings controller
+  get 'settings/general'
+  get 'settings/email'
+  patch 'settings/update'
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
