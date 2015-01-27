@@ -13,9 +13,9 @@ class CompaniesController < ApplicationController
   end
   def create
     if Company.create(permitted(params))
-      redirect_to companies_path
+      redirect_to companies_path, notice: 'Компания успешно добавлена'
     else
-      redirect_to companies_path
+      redirect_to companies_path, alert: 'Произошла ошибка, попробуйте еще раз'
     end
   end
 
@@ -28,7 +28,7 @@ class CompaniesController < ApplicationController
   def destroy
     company = Company.find(params[:id])
     if company.destroy
-      redirect_to companies_path
+      redirect_to companies_path, notice: 'Компания была успешно удалена'
     else
 
     end

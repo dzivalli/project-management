@@ -4,7 +4,7 @@
     Новая компания
     %i.entypo-plus
 %br
-%table#companies-table.table.table-bordered.datatable
+%table.pm-table.table.table-bordered.datatable
   %thead
     %tr
       %th Имя компании
@@ -25,4 +25,5 @@
             %i.entypo-home
           = link_to company_path(company), type: 'button', class: 'btn btn-default btn-xs', method: :delete, data: { confirm: 'Вы уверены?'} do
             %i.entypo-trash
-#company-new-modal.modal.fade
+= render 'common/flash'
+#new-modal.modal.fade

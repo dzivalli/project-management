@@ -21,13 +21,13 @@ class UsersController < ApplicationController
   def edit
     @user = User.find params[:id]
     @companies = Company.all
-    render layout: false
+    render 'new', layout: false
   end
 
   def password
     @user = User.find params[:id]
     @companies = Company.all
-    render 'edit', layout: false
+    render 'new', layout: false
   end
 
   def update

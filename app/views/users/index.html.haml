@@ -4,7 +4,7 @@
     Новый пользователь
     %i.entypo-plus
 %br
-%table#users-table.table.table-bordered.datatable
+%table.pm-table.table.table-bordered.datatable
   %thead
     %tr
       %th Полное имя
@@ -32,4 +32,4 @@
           = link_to user_path(user), type: 'button', class: 'btn btn-default btn-xs', method: :delete, data: { confirm: 'Вы уверены?'} do
             %i.entypo-trash
 = render 'common/flash'
-#user-new-modal.modal.fade
+#new-modal.modal.fade
