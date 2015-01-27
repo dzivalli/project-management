@@ -8,6 +8,7 @@ class ProjectsController < ApplicationController
 
   def new
     @project = Project.new
+    @companies = Company.every
     render layout: false
   end
 

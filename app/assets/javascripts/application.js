@@ -31,6 +31,7 @@
 //= require neon/toastr
 //= require neon/neon-custom
 //= require neon/messages_ru
+//= require neon/bootstrap-datepicker
 
 // common settings and functions
 //= require common

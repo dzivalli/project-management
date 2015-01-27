@@ -1,0 +1,28 @@
+.form-group
+  =f.label 'Имя проекта', nil, class: 'col-sm-3 control-label'
+  .col-sm-5
+    =f.text_field :title, class: 'form-control'
+.form-group
+  =f.label 'Клиент', nil, class: 'col-sm-3 control-label'
+  .col-sm-5
+    =f.collection_select :company_id, @companies, :id, :name, class: 'form-control'
+.form-group
+  =f.label 'Прогресс', nil, class: 'col-sm-3 control-label'
+  .col-sm-5
+    =f.text_field :progress, class: 'form-control'
+.form-group
+  =f.label 'Дата начала', nil, class: 'col-sm-3 control-label'
+  .col-sm-5
+    .input-group
+      =f.text_field :start_date, class: 'form-control datepicker', data: {format: 'D, dd MM yyyy'}
+      .input-group-addon
+        = link_to '#' do
+          %i.entypo-calendar
+.form-group
+  =f.label 'Дата конца', nil, class: 'col-sm-3 control-label'
+  .col-sm-5
+    .input-group
+      =f.text_field :due_date, class: 'form-control datepicker', data: {format: 'D, dd MM yyyy'}
+      .input-group-addon
+        = link_to '#' do
+          %i.entypo-calendar

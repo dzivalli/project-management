@@ -3,6 +3,8 @@ source 'https://rubygems.org'
 gem 'haml-rails'
 gem 'devise'
 gem 'quiet_assets'
+# for heroku deployment
+gem 'rails_12factor', group: :production
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
