@@ -35,6 +35,10 @@ Rails.application.configure do
   # yet still be able to expire them through the digest params.
   config.assets.digest = true
 
+  # compile assets from fonts folder for heroku deployment
+  config.assets.paths << "#{Rails.root}/vendor/assets/fonts"
+  config.assets.precompile << /\.(?:svg|eot|woff|ttf)$/
+
   # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb
 
   # Specifies the header that your server uses for sending files.
