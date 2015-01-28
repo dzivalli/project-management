@@ -4,7 +4,7 @@
     Новый проект
     %i.entypo-plus
 %br
-%table#project-table.table.table-bordered.datatable
+%table.pm-table.table.table-bordered.datatable
   %thead
     %tr
       %th Имя проекта
@@ -15,10 +15,10 @@
   %tbody
     - @projects.each do |project|
       %tr
-        %td= link_to project.name, project_path(project), class: 'text-info'
+        %td= link_to project.title, project_path(project), class: 'text-info'
         %td= project.start_date
         %td= project.due_date
         %td Стоимость
         %td Параметры
-#project-new-modal.modal.fade
-
+= render 'common/flash'
+#new-modal.modal.fade

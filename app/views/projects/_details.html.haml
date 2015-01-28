@@ -1,0 +1,51 @@
+.row
+  .col-lg-6
+    %ul.list-group
+      %li.list-group-item
+        %span.pull-right= @project.title
+        Имя проекта
+      %li.list-group-item
+        %span.pull-right= @project.company.name
+        Имя клиента
+      %li.list-group-item
+        %span.pull-right= @project.start_date
+        Начало
+      %li.list-group-item
+        %span.pull-right= @project.due_date
+        Конец
+  .col-lg-6
+    %ul.list-group
+      %li.list-group-item
+        %span.pull-right
+        Потраченно время
+      %li.list-group-item
+        %span.pull-right
+        Общая стоимость
+      %li.list-group-item
+        %span.pull-righte
+        Ответственные
+      %li.list-group-item
+        %span.pull-right
+        четвертая опция
+.row
+  .col-lg-6
+    .panel.panel-default
+      .panel-heading
+        .panel-title Задачи прогресс бар
+      .panel-body
+  .col-lg-6
+    .panel.panel-default
+      .panel-heading
+        .panel-title Файлы
+      .panel-body
+.row
+  .col-lg-6
+    .panel.panel-default
+      .panel-heading
+        .panel-title Список последних задач
+      .panel-body
+  .col-lg-6
+    .panel.panel-default
+      .panel-heading
+        .panel-title Последние баги
+      .panel-body

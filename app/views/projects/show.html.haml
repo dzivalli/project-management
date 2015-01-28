@@ -1,2 +1,9 @@
-%h1 Projects#show
-%p Find me in app/views/projects/show.html.haml
+.tabs-vertical-env
+  = render 'menu'
+  .tab-content
+    .panel
+      .panel-heading
+        = render 'header'
+      .panel-body
+        = render 'details'
+= render 'common/flash'

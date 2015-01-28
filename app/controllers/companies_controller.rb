@@ -12,7 +12,8 @@ class CompaniesController < ApplicationController
     render layout: false
   end
   def create
-    if Company.create(permitted(params))
+    company = Company.new(permitted(params))
+    if company.save
       redirect_to companies_path, notice: 'Компания успешно добавлена'
     else
       redirect_to companies_path, alert: 'Произошла ошибка, попробуйте еще раз'

@@ -14,6 +14,7 @@ init = ->
         minimumResultsForSearch: -1
   $('.pm-table').dataTable dtOpts
 
+
 #  bind submit to modal
   modal = $("#new-modal")
   modal.on 'click', '#save-modal', ->
@@ -35,7 +36,6 @@ init = ->
       "hideEasing": "linear"
       "showMethod": "fadeIn"
       "hideMethod": "fadeOut"
-    debugger
     if msg.data('msg') is 'notice'
       toastr.success msg.html(), null, toasterOpts
     else if msg.data('msg') is 'alert'
@@ -71,6 +71,27 @@ init = ->
       modal.html(result).modal('show')
       rulesFor = modal.find('form').attr('id').split("_")[1]
       modal.find('form').validate(generateRules(rulesFor))
+      modal.find('select').select2
+        minimumResultsForSearch: -1
+      bindDatepicker()
+      bindBootstrapSwitch()
+
+
+  bindDatepicker = ->
+    modal.find('.datepicker').datepicker
+      format: 'yyyy/mm/dd'
+    modal.find('.input-group-addon').on 'click',(e) ->
+      e.preventDefault()
+      $(this).siblings('input').datepicker('show')
+
+  bindBootstrapSwitch = ->
+    modal.find(".make-switch").bootstrapSwitch()
+    elements = modal.find('.pm-price')
+    modal.find(".make-switch").on 'change', ->
+      elements.toggle()
+
+
+
 
 $(document).on 'page:load', init
 $(document).ready init

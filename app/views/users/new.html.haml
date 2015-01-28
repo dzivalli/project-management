@@ -1,18 +1,18 @@
-.modal-dialog
-  .modal-content
-    .modal-header
-      = button_tag '×', type: 'button', class: 'close', data: { dismiss: 'modal'}, html: { 'aria-hidden' => 'true' }
-      %h4.modal-title
-        - if action_name == 'new'
-          Новый пользователь
-        - elsif action_name == 'edit'
-          Изменить данные
-        - else
-          Изменить пароль
-    .modal-body
-      = form_for @user do |f|
+= form_for @user do |f|
+  .modal-dialog
+    .modal-content
+      .modal-header
+        = button_tag '×', type: 'button', class: 'close', data: { dismiss: 'modal'}, html: { 'aria-hidden' => 'true' }
+        %h4.modal-title
+          - if action_name == 'new'
+            Новый пользователь
+          - elsif action_name == 'edit'
+            Изменить данные
+          - else
+            Изменить пароль
+      .modal-body
         = render partial: 'form', locals: {f: f}
-    .modal-footer
-      = button_tag 'Закрыть', type: 'button', class: 'btn btn-default', data: { dismiss: 'modal'}
-      = button_tag 'Сохранить', type: 'button', id: 'save-modal', class: 'btn btn-info'
+      .modal-footer
+        = button_tag 'Закрыть', type: 'button', class: 'btn btn-default', data: { dismiss: 'modal'}
+        = button_tag 'Сохранить', type: 'button', id: 'save-modal', class: 'btn btn-info'
 

@@ -1,0 +1,13 @@
+%ul.nav.tabs-vertical
+  %li{class: ('active' if action_name == 'show')}
+    = link_to 'Главная', project_path(@project)
+  %li{class: ('active' if action_name == 'email')}
+    = link_to 'Команда', '#'
+  %li
+    = link_to 'Этапы', '#'
+  %li
+    = link_to 'Задания', '#'
+  %li
+    = link_to 'Файлы', '#'
+  %li
+    = link_to 'Taбель', '#'

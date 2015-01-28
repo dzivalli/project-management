@@ -32,6 +32,7 @@
 //= require neon/neon-custom
 //= require neon/messages_ru
 //= require neon/bootstrap-datepicker
+//= require neon/bootstrap-switch.min
 
 // common settings and functions
 //= require common
