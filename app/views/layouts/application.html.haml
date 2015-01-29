@@ -11,4 +11,15 @@
       .main-content
         = render 'common/profile'
         %hr
-        = yield
+        - if content_for? :project
+          .tabs-vertical-env
+            = render 'projects/menu'
+            .tab-content
+              .panel
+                .panel-body
+                  = render 'projects/header'
+                .panel-body
+                  = yield :project
+        - else
+          = yield
+        #new-modal.modal.fade

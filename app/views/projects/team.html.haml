@@ -1,0 +1,22 @@
+- content_for :project do
+  .panel.panel-primary
+    .panel-heading
+      .panel-title
+        = link_to 'Изменить', '#', class: 'btn btn-default'
+    .panel-body
+      %table.pm-table.table.table-bordered.datatable
+        %thead
+          %tr
+            %th Аватар
+            %th Логин
+            %th Полное имя
+            %th Телефон
+            %th Email
+        %tbody
+          - @team.each do |member|
+            %tr
+              %td Картинка
+              %td= member.username
+              %td= member.full_name
+              %td= member.phone
+              %td= member.email

@@ -7,7 +7,7 @@ init = ->
     "sPaginationType": "bootstrap"
     "aLengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Все"]]
     "language":
-      "url": "datatable/Russian.json"
+      "url": "/datatable/Russian.json"
     "bStateSave": true
     fnDrawCallback: ->
       $(".dataTables_wrapper select").select2

@@ -11,7 +11,14 @@ Rails.application.routes.draw do
   end
 
   resources :companies
-  resources :projects
+
+  resources :projects do
+    resources :milestones
+    resources :tasks
+    member do
+      get 'team'
+    end
+  end
 
   #  routes for settings controller
   get 'settings/general'

@@ -1,13 +1,25 @@
 %ul.nav.tabs-vertical
   %li{class: ('active' if action_name == 'show')}
-    = link_to 'Главная', project_path(@project)
-  %li{class: ('active' if action_name == 'email')}
-    = link_to 'Команда', '#'
+    = link_to project_path(@project) do
+      %i.entypo-home
+      Главная
+  %li{class: ('active' if action_name == 'team')}
+    = link_to team_project_path(@project) do
+      %i.entypo-users
+      Команда
+  %li{class: ('active' if controller_name == 'milestone')}
+    = link_to project_milestones_path(@project) do
+      %i.entypo-monitor
+      Этапы
+  %li{class: ('active' if controller_name == 'task')}
+    = link_to project_tasks_path(@project) do
+      %i.entypo-doc-text-inv
+      Задачи
   %li
-    = link_to 'Этапы', '#'
+    = link_to '#' do
+      %i.entypo-archive
+      Файлы
   %li
-    = link_to 'Задания', '#'
-  %li
-    = link_to 'Файлы', '#'
-  %li
-    = link_to 'Taбель', '#'
+    = link_to '#' do
+      %i.entypo-clock
+      Табель

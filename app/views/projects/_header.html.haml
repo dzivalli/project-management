@@ -1,6 +1,6 @@
 .row
   .col-sm-12
-    = link_to edit_project_path(@project), class: 'btn btn-blue btn-icon icon-left' do
+    = link_to edit_project_path(@project), class: 'btn btn-blue btn-icon icon-left get-modal' do
       Изменить
       %i.entypo-pencil
     = link_to edit_project_path(@project), class: 'btn btn-blue btn-icon icon-left' do
@@ -9,6 +9,6 @@
     = link_to edit_project_path(@project), class: 'btn btn-blue btn-icon icon-left' do
       Счета
       %i.entypo-credit-card
-    = link_to edit_project_path(@project), class: 'btn btn-default btn-icon icon-left' do
+    = link_to project_path(@project), class: 'btn btn-default btn-icon icon-left', method: :delete do
       Удалить
       %i.entypo-trash

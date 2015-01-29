@@ -11,6 +11,7 @@ class CompaniesController < ApplicationController
     @company = Company.new
     render layout: false
   end
+
   def create
     company = Company.new(permitted(params))
     if company.save

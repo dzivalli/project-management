@@ -2,14 +2,22 @@
   =f.label 'Имя проекта', nil, class: 'col-sm-4 control-label'
   .col-sm-5
     =f.text_field :title, class: 'form-control'
+
 .form-group
   =f.label 'Клиент', nil, class: 'col-sm-4 control-label'
   .col-sm-5
     =f.collection_select :company_id, @companies, :id, :name, class: 'form-control'
+
+.form-group
+  =f.label 'Ответственные', nil, class: 'col-sm-4 control-label'
+  .col-sm-5
+    =f.collection_select :users, @users, :id, :username, {}, {class: 'form-control', multiple: ''}
+
 .form-group
   =f.label 'Прогресс', nil, class: 'col-sm-4 control-label'
   .col-sm-5
     =f.text_field :progress, class: 'form-control'
+
 .form-group
   =f.label 'Дата начала', nil, class: 'col-sm-4 control-label'
   .col-sm-5
@@ -18,6 +26,7 @@
       .input-group-addon
         = link_to '#' do
           %i.entypo-calendar
+
 .form-group
   =f.label 'Дата конца', nil, class: 'col-sm-4 control-label'
   .col-sm-5
@@ -31,14 +40,17 @@
   .col-sm-5
     .make-switch.switch-small
       =f.check_box :fixed_price
+
 .form-group.pm-price
   =f.label 'Стоимость часа', nil, class: 'col-sm-4 control-label'
   .col-sm-5
     =f.number_field :hourly_rate, class: 'form-control'
+
 .form-group.pm-price{style: 'display: none'}
   =f.label 'Общая стоимость', nil, class: 'col-sm-4 control-label'
   .col-sm-5
     =f.number_field :fixed_price, class: 'form-control'
+
 .form-group
   =f.label 'Описание', nil, class: 'col-sm-4 control-label'
   .col-sm-5
