@@ -1,2 +1,8 @@
-%h1 Tasks#index
-%p Find me in app/views/tasks/index.html.haml
+- content_for :project do
+  .panel.panel-primary
+    .panel-heading
+      .panel-title.m-r
+        = link_to 'Добавить', new_project_task_path(@project), class: 'btn btn-default get-modal'
+        = link_to 'Из шаблона', '#', class: 'btn btn-default'
+    .panel-body
+      = render 'table'

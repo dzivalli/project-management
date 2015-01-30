@@ -87,8 +87,9 @@ init = ->
   bindBootstrapSwitch = ->
     modal.find(".make-switch").bootstrapSwitch()
     elements = modal.find('.pm-price')
-    modal.find(".make-switch").on 'change', ->
-      elements.toggle()
+    if elements.length
+      modal.find(".make-switch").on 'change', ->
+        elements.toggle()
 
 
 

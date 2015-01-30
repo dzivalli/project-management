@@ -13,7 +13,7 @@
             %th Телефон
             %th Email
         %tbody
-          - @team.each do |member|
+          - @project.users.each do |member|
             %tr
               %td Картинка
               %td= member.username

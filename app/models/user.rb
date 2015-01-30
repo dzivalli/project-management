@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   belongs_to :company
 
   has_and_belongs_to_many :projects
+  has_and_belongs_to_many :tasks
 
   validates_presence_of :username, :full_name, :email
   validates_length_of :username, :full_name, :email, maximum: 255

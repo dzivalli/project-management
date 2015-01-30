@@ -6,7 +6,8 @@ class UsersController < ApplicationController
   def new
     @user = User.new
     @companies = Company.all
-    render layout: false
+    @title = 'Новый пользователь'
+    render layout: 'modal'
   end
 
   def create
@@ -21,13 +22,15 @@ class UsersController < ApplicationController
   def edit
     @user = User.find params[:id]
     @companies = Company.all
-    render 'new', layout: false
+    @title = 'Изменить данные'
+    render 'new', layout: 'modal'
   end
 
   def password
     @user = User.find params[:id]
     @companies = Company.all
-    render 'new', layout: false
+    @title = 'Смена пароля'
+    render 'new', layout: 'modal'
   end
 
   def update

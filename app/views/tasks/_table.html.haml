@@ -1,0 +1,19 @@
+%table.pm-table.table.table-bordered.datatable
+  %thead
+    %tr
+      %th Таймер
+      %th Имя
+      %th Конец
+      %th Прогресс
+      %th Параметры
+  %tbody
+    - @project.tasks.each do |task|
+      %tr
+        %td Таймер
+        %td= link_to task.name, project_task_path(@project, task), class: 'text-info'
+        %td= task.due_date
+        %td Прогресс
+        %td
+          = link_to edit_project_task_path(@project, task), type: 'button', class: 'btn btn-default btn-xs get-modal' do
+            %i.entypo-tools
+          = link_to 'Таймер', '#', type: 'button', class: 'btn btn-default btn-xs'

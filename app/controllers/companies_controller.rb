@@ -9,7 +9,8 @@ class CompaniesController < ApplicationController
 
   def new
     @company = Company.new
-    render layout: false
+    @title = 'Новая компания'
+    render layout: 'modal'
   end
 
   def create

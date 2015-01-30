@@ -5900,7 +5900,7 @@ body {
   perspective: 800;
 }
 .select2-search input,
-.select2-search-choice-close,
+/*.select2-search-choice-close,*/
 .select2-container .select2-choice abbr,
 .select2-container .select2-choice .select2-arrow b {
   background-image: none !important;

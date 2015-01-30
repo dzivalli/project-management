@@ -3,7 +3,7 @@ class CreateTasks < ActiveRecord::Migration
     create_table :tasks do |t|
       t.string :name
       t.text :description
-      t.date :start_date
+      t.integer :estimated_hours
       t.date :due_date
       t.references :project, index: true
       t.references :milestone, index: true

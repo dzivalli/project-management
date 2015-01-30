@@ -1,2 +1,26 @@
-%h1 Milestones#index
-%p Find me in app/views/milestones/index.html.haml
+- content_for :project do
+  .panel.panel-primary
+    .panel-heading
+      .panel-title
+        = link_to 'Добавить', new_project_milestone_path(@project), class: 'btn btn-default get-modal'
+    .panel-body
+      %table.pm-table.table.table-bordered.datatable
+        %thead
+          %tr
+            %th Имя
+            %th Начало
+            %th Конец
+            %th Прогресс
+            %th Параметры
+        %tbody
+          - @project.milestones.each do |milestone|
+            %tr
+              %td= link_to milestone.name, project_milestone_path(@project, milestone), class: 'text-info'
+              %td= milestone.start_date
+              %td= milestone.due_date
+              %td Прогресс
+              %td
+                = link_to edit_project_milestone_path(@project, milestone), type: 'button', class: 'btn btn-default btn-xs get-modal' do
+                  %i.entypo-tools
+                = link_to project_milestone_path(@project, milestone), type: 'button', class: 'btn btn-default btn-xs', method: :delete, data: { confirm: 'Вы уверены?'} do
+                  %i.entypo-trash

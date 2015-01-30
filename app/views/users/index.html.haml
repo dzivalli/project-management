@@ -23,7 +23,7 @@
         %td Роль
         %td= user.created_at
         %td Аватар
-        %td
+        %td.m-r
           = link_to password_user_path(user), type: 'button', class: 'btn btn-default btn-icon icon-left btn-xs get-modal' do
             Смена пароля
             %i.entypo-lock
@@ -31,4 +31,4 @@
             %i.entypo-tools
           = link_to user_path(user), type: 'button', class: 'btn btn-default btn-xs', method: :delete, data: { confirm: 'Вы уверены?'} do
             %i.entypo-trash
-= render 'common/flash'
+

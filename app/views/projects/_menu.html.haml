@@ -7,11 +7,11 @@
     = link_to team_project_path(@project) do
       %i.entypo-users
       Команда
-  %li{class: ('active' if controller_name == 'milestone')}
+  %li{class: ('active' if controller_name == 'milestones')}
     = link_to project_milestones_path(@project) do
       %i.entypo-monitor
       Этапы
-  %li{class: ('active' if controller_name == 'task')}
+  %li{class: ('active' if controller_name == 'tasks')}
     = link_to project_tasks_path(@project) do
       %i.entypo-doc-text-inv
       Задачи

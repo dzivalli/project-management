@@ -1,2 +1,2 @@
-%h1 Tasks#new
-%p Find me in app/views/tasks/new.html.haml
+= form_for [@project, @task], html: { class: 'form-horizontal' } do |f|
+  = render partial: 'form', locals: {f: f}

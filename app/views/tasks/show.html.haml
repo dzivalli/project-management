@@ -1,0 +1,37 @@
+- content_for :project do
+  .panel.panel-primary
+    .panel-heading
+      .panel-title
+        = link_to 'Добавить фаил', '#', class: 'btn btn-default'
+        = link_to 'Изменить', edit_project_task_path(@task.project, @task), class: 'btn btn-default get-modal'
+        = link_to 'Удалить', project_task_path(@task.project, @task), class: 'btn btn-default', method: :delete
+    .panel-body
+      .row
+        .col-lg-6
+          %ul.list-group
+            %li.list-group-item
+              %span.pull-right= @task.name
+              Имя задачи
+            %li.list-group-item
+              %span.pull-right= @project.title
+              Имя проекта
+            %li.list-group-item
+              %span.pull-right= @task.visible
+              Видимость клиенту
+            %li.list-group-item
+              %span.pull-right= @task.due_date
+              Конец
+        .col-lg-6
+          %ul.list-group
+            %li.list-group-item
+              %span.pull-right время
+              Потрачено время
+            %li.list-group-item
+              %span.pull-right= @task.estimated_hours
+              Время
+            %li.list-group-item
+              %span.pull-right= @task.users.pluck(:username).join(', ')
+              Ответственные
+            %li.list-group-item
+              %span.pull-right статус
+              Статус таймера

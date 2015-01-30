@@ -1,0 +1,28 @@
+- content_for :project do
+  .panel.panel-primary
+    .panel-heading
+      .panel-title
+        = link_to 'Изменить', edit_project_milestone_path(@milestone.project, @milestone), class: 'btn btn-default get-modal'
+        = link_to 'Удалить', project_milestone_path(@milestone.project, @milestone), class: 'btn btn-default', method: :delete
+    .panel-body
+      .row
+        .col-lg-6
+          %ul.list-group
+            %li.list-group-item
+              %span.pull-right= @milestone.name
+              Имя этапа
+            %li.list-group-item
+              %span.pull-right= @project.title
+              Имя проекта
+        .col-lg-6
+          %ul.list-group
+            %li.list-group-item
+              %span.pull-right= @milestone.start_date
+              Начало
+            %li.list-group-item
+              %span.pull-right= @project.due_date
+              Конец
+    .panel-body
+      .panel-title Задачи
+
+

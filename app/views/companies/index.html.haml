@@ -20,10 +20,9 @@
           %span.badge.badge-primary= company.users.count
         %td Основной
         %td= company.email
-        %td
+        %td.m-r
           = link_to company_path(company), type: 'button', class: 'btn btn-default btn-xs' do
             %i.entypo-home
           = link_to company_path(company), type: 'button', class: 'btn btn-default btn-xs', method: :delete, data: { confirm: 'Вы уверены?'} do
             %i.entypo-trash
-= render 'common/flash'
 

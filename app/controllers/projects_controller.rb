@@ -5,14 +5,15 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    @project = Project.find(params[:id])
+    @project = Project.find params[:id]
   end
 
   def new
     @users = User.all
     @project = Project.new
     @companies = Company.every
-    render layout: false
+    @title = 'Новый проект'
+    render layout: 'modal'
   end
 
   def create
@@ -26,29 +27,29 @@ class ProjectsController < ApplicationController
 
   def edit
     @users = User.all
-    @project = Project.find(params[:id])
+    @project = Project.find params[:id]
     @companies = Company.every
-    render 'new', layout: false
+    @title = 'Изменить данные'
+    render 'new', layout: 'modal'
   end
 
   def update
     project = Project.new_or_upd_with_users(permitted(params), params[:id])
     if project.save
-      redirect_to :back, notice: 'Проект был успешно создан'
+      redirect_to :back, notice: 'Данные были успешно изменены'
     else
       redirect_to :back, alert: 'Произошла ошибка, повторите еще раз'
     end
   end
 
   def destroy
-    if Project.destroy(params[:id])
+    if Project.destroy params[:id]
       redirect_to projects_path, notice: 'Проект был успешно удален'
     end
   end
 
   def team
-    @project = Project.find(params[:id])
-    @team = @project.users
+    @project = Project.includes(:users).find params[:id]
   end
 
   private

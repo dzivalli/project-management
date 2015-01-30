@@ -11,7 +11,7 @@
 .form-group
   =f.label 'Ответственные', nil, class: 'col-sm-4 control-label'
   .col-sm-5
-    =f.collection_select :users, @users, :id, :username, {}, {class: 'form-control', multiple: ''}
+    =f.collection_select :users, @users, :id, :username, {selected: @project.users.ids}, { class: 'form-control', multiple: ''}
 
 .form-group
   =f.label 'Прогресс', nil, class: 'col-sm-4 control-label'
