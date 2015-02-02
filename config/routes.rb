@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   # get 'home/index'
 
   devise_for :users, skip: [:passwords]
+
   resources :users do
     member do
       get 'password'

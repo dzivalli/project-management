@@ -1,0 +1,39 @@
+- content_for :login do
+  .login-container
+    .login-header.login-caret
+      .login-content
+        = link_to root_path, class: 'logo' do
+          = image_tag 'logo@2x.png', width: 120
+        %p.description Пожалуйста авторизуйтесь
+        .login-progressbar-indicator
+          %h3 43%
+          %span Вход...
+    .login-progressbar
+      %div
+    .login-form
+      .login-content
+        .form-login-error
+          %h3 Неправильные данные
+        = form_for resource, as: resource_name, url: session_path(resource_name), id: 'form-login', role: 'form' do |f|
+          .form-group
+            .input-group
+              .input-group-addon
+                %i.entypo-user
+              = f.text_field :username, autofocus: true, class: 'form-control', placeholder: 'Username'
+          .form-group
+            .input-group
+              .input-group-addon
+                %i.entypo-key
+              = f.password_field :password, autocomplete: 'off', class: 'form-control', placeholder: 'Password'
+          .form-group
+            = button_tag type: 'submit', class: 'btn btn-primary btn-block btn-login' do
+              %i.entypo-login
+              Вход
+          .form-group
+            %em -или-
+          .form-group
+            = button_tag class: 'btn btn-default btn-lg btn-block btn-icon icon-left facebook-button' do
+              Login with Facebook
+              %i.entypo-facebook
+        .login-bottom-links
+          = link_to 'Забыли пароль?', '#', class: 'link'

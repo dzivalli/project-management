@@ -1,8 +1,20 @@
 .row
   .col-md-6.col-sm-8.clearfix
+    %ul.user-info.pull-left.pull-none-xsm
+      %li.profile-info.dropdown
+        = link_to '#', class: 'dropdown-toggle', data: {toggle: 'dropdown'} do
+          = image_tag 'thumb-1@2x.png', width: 44, class: 'img-circle'
+          = current_user.full_name
+        %ul.dropdown-menu
+          %li.caret
+          %li
+            = link_to '#' do
+              %i.entypo-user
+              Профиль
+
   .col-md-6.col-sm-4.clearfix.hidden-xs
     %ul.list-inline.links-list.pull-right
       %li
-        = link_to '#' do
+        = link_to destroy_user_session_path, method: :delete do
           Выход
           %i.entypo-logout.right
