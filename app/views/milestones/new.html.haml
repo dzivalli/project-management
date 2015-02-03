@@ -1,5 +1,32 @@
 = form_for [@project, @milestone], html: { class: 'form-horizontal' } do |f|
-  = render partial: 'form', locals: {f: f}
+  .form-group
+    =f.label 'Имя', nil, class: 'col-sm-4 control-label'
+    .col-sm-5
+      =f.text_field :name, class: 'form-control'
+
+  .form-group
+    =f.label 'Дата начала', nil, class: 'col-sm-4 control-label'
+    .col-sm-5
+      .input-group
+        =f.text_field :start_date, class: 'form-control datepicker'
+        .input-group-addon
+          = link_to '#' do
+            %i.entypo-calendar
+
+  .form-group
+    =f.label 'Дата конца', nil, class: 'col-sm-4 control-label'
+    .col-sm-5
+      .input-group
+        =f.text_field :due_date, class: 'form-control datepicker'
+        .input-group-addon
+          = link_to '#' do
+            %i.entypo-calendar
+
+  .form-group
+    =f.label 'Описание', nil, class: 'col-sm-4 control-label'
+    .col-sm-5
+      =f.text_area :description, class: 'form-control'
+
 
 
 

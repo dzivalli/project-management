@@ -3,18 +3,31 @@
     = link_to project_path(@project) do
       %i.entypo-home
       Главная
-  %li{class: ('active' if action_name == 'team')}
-    = link_to team_project_path(@project) do
-      %i.entypo-users
-      Команда
-  %li{class: ('active' if controller_name == 'milestones')}
-    = link_to project_milestones_path(@project) do
-      %i.entypo-monitor
-      Этапы
-  %li{class: ('active' if controller_name == 'tasks')}
-    = link_to project_tasks_path(@project) do
-      %i.entypo-doc-text-inv
-      Задачи
+
+  - if can? :team, @project
+    %li{class: ('active' if action_name == 'team')}
+      = link_to team_project_path(@project) do
+        %i.entypo-users
+        Команда
+
+  - if can? :show, Milestone
+    %li{class: ('active' if controller_name == 'milestones')}
+      = link_to project_milestones_path(@project) do
+        %i.entypo-monitor
+        Этапы
+
+  - if can? :show, Task
+    %li{class: ('active' if controller_name == 'tasks')}
+      = link_to project_tasks_path(@project) do
+        %i.entypo-doc-text-inv
+        Задачи
+
+  - if can? :permission, @project
+    %li{class: ('active' if action_name == 'permissions')}
+      = link_to permissions_project_path(@project) do
+        %i.entypo-cog
+        Доступ
+
   %li
     = link_to '#' do
       %i.entypo-archive

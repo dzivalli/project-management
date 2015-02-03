@@ -1,0 +1,21 @@
+- content_for :project do
+  .panel.panel-primary
+    .panel-heading
+      .panel-title
+        = "Настройка доступа к проекту #{@project.title}"
+    = form_tag do
+      .panel-body
+        .form-group
+          .checkbox-replace
+            = check_box_tag 'milestone', nil, @permissions.include?('milestone')
+            = label_tag 'milestone' , 'Просмотр этапов'
+        .form-group
+          .checkbox-replace
+            = check_box_tag 'task', nil, @permissions.include?('task')
+            = label_tag 'task' , 'Просмотр задач'
+        .form-group
+          .checkbox-replace
+            = check_box_tag 'team', nil, @permissions.include?('team')
+            = label_tag 'team' , 'Просмотр команды'
+      .panel-body
+        = submit_tag 'Сохранить', class: 'btn btn-default'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150130145851) do
+ActiveRecord::Schema.define(version: 20150203113847) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,19 @@ ActiveRecord::Schema.define(version: 20150130145851) do
 
   add_index "milestones", ["project_id"], name: "index_milestones_on_project_id", using: :btree
 
+  create_table "permissions", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "company_id"
+    t.string   "subject_class"
+    t.integer  "subject_id"
+    t.string   "action"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "permissions", ["company_id"], name: "index_permissions_on_company_id", using: :btree
+  add_index "permissions", ["user_id"], name: "index_permissions_on_user_id", using: :btree
+
   create_table "projects", force: :cascade do |t|
     t.string   "title",           null: false
     t.text     "description"
@@ -64,6 +77,12 @@ ActiveRecord::Schema.define(version: 20150130145851) do
   end
 
   add_index "projects_users", ["user_id", "project_id"], name: "index_projects_users_on_user_id_and_project_id", unique: true, using: :btree
+
+  create_table "roles", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "settings", id: false, force: :cascade do |t|
     t.string   "key",        null: false
@@ -118,7 +137,7 @@ ActiveRecord::Schema.define(version: 20150130145851) do
     t.string   "username",               default: "", null: false
     t.string   "full_name",              default: "", null: false
     t.string   "phone"
-    t.integer  "role",                   default: 0,  null: false
+    t.integer  "role_id"
     t.integer  "company_id"
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -138,6 +157,8 @@ ActiveRecord::Schema.define(version: 20150130145851) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "milestones", "projects"
+  add_foreign_key "permissions", "companies"
+  add_foreign_key "permissions", "users"
   add_foreign_key "tasks", "milestones"
   add_foreign_key "tasks", "projects"
   add_foreign_key "tasks", "users"

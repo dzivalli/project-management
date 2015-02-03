@@ -5,6 +5,7 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    @roles = Role.all
     @companies = Company.all
     @title = 'Новый пользователь'
     render layout: 'modal'
@@ -15,12 +16,14 @@ class UsersController < ApplicationController
     if user.save
       redirect_to users_path, notice: 'Пользователь был успешно создан'
     else
-      redirect_to users_path, alert: 'Произошла ошибка, попробуйте еще раз'
+      # TODO active records errors i18
+      redirect_to users_path, alert: "Ошибка#{user.errors.inspect}"
     end
   end
 
   def edit
     @user = User.find params[:id]
+    @roles = Role.all
     @companies = Company.all
     @title = 'Изменить данные'
     render 'new', layout: 'modal'
@@ -28,7 +31,7 @@ class UsersController < ApplicationController
 
   def password
     @user = User.find params[:id]
-    @companies = Company.all
+    # @companies = Company.all
     @title = 'Смена пароля'
     render 'new', layout: 'modal'
   end
@@ -53,6 +56,6 @@ class UsersController < ApplicationController
 
   def permitted(params)
     params.require(:user).permit(:full_name, :username, :email, :phone, :company_id,
-                  :password, :password_confirmation)
+                  :password, :password_confirmation, :role_id)
   end
 end

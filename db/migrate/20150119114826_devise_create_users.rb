@@ -4,7 +4,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string :username, null: false, default: ""
       t.string :full_name, null: false, default: ""
       t.string :phone
-      t.integer :role, null: false, default: 0
+      t.references :role
       t.references :company
 
 

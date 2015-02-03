@@ -24,7 +24,7 @@ class MilestonesController < ApplicationController
   def edit
     @milestone = Milestone.find params[:id]
     @title = 'Изменить данные'
-    render layout: 'modal'
+    render 'new', layout: 'modal'
   end
 
   def update

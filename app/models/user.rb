@@ -4,6 +4,9 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable
 
   belongs_to :company
+  belongs_to :role
+
+  has_many :permissions
 
   has_and_belongs_to_many :projects
   has_and_belongs_to_many :tasks
@@ -13,5 +16,16 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :username, :email
 #   TODO add email regex
 
+  def client?
+    role.name == 'client'
+  end
+
+  def admin?
+    role.name == 'admin'
+  end
+
+  def staff?
+    role.name == 'staff'
+  end
 
 end

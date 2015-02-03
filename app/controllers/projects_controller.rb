@@ -1,7 +1,11 @@
 class ProjectsController < ApplicationController
 
   def index
-    @projects = Project.all
+    @projects = if current_user.client?
+                  current_user.company.projects
+                else
+                  Project.all
+                end
   end
 
   def show
@@ -50,6 +54,19 @@ class ProjectsController < ApplicationController
 
   def team
     @project = Project.includes(:users).find params[:id]
+    authorize! :team, @project
+  end
+
+  def permissions
+    @project = Project.find params[:id]
+     # TODO create model method for:
+    @permissions = Permission.for_client(@project).pluck(:subject_class, :action).flatten.uniq
+  end
+
+  def update_permissions
+    permissions = params.slice(:milestone, :team, :task).keys
+    Permission.update_for_client permissions, Project.find(params[:id])
+    redirect_to :back, notice: 'Параметры доступа были обновленны'
   end
 
   private

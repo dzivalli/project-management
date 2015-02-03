@@ -13,11 +13,14 @@ Rails.application.routes.draw do
 
   resources :companies
 
+  # TODO constrain all routes
   resources :projects do
     resources :milestones
     resources :tasks
     member do
       get 'team'
+      get 'permissions'
+      post 'permissions', action: 'update_permissions'
     end
   end
 

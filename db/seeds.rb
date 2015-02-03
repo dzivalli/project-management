@@ -7,10 +7,17 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 # Create default(own) company and save it into general settings
-company = Company.find_or_create_by(name: 'Default company', email: 'email@example.com',
+company = Company.find_or_create_by(name: 'Default', email: 'email@example.com',
                          website: 'http://example.com', address: 'ул. Красная 1',
                          phone: '000-00-00', city: 'Краснодар')
 
 s = Setting.find_or_create_by(key: 'company')
 s.update(value: company.id)
+
+Role.create!([{name: 'admin'}, {name: 'client'}, {name: 'staff'}])
+
+User.create!(username: 'admin', full_name: 'admin', email: 'admin@example.com',
+            password: 'admin', password_confirmation: 'admin',
+            role: Role.find_by_name('admin'), company: company)
+
 
