@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
   belongs_to :role
 
   has_many :permissions
+  has_many :messages
+  has_many :tickets
 
   has_and_belongs_to_many :projects
   has_and_belongs_to_many :tasks

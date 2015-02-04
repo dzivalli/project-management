@@ -15,19 +15,30 @@
       = link_to root_path do
         %i.entypo-gauge
         %span.title Главная
-    %li
-      = link_to companies_path do
-        %i.entypo-users
-        %span.title Клиенты
+    - if can? :index, Company
+      %li
+        = link_to companies_path do
+          %i.entypo-users
+          %span.title Клиенты
     %li
       = link_to projects_path do
         %i.entypo-cup
         %span.title Проекты
     %li
-      = link_to settings_general_path do
-        %i.entypo-cog
-        %span.title Настройки
+      = link_to messages_path do
+        %i.entypo-mail
+        %span.title Сообщения
     %li
-      = link_to users_path do
-        %i.entypo-lock
-        %span.title Пользователи
+      = link_to tickets_path do
+        %i.entypo-ticket
+        %span.title Заявки
+    - if can? :index, Setting
+      %li
+        = link_to settings_general_path do
+          %i.entypo-cog
+          %span.title Настройки
+    - if can? :index, User
+      %li
+        = link_to users_path do
+          %i.entypo-lock
+          %span.title Пользователи

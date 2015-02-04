@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150203113847) do
+ActiveRecord::Schema.define(version: 20150204114833) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,18 @@ ActiveRecord::Schema.define(version: 20150203113847) do
     t.integer  "user_id"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.integer  "user_to"
+    t.integer  "users_id"
+    t.text     "message"
+    t.string   "status"
+    t.string   "attached_file"
+    t.date     "date_received"
+    t.boolean  "deleted"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "milestones", force: :cascade do |t|
@@ -118,6 +130,18 @@ ActiveRecord::Schema.define(version: 20150203113847) do
   end
 
   add_index "tasks_users", ["user_id", "task_id"], name: "index_tasks_users_on_user_id_and_task_id", unique: true, using: :btree
+
+  create_table "tickets", force: :cascade do |t|
+    t.string   "subject"
+    t.text     "body"
+    t.string   "status"
+    t.integer  "priority"
+    t.text     "additional"
+    t.string   "attachment"
+    t.integer  "users_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "time_entries", force: :cascade do |t|
     t.date     "start_time"
