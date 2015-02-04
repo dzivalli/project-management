@@ -10,13 +10,13 @@
         %i.entypo-users
         Команда
 
-  - if can? :show, Milestone
+  - if can? :read, Milestone
     %li{class: ('active' if controller_name == 'milestones')}
       = link_to project_milestones_path(@project) do
         %i.entypo-monitor
         Этапы
 
-  - if can? :show, Task
+  - if can? :read, Task
     %li{class: ('active' if controller_name == 'tasks')}
       = link_to project_tasks_path(@project) do
         %i.entypo-doc-text-inv

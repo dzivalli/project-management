@@ -1,14 +1,18 @@
 .row
   .col-sm-12.m-r
-    = link_to edit_project_path(@project), class: 'btn btn-blue btn-icon icon-left get-modal' do
-      Изменить
-      %i.entypo-pencil
-    = link_to edit_project_path(@project), class: 'btn btn-blue btn-icon icon-left' do
-      Копировать
-      %i.entypo-docs
-    = link_to edit_project_path(@project), class: 'btn btn-blue btn-icon icon-left' do
-      Счета
-      %i.entypo-credit-card
-    = link_to project_path(@project), class: 'btn btn-default btn-icon icon-left', method: :delete do
-      Удалить
-      %i.entypo-trash
+    - if can? :edit, @project
+      = link_to edit_project_path(@project), class: 'btn btn-blue btn-icon icon-left get-modal' do
+        Изменить
+        %i.entypo-pencil
+    - if can? :new, @project
+      = link_to edit_project_path(@project), class: 'btn btn-blue btn-icon icon-left' do
+        Копировать
+        %i.entypo-docs
+    - if can? :index, @project
+      = link_to edit_project_path(@project), class: 'btn btn-blue btn-icon icon-left' do
+        Счета
+        %i.entypo-credit-card
+    - if can? :delete, @project
+      = link_to project_path(@project), class: 'btn btn-default btn-icon icon-left', method: :delete do
+        Удалить
+        %i.entypo-trash

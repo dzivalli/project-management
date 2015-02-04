@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
   include ProjectCommon
+  load_and_authorize_resource
 
   def index
     @project = Project.includes(:tasks).find params[:project_id]

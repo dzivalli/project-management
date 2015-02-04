@@ -9,10 +9,13 @@ class Ability
         can :manage, :all
       elsif user.client?
         can do |action, klass, project|
+          action = action.to_s
+          # kind of alias, 'show' and 'index' are 'read'
+          action = [action, 'read'] if (action == 'show') || (action == 'index')
           if project
-            Permission.where(action: action.to_s, company: user.company, subject_id: project.id, subject_class: klass.name.downcase).any?
+            Permission.where(action: action, company: user.company, subject_id: project.id, subject_class: klass.name.downcase).any?
           else
-            Permission.where(action: action.to_s, company: user.company, subject_class: klass.name.downcase).any?
+            Permission.where(action: action, company: user.company, subject_class: klass.name.downcase).any?
           end
         end
       elsif user.staff?

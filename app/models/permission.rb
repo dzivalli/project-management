@@ -13,7 +13,7 @@ class Permission < ActiveRecord::Base
     Permission.for_client(project).delete_all
     permissions.each do |p|
       if SUBJECT_CLASSES.include?(p)
-        create! company: project.company, subject_id: project.id, action: 'show', subject_class: p
+        create! company: project.company, subject_id: project.id, action: 'read', subject_class: p
       else
         create! company: project.company, subject_id: project.id, action: p, subject_class: 'project'
       end

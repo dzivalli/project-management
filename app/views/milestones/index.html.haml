@@ -1,8 +1,9 @@
 - content_for :project do
   .panel.panel-primary
-    .panel-heading
-      .panel-title
-        = link_to 'Добавить', new_project_milestone_path(@project), class: 'btn btn-default get-modal'
+    - if can? :new, Milestone
+      .panel-heading
+        .panel-title
+          = link_to 'Добавить', new_project_milestone_path(@project), class: 'btn btn-default get-modal'
     .panel-body
       %table.pm-table.table.table-bordered.datatable
         %thead
