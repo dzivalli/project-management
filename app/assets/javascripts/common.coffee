@@ -75,6 +75,7 @@ init = ->
         minimumResultsForSearch: -1
       bindDatepicker()
       bindBootstrapSwitch()
+      bindSlider()
 
 
   bindDatepicker = ->
@@ -85,11 +86,36 @@ init = ->
       $(this).siblings('input').datepicker('show')
 
   bindBootstrapSwitch = ->
-    modal.find(".make-switch").bootstrapSwitch()
+    bSwitch = modal.find('.make-switch')
+    checkbox = modal.find('#project_fixed_price')
     elements = modal.find('.pm-price')
-    if elements.length
-      modal.find(".make-switch").on 'change', ->
-        elements.toggle()
+
+    bSwitch.bootstrapSwitch()
+
+    if checkbox.val() == 'true'
+      bSwitch.bootstrapSwitch('setState', true)
+      elements.toggle()
+    else
+      bSwitch.bootstrapSwitch('setState', false)
+
+    bSwitch.on 'change', ->
+      elements.toggle()
+      if checkbox.val() == 'true' then checkbox.val('false') else checkbox.val('true')
+
+  bindSlider = ->
+    progress = modal.find('#project_progress').val() || 0
+    label = $("<span class='ui-label'>#{progress}</span>")
+    modal.find('#slider').slider
+      min: 0
+      max: 100
+      step: 1
+      range: 'min'
+      value: progress
+      slide: (e, ui) ->
+        label.html(ui.value)
+      change: (e, ui) ->
+        modal.find('#project_progress').val(ui.value)
+    modal.find('.ui-slider-handle').append(label)
 
 
 

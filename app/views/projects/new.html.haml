@@ -17,7 +17,9 @@
   .form-group
     =f.label 'Прогресс', nil, class: 'col-sm-4 control-label'
     .col-sm-5
-      =f.text_field :progress, class: 'form-control'
+      %br
+      #slider.slider.slider-blue
+      =f.number_field :progress, class: 'form-control hide'
 
   .form-group
     =f.label 'Дата начала', nil, class: 'col-sm-4 control-label'
@@ -36,11 +38,12 @@
         .input-group-addon
           = link_to '#' do
             %i.entypo-calendar
+
   .form-group
     =f.label 'Фиксированная цена', nil, class: 'col-sm-4 control-label'
     .col-sm-5
       .make-switch.switch-small
-        =f.check_box :fixed_price
+        =f.check_box :fixed_price, {}, @project.fixed_price
 
   .form-group.pm-price
     =f.label 'Стоимость часа', nil, class: 'col-sm-4 control-label'
@@ -50,7 +53,7 @@
   .form-group.pm-price{style: 'display: none'}
     =f.label 'Общая стоимость', nil, class: 'col-sm-4 control-label'
     .col-sm-5
-      =f.number_field :fixed_price, class: 'form-control'
+      =f.number_field :fixed_rate, class: 'form-control'
 
   .form-group
     =f.label 'Описание', nil, class: 'col-sm-4 control-label'
