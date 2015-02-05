@@ -26,6 +26,8 @@ Rails.application.routes.draw do
     end
   end
 
+
+
   #  routes for settings controller
   get 'settings/general'
   get 'settings/email'

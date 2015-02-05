@@ -103,7 +103,8 @@ init = ->
       if checkbox.val() == 'true' then checkbox.val('false') else checkbox.val('true')
 
   bindSlider = ->
-    progress = modal.find('#project_progress').val() || 0
+    input = modal.find("input[id*='progress']")
+    progress = input.val() || 0
     label = $("<span class='ui-label'>#{progress}</span>")
     modal.find('#slider').slider
       min: 0
@@ -114,7 +115,7 @@ init = ->
       slide: (e, ui) ->
         label.html(ui.value)
       change: (e, ui) ->
-        modal.find('#project_progress').val(ui.value)
+        input.val(ui.value)
     modal.find('.ui-slider-handle').append(label)
 
 

@@ -15,8 +15,8 @@ class TasksController < ApplicationController
   end
 
   def create
-    task = Task.new_or_upd_with_users permitted(params), params[:project_id]
-    if task.save
+    task =  @project.tasks.build task_params
+    if (task.users = User.find(users_params)) && task.save!
       redirect_to :back, notice: 'Задача создано успешно'
     else
       redirect_to :back, alert: 'Произошла ошибка'
@@ -32,9 +32,8 @@ class TasksController < ApplicationController
   end
 
   def update
-    task = Task.new_or_upd_with_users permitted(params), params[:project_id],
-                                      params[:id]
-    if task.save
+    task = Task.find params[:id]
+    if (task.users = User.find(users_params)) && task.update!(task_params)
       redirect_to :back, notice: 'Задача обновленна успешно'
     else
       redirect_to :back, alert: 'Произошла ошибка'
@@ -50,9 +49,14 @@ class TasksController < ApplicationController
 
   private
 
-  def permitted(params)
+  def task_params
     params.require(:task).permit(:name, :description, :estimated_hours,
                                  :due_date, :milestone_id, :visible,
-                                 :progress, :added_by, users: [])
+                                 :progress, :added_by)
+  end
+
+  def users_params
+    ids = params.require(:users).permit(id: [])[:id]
+    ids.reject! { |id| id.empty? }
   end
 end

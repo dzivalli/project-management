@@ -17,8 +17,8 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    project = Project.new_or_upd_with_users(permitted(params), params[:id])
-    if project.save
+    project = Project.new project_params
+    if (project.users = User.find(users_params)) && project.save
       redirect_to projects_path, notice: 'Проект был успешно создан'
     else
       redirect_to projects_path, alert: 'Произошла ошибка, повторите еще раз'
@@ -34,8 +34,8 @@ class ProjectsController < ApplicationController
   end
 
   def update
-    project = Project.new_or_upd_with_users(permitted(params), params[:id])
-    if project.save
+    project = Project.find(params[:id])
+    if (project.users = User.find(users_params)) && project.update(project_params)
       redirect_to :back, notice: 'Данные были успешно изменены'
     else
       redirect_to :back, alert: 'Произошла ошибка, повторите еще раз'
@@ -53,6 +53,8 @@ class ProjectsController < ApplicationController
     authorize! :team, @project
   end
 
+
+  # TODO maybe new controller
   def permissions
     @project = Project.find params[:id]
      # TODO create model method for:
@@ -67,10 +69,15 @@ class ProjectsController < ApplicationController
 
   private
 
-  def permitted(params)
+  def project_params
     params.require(:project).permit(:action, :title, :description, :start_date,
                               :due_date, :fixed_price, :fixed_rate, :estimated_hours,
-                              :hourly_rate, :progress, :company_id,
-                              users: [])
+                              :hourly_rate, :progress, :company_id)
   end
+
+  def users_params
+    ids = params.require(:users).permit(id: [])[:id]
+    ids.reject! { |id| id.empty? }
+  end
+
 end

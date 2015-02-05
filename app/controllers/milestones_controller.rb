@@ -13,9 +13,8 @@ class MilestonesController < ApplicationController
   end
 
   def create
-    project = Project.find params[:project_id]
-    project.milestones.build(permitted(params))
-    if project.save
+    @project.milestones.build milestone_params
+    if @project.save
       redirect_to :back, notice: 'Этап был создан успешно'
     else
       redirect_to :back, alert: 'Произошла ошибка'
@@ -51,7 +50,7 @@ class MilestonesController < ApplicationController
 
   private
 
-  def permitted(params)
+  def milestone_params
     params.require(:milestone).permit(:name, :start_date, :due_date, :description)
   end
 end

@@ -12,5 +12,7 @@ class CreateTimeEntries < ActiveRecord::Migration
     add_foreign_key :time_entries, :projects
     add_foreign_key :time_entries, :users
     add_foreign_key :time_entries, :tasks
+
+    add_index :time_entries, [:project_id, :user_id, :task_id], unique: true
   end
 end

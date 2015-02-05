@@ -12,7 +12,8 @@
   .form-group
     =f.label 'Ответственные', nil, class: 'col-sm-4 control-label'
     .col-sm-5
-      =f.collection_select :users, @users, :id, :username, {selected: @task.users.ids}, { class: 'form-control', multiple: ''}
+      = fields_for :users, @task.users do |user|
+        =user.collection_select :id, @users, :id, :username, {selected: @task.users.ids}, { class: 'form-control', multiple: ''}
 
   .form-group
     =f.label 'Описание', nil, class: 'col-sm-4 control-label'
@@ -22,7 +23,7 @@
   .form-group
     =f.label 'Колличество часов', nil, class: 'col-sm-4 control-label'
     .col-sm-5
-      =f.number_field :estimated_hours
+      =f.number_field :estimated_hours, class: 'form-control'
 
   .form-group
     =f.label 'Дата конца', nil, class: 'col-sm-4 control-label'
@@ -36,7 +37,9 @@
   .form-group
     =f.label 'Прогресс', nil, class: 'col-sm-4 control-label'
     .col-sm-5
-      =f.number_field :progress
+      %br
+      #slider.slider.slider-blue
+      =f.number_field :progress, class: 'hide'
 
   .form-group
     =f.label 'Видимость клиенту', nil, class: 'col-sm-4 control-label'
