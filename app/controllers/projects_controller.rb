@@ -1,11 +1,7 @@
 class ProjectsController < ApplicationController
 
   def index
-    @projects = if current_user.client?
-                  current_user.company.projects
-                else
-                  Project.all
-                end
+    @projects = Project.for_user(current_user)
   end
 
   def show
@@ -73,7 +69,7 @@ class ProjectsController < ApplicationController
 
   def permitted(params)
     params.require(:project).permit(:action, :title, :description, :start_date,
-                              :due_date, :fixed_price, :fixed_rate,
+                              :due_date, :fixed_price, :fixed_rate, :estimated_hours,
                               :hourly_rate, :progress, :company_id,
                               users: [])
   end

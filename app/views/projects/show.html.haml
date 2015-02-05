@@ -1,5 +1,8 @@
 - content_for :project do
   .row
+    .col-lg-12
+      = render partial: 'common/bar', locals: {progress: @project.progress}
+  .row
     .col-lg-6
       %ul.list-group
         %li.list-group-item
@@ -20,8 +23,8 @@
           %span.pull-right
           Потраченно время
         %li.list-group-item
-          %span.pull-right
-          Общая стоимость
+          %span.pull-right= @project.cost
+          Стоимость
         %li.list-group-item
           %span.pull-right= @project.users.pluck(:username).join(', ')
           Ответственные

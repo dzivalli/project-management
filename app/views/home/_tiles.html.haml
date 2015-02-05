@@ -1,0 +1,33 @@
+.col-sm-3
+  = link_to projects_path do
+    .tile-stats.tile-aqua
+      .icon
+        %i.entypo-cup
+      .num= @projects.count
+      %h3 Проектов
+.col-sm-3
+  .tile-stats.tile-aqua
+    .icon
+      %i.entypo-mail
+    .num 0
+    %h3 Сообщений
+.col-sm-3
+  .tile-stats.tile-aqua
+    .icon
+      %i.entypo-credit-card
+    .num 0
+    %h3 Счетов
+- if current_user.admin?
+  .col-sm-3
+    .tile-stats.tile-aqua
+      .icon
+        %i.entypo-publish
+      .num 0
+      %h3 Заявок
+- elsif current_user.client?
+  .col-sm-3
+    .tile-stats.tile-aqua
+      .icon
+        %i.entypo-calendar
+      .num 0
+      %h3 Задач

@@ -17,4 +17,21 @@ class Project < ActiveRecord::Base
     project.users = User.find(users)
     project
   end
+
+  def self.for_user(user)
+    if user.client?
+      user.company.projects
+    else
+      Project.all
+    end
+  end
+
+  def cost
+    if fixed_price
+      fixed_rate
+    elsif estimated_hours
+      hourly_rate * estimated_hours
+    end
+  end
+
 end

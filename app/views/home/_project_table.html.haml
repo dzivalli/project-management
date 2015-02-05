@@ -1,0 +1,22 @@
+.panel.panel-default
+  .panel-heading
+    .panel-title
+      Последние проекты
+  .panel-body
+    %table.table.responsive
+      %thead
+        %tr
+          %th Таймер
+          %th Прогресс
+          %th Имя
+          %th Параметры
+      %tbody
+        - @projects.each do |project|
+          %tr
+            %td Таймер
+            %td= render partial: 'common/bar', locals: {progress: project.progress}
+            %td= project.title
+            %td
+              = link_to project_path(project), class: 'btn btn-default btn-icon btn-xs icon-left' do
+                Проект
+                %i.entypo-suitcase

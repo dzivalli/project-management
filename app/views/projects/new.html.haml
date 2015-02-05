@@ -56,6 +56,11 @@
       =f.number_field :fixed_rate, class: 'form-control'
 
   .form-group
+    =f.label 'Общее количество часов', nil, class: 'col-sm-4 control-label'
+    .col-sm-5
+      =f.number_field :estimated_hours, class: 'form-control'
+
+  .form-group
     =f.label 'Описание', nil, class: 'col-sm-4 control-label'
     .col-sm-5
       =f.text_area :description, class: 'form-control'

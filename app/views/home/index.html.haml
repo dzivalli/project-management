@@ -1,25 +1,10 @@
-.col-sm-3
-  .tile-stats.tile-aqua
-    .icon
-      %i.entypo-cup
-    .num 5
-    %h3 Проектов
-.col-sm-3
-  .tile-stats.tile-aqua
-    .icon
-      %i.entypo-mail
-    .num 5
-    %h3 Сообщений
-.col-sm-3
-  .tile-stats.tile-aqua
-    .icon
-      %i.entypo-credit-card
-    .num 5
-    %h3 Счетов
-.col-sm-3
-  .tile-stats.tile-aqua
-    .icon
-      %i.entypo-publish
-    .num 5
-    %h3 Заявок
-
+.row
+  = render 'tiles'
+.row
+  .col-sm-8
+    = render 'project_table'
+  .col-sm-4
+    - if current_user.admin?
+      = render 'paid_invoices'
+    - elsif current_user.client?
+      -#= render 'payments'
