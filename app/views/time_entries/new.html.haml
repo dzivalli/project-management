@@ -1,0 +1,5 @@
+= form_for [@project, @te], html: { class: 'form-horizontal' } do |f|
+  .form-group
+    =f.label 'Задача', nil, class: 'col-sm-4 control-label'
+    .col-sm-5
+      =f.collection_select :task_id, @project.tasks, :id, :name, class: 'form-control'

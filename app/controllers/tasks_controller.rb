@@ -9,7 +9,6 @@ class TasksController < ApplicationController
   def new
     @task = @project.tasks.build
     @title = 'Новая задача'
-    @milestones = @project.milestones
     @users = User.all
     render layout: 'modal'
   end
@@ -26,7 +25,6 @@ class TasksController < ApplicationController
   def edit
     @task = Task.find params[:id]
     @title = 'Измениить данные'
-    @milestones = @project.milestones
     @users = User.all
     render 'new', layout: 'modal'
   end

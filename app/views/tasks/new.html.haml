@@ -7,7 +7,7 @@
   .form-group
     =f.label 'Этап', nil, class: 'col-sm-4 control-label'
     .col-sm-5
-      =f.collection_select :milestone_id, @milestones, :id, :name, class: 'form-control'
+      =f.collection_select :milestone_id, @project.milestones, :id, :name, class: 'form-control'
 
   .form-group
     =f.label 'Ответственные', nil, class: 'col-sm-4 control-label'

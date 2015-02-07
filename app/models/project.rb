@@ -28,4 +28,8 @@ class Project < ActiveRecord::Base
     end
   end
 
+  def active_tasks(user)
+    tasks.joins(:time_entries).where(time_entries: {user: user, status: 'active'})
+  end
+
 end

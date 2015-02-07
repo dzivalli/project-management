@@ -1,0 +1,22 @@
+- content_for :project do
+  = link_to new_project_time_entry_path(@project), class: 'btn btn-default get-modal' do
+    Ввести время
+
+  %table.pm-table.table.table-bordered.datatable
+    %thead
+      %tr
+        %th Начало
+        %th Конец
+        %th Пользователь
+        %th Название задачи
+        %th Потрачено время
+        %th Параметры
+    %tbody
+      - @time_entries.each do |te|
+        %tr
+          %td= te.created_at
+          %td= te.updated_at
+          %td= te.user.username
+          %td= te.task.name
+          %td= te.spent
+          %td options

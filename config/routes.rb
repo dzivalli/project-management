@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   resources :projects do
     resources :milestones
     resources :tasks
+    resources :time_entries
     member do
       get 'team'
       get 'permissions'
@@ -28,7 +29,7 @@ Rails.application.routes.draw do
 
 
 
-  #  routes for settings controller
+  #  routes for setting controller
   get 'settings/general'
   get 'settings/email'
   patch 'settings/update'

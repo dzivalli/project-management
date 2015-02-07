@@ -16,4 +16,11 @@
         %td
           = link_to edit_project_task_path(@project, task), type: 'button', class: 'btn btn-default btn-xs get-modal' do
             %i.entypo-tools
-          = link_to 'Таймер', '#', type: 'button', class: 'btn btn-default btn-xs'
+          - if task.active(current_user).any?
+            = link_to project_time_entry_path(id: task.active(current_user).first), type: 'button', method: :put, class: 'btn btn-danger btn-xs' do
+              %i.entypo-stop
+              Таймер
+          - else
+            = link_to new_project_time_entry_path(task_id: task.id), class: 'btn btn-default btn-xs' do
+              %i.entypo-play
+              Таймер

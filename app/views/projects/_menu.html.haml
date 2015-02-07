@@ -21,6 +21,8 @@
       = link_to project_tasks_path(@project) do
         %i.entypo-doc-text-inv
         Задачи
+        - if @project.active_tasks(current_user).any?
+          %span.badge.badge-secondary.pull-right= @project.active_tasks(current_user).count
 
   - if can? :permission, @project
     %li{class: ('active' if action_name == 'permissions')}
@@ -32,7 +34,9 @@
     = link_to '#' do
       %i.entypo-archive
       Файлы
-  %li
-    = link_to '#' do
-      %i.entypo-clock
-      Табель
+
+  - if can? :read, TimeEntry
+    %li{class: ('active' if controller_name == 'time_entries')}
+      = link_to project_time_entries_path(@project) do
+        %i.entypo-clock
+        Табель

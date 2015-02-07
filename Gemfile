@@ -4,6 +4,7 @@ gem 'haml-rails'
 gem 'devise'
 gem 'cancancan'
 gem 'quiet_assets'
+gem 'russian'
 
 # for heroku deployment
 gem 'rails_12factor', group: :production
