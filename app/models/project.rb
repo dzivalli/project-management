@@ -3,6 +3,7 @@ class Project < ActiveRecord::Base
   has_many :milestones
   has_many :tasks
   has_many :permissions
+  has_many :attachments
 
   has_and_belongs_to_many :users
 

@@ -1,0 +1,11 @@
+= form_for [@project, @attachment], html: { class: 'form-horizontal' }  do |f|
+
+  .form-group
+    =f.label 'Фаил', nil, class: 'col-sm-4 control-label'
+    .col-sm-5
+      =f.file_field :file, class: 'form-control'
+
+  .form-group
+    =f.label 'Описание', nil, class: 'col-sm-4 control-label'
+    .col-sm-5
+      =f.text_field :description, class: 'form-control'

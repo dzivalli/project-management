@@ -1,0 +1,20 @@
+- content_for :project do
+  = link_to new_project_attachment_path(@project), class: 'btn btn-default get-modal' do
+    Закачать файл
+
+  %table.pm-table.table.table-bordered.datatable
+    %thead
+      %tr
+        %th Пользователь
+        %th Имя файла
+        %th Описание
+        %th Параметры
+    %tbody
+      - @project.attachments.each do |attachment|
+        %tr
+          %td= attachment.user.username
+          %td= link_to attachment.file_identifier, attachment.file.url
+          %td= attachment.description
+          %td.m-r
+            = link_to project_attachment_path(@project, attachment), type: 'button', class: 'btn btn-default btn-xs', method: :delete, data: { confirm: 'Вы уверены?'} do
+              %i.entypo-trash

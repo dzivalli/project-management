@@ -13,8 +13,8 @@ class MilestonesController < ApplicationController
   end
 
   def create
-    @project.milestones.build milestone_params
-    if @project.save
+    milestone = Milestone.new milestone_params.merge(project_id: params[:project_id])
+    if milestone.save
       redirect_to :back, notice: 'Этап был создан успешно'
     else
       redirect_to :back, alert: 'Произошла ошибка'

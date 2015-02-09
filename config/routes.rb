@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get 'attachments/index'
+
+  get 'attachments/new'
+
+  get 'attachments/destroy'
+
   root 'home#index'
 
   # get 'home/index'
@@ -20,6 +26,7 @@ Rails.application.routes.draw do
     resources :milestones
     resources :tasks
     resources :time_entries
+    resources :attachments
     member do
       get 'team'
       get 'permissions'

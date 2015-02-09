@@ -5,7 +5,7 @@ gem 'devise'
 gem 'cancancan'
 gem 'quiet_assets'
 gem 'russian'
-
+gem 'carrierwave'
 # for heroku deployment
 gem 'rails_12factor', group: :production
 

@@ -30,10 +30,11 @@
         %i.entypo-cog
         Доступ
 
-  %li
-    = link_to '#' do
-      %i.entypo-archive
-      Файлы
+  - if can? :read, Attachment
+    %li{class: ('active' if controller_name == 'attachments')}
+      = link_to project_attachments_path(@project) do
+        %i.entypo-archive
+        Файлы
 
   - if can? :read, TimeEntry
     %li{class: ('active' if controller_name == 'time_entries')}
