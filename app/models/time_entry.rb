@@ -19,8 +19,9 @@ class TimeEntry < ActiveRecord::Base
     end
     # TODO use russian pluralize
     hours = "#{pluralize(h.to_i, 'час', 'часа')}" if h > 0
-    min = "#{pluralize(m.to_i, 'минута', 'минуты')}" if m > 0
-    s > 0 ? sec = "#{s.round} секунд" : sec = "#{interval.round} секунд"
-    [hours, min, sec].compact!.join(', ')
+    m > 0 ? min = "#{pluralize(m.to_i, 'минута', 'минуты')}" : min = nil
+    s > 0 ? sec = "#{s.round} секунд" : sec = nil
+    # sec = "#{s.round} секунд"
+    [hours, min, sec].compact.join(', ')
   end
 end

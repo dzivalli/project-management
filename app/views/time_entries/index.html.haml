@@ -14,9 +14,13 @@
     %tbody
       - @time_entries.each do |te|
         %tr
-          %td= te.created_at
-          %td= te.updated_at
+          %td= convert_time(te.created_at)
+          %td= convert_time(te.updated_at)
           %td= te.user.username
           %td= te.task.name
           %td= te.spent
-          %td options
+          %td.m-r
+            = link_to edit_project_time_entry_path(@project, te), type: 'button', class: 'btn btn-default btn-xs get-modal' do
+              %i.entypo-pencil
+            = link_to project_time_entry_path(@project, te), type: 'button', class: 'btn btn-default btn-xs', method: :delete, data: { confirm: 'Вы уверены?'} do
+              %i.entypo-trash

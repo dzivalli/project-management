@@ -3,3 +3,13 @@
     =f.label 'Задача', nil, class: 'col-sm-4 control-label'
     .col-sm-5
       =f.collection_select :task_id, @project.tasks, :id, :name, class: 'form-control'
+  .form-group
+    =f.label 'Начало', nil, class: 'col-sm-4 control-label'
+    .col-sm-5
+      =f.text_field :created_at, class: 'form-control'
+      %h5 ДД-ММ-ГГГГ чч:мм
+  .form-group
+    =f.label 'Конец', nil, class: 'col-sm-4 control-label'
+    .col-sm-5
+      =f.text_field :updated_at, class: 'form-control'
+      %h5 ДД-ММ-ГГГГ чч:мм
