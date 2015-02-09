@@ -7,6 +7,8 @@ class Project < ActiveRecord::Base
 
   has_and_belongs_to_many :users
 
+  has_paper_trail
+
   validates_presence_of :title, :company, :start_date, :due_date, :description
   validates_length_of :title, maximum: 255
 

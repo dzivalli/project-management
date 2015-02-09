@@ -80,7 +80,7 @@ init = ->
 
   bindDatepicker = ->
     modal.find('.datepicker').datepicker
-      format: 'yyyy/mm/dd'
+      format: 'dd-mm-yyyy'
     modal.find('.input-group-addon').on 'click',(e) ->
       e.preventDefault()
       $(this).siblings('input').datepicker('show')

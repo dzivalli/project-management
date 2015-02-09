@@ -8,3 +8,8 @@
       = render 'paid_invoices'
     - elsif current_user.client?
       -#= render 'payments'
+.row
+  .col-md-8
+    = render 'history'
+  .col-md-4
+    = render 'tickets'

@@ -6,6 +6,7 @@ gem 'cancancan'
 gem 'quiet_assets'
 gem 'russian'
 gem 'carrierwave'
+gem 'paper_trail', '~> 4.0.0.beta'
 # for heroku deployment
 gem 'rails_12factor', group: :production
 

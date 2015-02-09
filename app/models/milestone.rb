@@ -4,5 +4,6 @@ class Milestone < ActiveRecord::Base
 
   validates_presence_of :name, :start_date, :due_date
 
+  has_paper_trail
 
 end

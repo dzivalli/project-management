@@ -7,6 +7,8 @@ class Task < ActiveRecord::Base
 
   has_many :time_entries
 
+  has_paper_trail
+
   def active(user)
     TimeEntry.where(user: user, task: self, status: 'active').ids
   end

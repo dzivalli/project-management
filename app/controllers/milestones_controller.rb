@@ -8,6 +8,7 @@ class MilestonesController < ApplicationController
 
   def new
     @milestone = Milestone.new
+    @milestone.start_date = @milestone.due_date = Time.now.strftime("%d-%m-%Y")
     @title = 'Новый этап'
     render layout: 'modal'
   end

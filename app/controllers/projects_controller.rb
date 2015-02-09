@@ -11,6 +11,7 @@ class ProjectsController < ApplicationController
   def new
     @users = User.all
     @project = Project.new
+    @project.start_date = @project.due_date = Time.now.strftime("%d-%m-%Y")
     @companies = Company.every
     @title = 'Новый проект'
     render layout: 'modal'

@@ -1,0 +1,13 @@
+.panel.panel-default
+  .panel-body
+    %ul.cbp_tmtimeline
+      - @versions.each do |version|
+        %li
+          %time.cbp_tmtime
+            %span= version.created_at.strftime('%d %B')
+            %span= version.created_at.strftime('%R')
+          .cbp_tmicon
+            %i.entypo-user
+          .cbp_tmlabel
+            %h2= version.whodunnit
+            %p= version.event
