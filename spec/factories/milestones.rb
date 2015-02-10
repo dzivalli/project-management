@@ -6,6 +6,15 @@ FactoryGirl.define do
     description "MyText"
     start_date "2015-01-26"
     due_date "2015-01-26"
-    project nil
+
+    factory :milestone_with_tasks do
+      transient do
+        count 5
+      end
+
+      after(:create) do |milestone, evaluator|
+        create_list(:task, evaluator.count, milestone: milestone)
+      end
+    end
   end
 end

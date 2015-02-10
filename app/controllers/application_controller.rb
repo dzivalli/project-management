@@ -4,4 +4,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_action :authenticate_user!, except: [:sessions]
+
+  def user_for_paper_trail
+    current_user.username
+  end
 end

@@ -19,8 +19,18 @@ ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
 
+  # clean test database
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
   #  include factory girl
   config.include FactoryGirl::Syntax::Methods
+
+  # include devise test helpers
+  config.include Devise::TestHelpers, type: :controller
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
