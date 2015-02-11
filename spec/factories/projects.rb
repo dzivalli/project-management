@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :project do
-    title "MyString"
+    name "MyString"
     description "MyText"
     start_date "2015-01-19"
     due_date "2015-01-19"
@@ -10,12 +10,10 @@ FactoryGirl.define do
     progress 90
     company
 
-    factory :project_with_milestones do
-
+    factory :project_with_milestones_and_tasks do
       transient do
         count 5
       end
-
       after(:create) do |project, evaluator|
         create_list(:milestone_with_tasks, evaluator.count, project: project)
       end

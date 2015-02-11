@@ -10,4 +10,5 @@
             %i.entypo-user
           .cbp_tmlabel
             %h2= version.whodunnit
-            %p= version.event
+            %p= "#{I18n.t(version.event)} #{I18n.t(version.item_type.downcase)} #{get_name(version)}"
+

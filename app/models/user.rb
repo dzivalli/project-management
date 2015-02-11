@@ -18,6 +18,8 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :username, :email
 #   TODO add email regex
 
+  # TODO make hook after delete to check if user primary contact
+
   def client?
     role.name == 'client'
   end

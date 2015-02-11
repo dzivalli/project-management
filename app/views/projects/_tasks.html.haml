@@ -1,0 +1,16 @@
+.panel.panel-primary
+  .panel-heading
+    .panel-title Задачи
+  .panel-body.with-table
+    %table.table.table-bordered.table-responsive
+      %thead
+        %tr
+          %th Имя задачи
+          %th Пользователь
+      %tbody
+        - @project.tasks.each do |task|
+          %tr
+            %td
+              = link_to project_task_path(@project, task) do
+                %strong.text-info= task.name
+            %td= task.owner.username

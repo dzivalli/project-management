@@ -1,9 +1,11 @@
 class UsersController < ApplicationController
   def index
-    @users = User.all
+    @users = User.includes(:role, :company).all
   end
 
   def new
+    @selected = params[:company_id] if params.has_key?(:company_id)
+
     @user = User.new
     @roles = Role.all
     @companies = Company.all
@@ -14,10 +16,10 @@ class UsersController < ApplicationController
   def create
     user = User.new(permitted(params))
     if user.save
-      redirect_to users_path, notice: 'Пользователь был успешно создан'
+      redirect_to :back, notice: 'Пользователь был успешно создан'
     else
       # TODO active records errors i18
-      redirect_to users_path, alert: "Ошибка#{user.errors.inspect}"
+      redirect_to :back, alert: "Ошибка#{user.errors.inspect}"
     end
   end
 
@@ -39,16 +41,23 @@ class UsersController < ApplicationController
   def update
     user = User.find params[:id]
     if user.update(permitted(params))
-      redirect_to users_path, notice: 'Данные были успешно обновленны'
+      redirect_to :back, notice: 'Данные были успешно обновленны'
     else
-      redirect_to users_path, alert: 'Произошла ошибка, попробуйте еще раз'
+      redirect_to :back, alert: 'Произошла ошибка, попробуйте еще раз'
     end
   end
 
   def destroy
     user = User.find params[:id]
     if user.destroy!
-      redirect_to users_path, notice: 'Пользователь был успешно удален'
+      redirect_to :back, notice: 'Пользователь был успешно удален'
+    end
+  end
+
+  def primary
+    company = Company.find params[:company_id]
+    if company.update(contact: User.find(params[:id]))
+      redirect_to :back, notice: 'Основной контакт успешно установлен'
     end
   end
 

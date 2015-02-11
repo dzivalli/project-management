@@ -15,8 +15,14 @@
   %tbody
     - @projects.each do |project|
       %tr
-        %td= link_to project.title, project_path(project), class: 'text-info'
+        %td
+          = link_to project_path(project) do
+            %strong.text-info= project.name
         %td= project.start_date
         %td= project.due_date
         %td= project.cost
-        %td Параметры
+        %td.m-r
+          = link_to edit_project_path(project), type: 'button', class: 'btn btn-default btn-xs get-modal' do
+            %i.entypo-tools
+          = link_to project_path(project), type: 'button', class: 'btn btn-default btn-xs', method: :delete, data: { confirm: 'Вы уверены?'} do
+            %i.entypo-trash

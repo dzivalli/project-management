@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 20150209132414) do
     t.string   "city"
     t.string   "website"
     t.integer  "phone"
-    t.integer  "user_id"
+    t.integer  "contact_id"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
   end
@@ -78,7 +78,7 @@ ActiveRecord::Schema.define(version: 20150209132414) do
   add_index "permissions", ["user_id"], name: "index_permissions_on_user_id", using: :btree
 
   create_table "projects", force: :cascade do |t|
-    t.string   "title",           null: false
+    t.string   "name",                        null: false
     t.text     "description"
     t.date     "start_date"
     t.date     "due_date"
@@ -89,10 +89,10 @@ ActiveRecord::Schema.define(version: 20150209132414) do
     t.boolean  "deleted"
     t.text     "notes"
     t.integer  "estimated_hours"
-    t.integer  "progress"
+    t.integer  "progress",        default: 0, null: false
     t.integer  "company_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   create_table "projects_users", id: false, force: :cascade do |t|
@@ -125,16 +125,16 @@ ActiveRecord::Schema.define(version: 20150209132414) do
     t.integer  "project_id"
     t.integer  "milestone_id"
     t.boolean  "visible"
-    t.integer  "progress"
-    t.integer  "user_id"
+    t.integer  "progress",        default: 0, null: false
+    t.integer  "owner_id"
     t.boolean  "auto_progress"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   add_index "tasks", ["milestone_id"], name: "index_tasks_on_milestone_id", using: :btree
+  add_index "tasks", ["owner_id"], name: "index_tasks_on_owner_id", using: :btree
   add_index "tasks", ["project_id"], name: "index_tasks_on_project_id", using: :btree
-  add_index "tasks", ["user_id"], name: "index_tasks_on_user_id", using: :btree
 
   create_table "tasks_users", id: false, force: :cascade do |t|
     t.integer "task_id", null: false
@@ -197,7 +197,7 @@ ActiveRecord::Schema.define(version: 20150209132414) do
     t.integer  "item_id",    null: false
     t.string   "event",      null: false
     t.string   "whodunnit"
-    t.text     "object"
+    t.json     "object"
     t.datetime "created_at"
   end
 
@@ -210,8 +210,9 @@ ActiveRecord::Schema.define(version: 20150209132414) do
   add_foreign_key "permissions", "users"
   add_foreign_key "tasks", "milestones"
   add_foreign_key "tasks", "projects"
-  add_foreign_key "tasks", "users"
   add_foreign_key "time_entries", "projects"
   add_foreign_key "time_entries", "tasks"
   add_foreign_key "time_entries", "users"
+  add_foreign_key "users", "companies"
+  add_foreign_key "users", "roles"
 end

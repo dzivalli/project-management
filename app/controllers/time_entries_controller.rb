@@ -1,12 +1,13 @@
 class TimeEntriesController < ApplicationController
   def index
     @project = Project.find params[:project_id]
-    @time_entries = TimeEntry.for_project(@project)
+    @time_entries = TimeEntry.completed(@project)
   end
 
   def new
     if params[:task_id].present?
-      te = TimeEntry.new(task: Task.find(params[:task_id]), user: current_user, status: 'active')
+      te = TimeEntry.new(task: Task.find(params[:task_id]), user: current_user,
+                         status: 'active', project_id: params[:project_id])
       if te.save
         redirect_to :back, notice: 'Таймер запущен успешно'
       end
@@ -20,7 +21,8 @@ class TimeEntriesController < ApplicationController
   end
 
   def create
-    te = TimeEntry.new(time_entry_params.merge!(user: current_user, status: 'completed'))
+    te = TimeEntry.new(time_entry_params.merge!(user: current_user, status: 'completed',
+                                                project_id: params[:project_id]))
     if te.save
       redirect_to :back, notice: 'Время успешно добавлено'
     else

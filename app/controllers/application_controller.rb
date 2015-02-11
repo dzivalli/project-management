@@ -6,6 +6,6 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!, except: [:sessions]
 
   def user_for_paper_trail
-    current_user.username
+    current_user.username if current_user
   end
 end

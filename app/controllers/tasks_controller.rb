@@ -14,7 +14,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    task =  @project.tasks.build task_params
+    task =  Task.new task_params.merge(project_id: params[:project_id], owner: current_user)
     if (task.users = User.find(users_params)) && task.save!
       redirect_to :back, notice: 'Задача создано успешно'
     else
@@ -43,6 +43,10 @@ class TasksController < ApplicationController
   end
 
   def destroy
+    task = Task.find params[:id]
+    if task.destroy
+      redirect_to project_task_path(id: params[:project_id]), notice: 'Задача удалена успешно'
+    end
   end
 
   private
@@ -50,7 +54,7 @@ class TasksController < ApplicationController
   def task_params
     params.require(:task).permit(:name, :description, :estimated_hours,
                                  :due_date, :milestone_id, :visible,
-                                 :progress, :added_by)
+                                 :progress)
   end
 
   def users_params

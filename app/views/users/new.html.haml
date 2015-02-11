@@ -21,7 +21,10 @@
       .col-md-6
         .form-group
           = f.label 'Компания', nil, class: 'control-label'
-          = f.collection_select :company_id, @companies, :id, :name, {}, {class: 'form-control'}
+          - if @selected
+            = f.collection_select :company_id, @companies, :id, :name, { selected: @selected }, {class: 'form-control'}
+          - else
+            = f.collection_select :company_id, @companies, :id, :name, { }, {class: 'form-control'}
       .col-md-6
         .form-group
           = f.label 'Роль', nil, class: 'control-label'

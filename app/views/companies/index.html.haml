@@ -15,10 +15,12 @@
   %tbody
     - @companies.each do |company|
       %tr
-        %td= link_to company.name, company_path(company), class: 'text-info'
+        %td
+          = link_to company_path(company), class: 'text-info' do
+            %strong.text-info= company.name
         %td
           %span.badge.badge-primary= company.users.count
-        %td Основной
+        %td= (company.contact.full_name if company.contact)
         %td= company.email
         %td.m-r
           = link_to company_path(company), type: 'button', class: 'btn btn-default btn-xs' do

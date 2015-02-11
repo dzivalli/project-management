@@ -5,11 +5,12 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    @project = Project.find params[:id]
+    @project = Project.includes(:attachments).find params[:id]
   end
 
   def new
     @users = User.all
+    @roles = Role.all
     @project = Project.new
     @project.start_date = @project.due_date = Time.now.strftime("%d-%m-%Y")
     @companies = Company.every
@@ -22,12 +23,13 @@ class ProjectsController < ApplicationController
     if (project.users = User.find(users_params)) && project.save
       redirect_to projects_path, notice: 'Проект был успешно создан'
     else
-      redirect_to projects_path, alert: 'Произошла ошибка, повторите еще раз'
+      redirect_to projects_path, alert: "Произошла ошибка: #{project.errors.messages}"
     end
   end
 
   def edit
     @users = User.all
+    @roles = Role.all
     @project = Project.find params[:id]
     @companies = Company.every
     @title = 'Изменить данные'
@@ -71,7 +73,7 @@ class ProjectsController < ApplicationController
   private
 
   def project_params
-    params.require(:project).permit(:action, :title, :description, :start_date,
+    params.require(:project).permit(:action, :name, :description, :start_date,
                               :due_date, :fixed_price, :fixed_rate, :estimated_hours,
                               :hourly_rate, :progress, :company_id)
   end

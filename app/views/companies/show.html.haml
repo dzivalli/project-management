@@ -10,7 +10,7 @@
         .col-md-6= @company.email
       .row
         .col-md-4 Контакт
-        .col-md-6 Контакт
+        .col-md-6= (@company.contact.full_name if @company.contact)
       %h4 Другие детали
       .row
         .col-md-4 Город
@@ -19,12 +19,7 @@
       %h4 Полученные платежи
   .panel-body
     .col-md-12
-      .panel.panel-default.panel-shadow
-        .panel-heading
-          .panel-title
-            %i.entypo-user
-            Контакты
-        .panel-body
+      =render 'users'
     .col-md-6
       .panel.panel-default.panel-shadow
         .panel-heading
@@ -33,12 +28,7 @@
             Счета
         .panel-body
     .col-md-6
-      .panel.panel-default.panel-shadow
-        .panel-heading
-          .panel-title
-            %i.entypo-folder
-            Проекты
-        .panel-body
+      = render 'projects'
 
 
 

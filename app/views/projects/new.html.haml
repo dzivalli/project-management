@@ -2,7 +2,7 @@
   .form-group
     =f.label 'Имя проекта', nil, class: 'col-sm-4 control-label'
     .col-sm-5
-      =f.text_field :title, class: 'form-control'
+      =f.text_field :name, class: 'form-control'
 
   .form-group
     =f.label 'Клиент', nil, class: 'col-sm-4 control-label'
@@ -13,7 +13,7 @@
     =f.label 'Ответственные', nil, class: 'col-sm-4 control-label'
     .col-sm-5
       = fields_for :users, @users do |user|
-        = user.collection_select :id, @users, :id, :username, {selected: @project.users.ids}, { class: 'form-control', multiple: ''}
+        = user.grouped_collection_select :id, @roles, :users, :name, :id, :username, {selected: @project.users.ids}, { class: 'form-control', multiple: ''}
 
   .form-group
     =f.label 'Прогресс', nil, class: 'col-sm-4 control-label'

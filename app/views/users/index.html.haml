@@ -1,6 +1,6 @@
 %h3
   Пользователи
-  = link_to new_user_path, type: 'button', class: 'btn btn-blue btn-icon icon-left pull-right get-modal' do
+  = link_to new_user_path, class: 'btn btn-blue btn-icon icon-left pull-right get-modal' do
     Новый пользователь
     %i.entypo-plus
 %br
@@ -21,14 +21,14 @@
         %td= user.username
         %td= user.company.name
         %td= user.role.name
-        %td= user.created_at
+        %td= convert_time(user.created_at)
         %td Аватар
         %td.m-r
-          = link_to password_user_path(user), type: 'button', class: 'btn btn-default btn-icon icon-left btn-xs get-modal' do
+          = link_to password_user_path(user), class: 'btn btn-default btn-icon icon-left btn-xs get-modal' do
             Смена пароля
             %i.entypo-lock
-          = link_to edit_user_path(user), type: 'button', class: 'btn btn-default btn-xs get-modal' do
+          = link_to edit_user_path(user), class: 'btn btn-default btn-xs get-modal' do
             %i.entypo-tools
-          = link_to user_path(user), type: 'button', class: 'btn btn-default btn-xs', method: :delete, data: { confirm: 'Вы уверены?'} do
+          = link_to user_path(user), class: 'btn btn-default btn-xs', method: :delete, data: { confirm: 'Вы уверены?'} do
             %i.entypo-trash
 

@@ -41,3 +41,8 @@
       = link_to project_time_entries_path(@project) do
         %i.entypo-clock
         Табель
+
+  %li{class: ('active' if controller_name == 'histories')}
+    = link_to project_histories_path(@project) do
+      %i.entypo-vcard
+      История

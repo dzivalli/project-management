@@ -2,7 +2,7 @@ module ProjectCommon
   extend ActiveSupport::Concern
 
   included do
-    before_action :find_project, only: [:new, :edit, :show, :create]
+    before_action :find_project, only: [:new, :edit, :show]
   end
 
   private

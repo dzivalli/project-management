@@ -1,0 +1,9 @@
+ru:
+  create: "Создал"
+  update: "Изменил"
+  delete: "Удалил"
+  destroy: "Удалил"
+
+  task: "задачу"
+  milestone: "этап"
+  project: "проект"

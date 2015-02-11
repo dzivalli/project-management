@@ -1,11 +1,5 @@
 Rails.application.routes.draw do
-  get 'attachments/index'
-
-  get 'attachments/new'
-
-  get 'attachments/destroy'
-
-  root 'home#index'
+   root 'home#index'
 
   # get 'home/index'
 
@@ -17,7 +11,13 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :companies
+  resources :companies do
+    resources :users, only: [:new] do
+      member do
+        get 'primary'
+      end
+    end
+  end
   resources :messages
   resources :tickets
 
@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     resources :tasks
     resources :time_entries
     resources :attachments
+    resources :histories, only: [:index]
     member do
       get 'team'
       get 'permissions'

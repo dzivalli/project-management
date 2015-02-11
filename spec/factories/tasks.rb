@@ -6,5 +6,10 @@ FactoryGirl.define do
     description "MyText"
     due_date "2015-01-26"
     progress 1
+
+    factory :active_tasks do
+      association :time_entry, status: 'active', user: user
+    end
+
   end
 end

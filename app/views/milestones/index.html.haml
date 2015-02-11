@@ -1,10 +1,10 @@
 - content_for :project do
   .panel.panel-primary
-    - if can? :new, Milestone
-      .panel-heading
-        .panel-title
+    .panel-heading
+      .panel-title
+        - if can? :new, Milestone
           = link_to 'Добавить', new_project_milestone_path(@project), class: 'btn btn-default get-modal'
-    .panel-body
+    .panel-body.with-table
       %table.pm-table.table.table-bordered.datatable
         %thead
           %tr
@@ -16,11 +16,13 @@
         %tbody
           - @project.milestones.each do |milestone|
             %tr
-              %td= link_to milestone.name, project_milestone_path(@project, milestone), class: 'text-info'
+              %td
+                = link_to project_milestone_path(@project, milestone) do
+                  %strong.text-info= milestone.name
               %td= milestone.start_date
               %td= milestone.due_date
               %td Прогресс
-              %td
+              %td.m-r
                 = link_to edit_project_milestone_path(@project, milestone), type: 'button', class: 'btn btn-default btn-xs get-modal' do
                   %i.entypo-tools
                 = link_to project_milestone_path(@project, milestone), type: 'button', class: 'btn btn-default btn-xs', method: :delete, data: { confirm: 'Вы уверены?'} do

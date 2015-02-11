@@ -15,7 +15,7 @@
           %tr
             %td Таймер
             %td= render partial: 'common/bar', locals: {progress: project.progress}
-            %td= project.title
+            %td= project.name
             %td
               = link_to project_path(project), class: 'btn btn-default btn-icon btn-xs icon-left' do
                 Проект

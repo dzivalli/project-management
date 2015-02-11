@@ -1,0 +1,16 @@
+.panel.panel-primary
+  .panel-heading
+    .panel-title Файлы
+  .panel-body.with-table
+    %table.table.table-bordered.table-responsive
+      %thead
+        %tr
+          %th Имя файла
+          %th Пользователь
+      %tbody
+        - @project.attachments.each do |attachment|
+          %tr
+            %td
+              = link_to attachment.file.url do
+                %strong.text-info= attachment.file_identifier
+            %td= attachment.user.username

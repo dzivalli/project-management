@@ -1,0 +1,18 @@
+.panel.panel-default.panel-shadow
+  .panel-heading
+    .panel-title
+      %i.entypo-folder
+      Проекты
+  .panel-body.with-table
+    %table.table.table-bordered
+      %thead
+        %tr
+          %td Имя
+          %td Прогресс
+      %tbody
+        - @company.projects.each do |project|
+          %tr
+            %td
+              = link_to project_path(project) do
+                %strong.text-info= project.name
+            %td= render partial: 'common/bar', locals: {progress: project.progress}

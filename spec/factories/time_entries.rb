@@ -5,5 +5,9 @@ FactoryGirl.define do
     project nil
     user nil
     task nil
+
+    factory :active_time_entry do
+      status 'active'
+    end
   end
 end
