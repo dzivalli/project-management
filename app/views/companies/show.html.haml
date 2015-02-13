@@ -1,3 +1,9 @@
+%h3
+  = "Детали - #{@company.name}"
+  = link_to edit_company_path(@company), class: 'btn btn-blue btn-icon icon-left pull-right get-modal' do
+    Изменить
+    %i.entypo-pencil
+%br
 .panel.panel-default
   .panel-body
     .col-md-6

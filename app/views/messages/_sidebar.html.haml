@@ -1,0 +1,11 @@
+.mail-sidebar
+  .mail-sidebar-row
+    - if action_name == 'index'
+      %strong Все сообщения
+    - else
+      .text-center= link_to 'Новый диалог', messages_path, class: 'btn btn-blue'
+  %ul.mail-menu
+    - @recipients.each do |recipient|
+      %li{class: ('active' if recipient.id == params[:id].to_i)}
+        = link_to recipient.full_name, message_path(recipient.id), class: 'active'
+

@@ -4,8 +4,8 @@
       - @versions.each do |version|
         %li
           %time.cbp_tmtime
-            %span= version.created_at.strftime('%d %B')
             %span= version.created_at.strftime('%R')
+            %span= version.created_at.strftime('%d %B')
           .cbp_tmicon
             %i.entypo-user
           .cbp_tmlabel

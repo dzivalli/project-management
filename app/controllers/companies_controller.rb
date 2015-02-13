@@ -14,18 +14,27 @@ class CompaniesController < ApplicationController
   end
 
   def create
-    company = Company.new(permitted(params))
+    company = Company.new company_params
     if company.save
-      redirect_to companies_path, notice: 'Компания успешно добавлена'
+      redirect_to :back, notice: 'Компания успешно добавлена'
     else
-      redirect_to companies_path, alert: 'Произошла ошибка, попробуйте еще раз'
+      redirect_to :back, alert: 'Произошла ошибка, попробуйте еще раз'
     end
   end
 
   def edit
+    @company = Company.find params[:id]
+    @title = 'Изменить данные'
+    render 'new', layout: 'modal'
   end
 
   def update
+    company = Company.find params[:id]
+    if company.update company_params
+      redirect_to :back, notice: 'Компания успешно добавлена'
+    else
+      redirect_to :back, alert: 'Произошла ошибка, попробуйте еще раз'
+    end
   end
 
   def destroy
@@ -39,7 +48,7 @@ class CompaniesController < ApplicationController
 
   private
 
-  def permitted(params)
+  def company_params
     params.require(:company).permit(:name, :email, :address, :phone,
                                     :website, :city)
   end

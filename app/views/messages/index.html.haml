@@ -1,2 +1,18 @@
-%h1 Messages#index
-%p Find me in app/views/messages/index.html.haml
+.mail-env
+  .mail-body
+    .mail-header
+      .text-center Пользователь получит оповещение о новом сообщении на почту
+    %br
+    = form_for @message, html: {role: 'form', class: 'form-horizontal'} do |f|
+      .form-group
+        = f.label 'Получатели', nil, class: 'col-sm-3 control-label'
+        .col-sm-5
+          = fields_for :recipients do |r|
+            = r.grouped_collection_select :id, @roles, :users, :name, :id, :username, {selected: @message.recipients}, { class: 'form-control select2', multiple: ''}
+      .form-group
+        = f.label 'Текст', nil, class: 'control-label col-sm-3'
+        .col-sm-5
+          = f.text_area :message, class: 'form-control'
+      .col-sm-offset-6
+        = f.submit 'Отправить', class: 'btn btn-success'
+  =render 'sidebar'

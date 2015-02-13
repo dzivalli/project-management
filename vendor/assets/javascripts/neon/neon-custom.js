@@ -578,32 +578,32 @@ var public_vars = public_vars || {};
 
 
 
-		// Select2 Dropdown replacement
-		//if($.isFunction($.fn.select2))
-		//{
-		//	$(".select2").each(function(i, el)
-		//	{
-		//		var $this = $(el),
-		//			opts = {
-		//				allowClear: attrDefault($this, 'allowClear', false)
-		//			};
-        //
-		//		$this.select2(opts);
-		//		$this.addClass('visible');
-        //
-		//		//$this.select2("open");
-		//	});
-        //
-        //
-		//	if($.isFunction($.fn.niceScroll))
-		//	{
-		//		$(".select2-results").niceScroll({
-		//			cursorcolor: '#d4d4d4',
-		//			cursorborder: '1px solid #ccc',
-		//			railpadding: {right: 3}
-		//		});
-		//	}
-		//}
+		//Select2 Dropdown replacement
+		if($.isFunction($.fn.select2))
+		{
+			$(".select2").each(function(i, el)
+			{
+				var $this = $(el),
+					opts = {
+						allowClear: attrDefault($this, 'allowClear', false)
+					};
+
+				$this.select2(opts);
+				$this.addClass('visible');
+
+				//$this.select2("open");
+			});
+
+
+			if($.isFunction($.fn.niceScroll))
+			{
+				$(".select2-results").niceScroll({
+					cursorcolor: '#d4d4d4',
+					cursorborder: '1px solid #ccc',
+					railpadding: {right: 3}
+				});
+			}
+		}
 
 
 

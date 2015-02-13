@@ -1,8 +1,8 @@
 class CreateMessages < ActiveRecord::Migration
   def change
     create_table :messages do |t|
-      t.integer :user_to
-      t.references :users
+      t.integer :recipients, array: true, null: false, default: []
+      t.references :user
       t.text :message
       t.string :status
       t.string :attached_file
@@ -11,5 +11,7 @@ class CreateMessages < ActiveRecord::Migration
 
       t.timestamps null: false
     end
+
+    add_foreign_key :messages, :users
   end
 end

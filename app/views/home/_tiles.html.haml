@@ -4,13 +4,14 @@
       .icon
         %i.entypo-cup
       .num= @projects.count
-      %h3 Проектов
+      %h3= Russian::pluralize(@projects.count, 'Проект', 'Проекта', 'Проектов')
 .col-sm-3
-  .tile-stats.tile-aqua
-    .icon
-      %i.entypo-mail
-    .num 0
-    %h3 Сообщений
+  = link_to messages_path do
+    .tile-stats.tile-aqua
+      .icon
+        %i.entypo-mail
+      .num= Message.recipients_for(current_user.id).count
+      %h3= Russian::pluralize(Message.recipients_for(current_user.id).count, 'Сообщение', 'Сообщения', 'Сообщений')
 .col-sm-3
   .tile-stats.tile-aqua
     .icon

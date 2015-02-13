@@ -1,2 +1,25 @@
-%h1 Messages#show
-%p Find me in app/views/messages/show.html.haml
+.mail-env
+  .mail-body
+    -#.mail-header
+    .panel.minimal.minimal-gray
+      = form_for @message do |f|
+        .panel-body
+          = f.text_area :message, class: 'form-control autogrow', placeholder: 'Введите ваше сообщение'
+          %br
+          = f.submit 'Отправить', class: 'btn btn-success pull-right'
+        .panel-body
+          %br
+          .timeline-centered
+            - @messages.each do |msg|
+              %article.timeline-entry{class: ('left-aligned' if msg.my?(current_user.id)) }
+                .timeline-entry-inner
+                  %time.timeline-time
+                    %span= msg.created_at.strftime('%R')
+                    %span= msg.created_at.strftime('%d %B')
+                  .timeline-icon
+                    %i.entypo-user
+                  .timeline-label
+                    %h2= msg.user.full_name
+                    %p= msg.message
+
+  = render 'sidebar'

@@ -23,8 +23,8 @@
         %td= (company.contact.full_name if company.contact)
         %td= company.email
         %td.m-r
-          = link_to company_path(company), type: 'button', class: 'btn btn-default btn-xs' do
+          = link_to company_path(company), type: 'button', class: 'btn btn-default btn-xs', data: { toggle: 'tooltip', placement: 'top', 'original-title' => 'Детали'} do
             %i.entypo-home
-          = link_to company_path(company), type: 'button', class: 'btn btn-default btn-xs', method: :delete, data: { confirm: 'Вы уверены?'} do
+          = link_to company_path(company), type: 'button', class: 'btn btn-default btn-xs tooltip-primary', method: :delete, data: { confirm: 'Вы уверены?', toggle: 'tooltip', placement: 'top', 'original-title' => 'Удалить'} do
             %i.entypo-trash
 

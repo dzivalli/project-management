@@ -24,11 +24,11 @@
             %td= user.phone
             %td= convert_time(user.last_sign_in_at)
             %td.m-r
-              = link_to primary_company_user_path(@company, user), class: 'btn btn-default btn-xs' do
+              = link_to primary_company_user_path(@company, user), class: 'btn btn-default btn-xs', data: { confirm: 'Вы уверены?', toggle: 'tooltip', placement: 'top', 'original-title' => 'Основной'} do
                 %i.entypo-link{class: ('text-danger' if @company.contact && user.id == @company.contact.id)}
-              = link_to edit_user_path(user), class: 'btn btn-default btn-xs get-modal' do
+              = link_to edit_user_path(user), class: 'btn btn-default btn-xs get-modal', data: { toggle: 'tooltip', placement: 'top', 'original-title' => 'Изменить'} do
                 %i.entypo-tools
-              = link_to user_path(user), class: 'btn btn-default btn-xs', method: :delete, data: { confirm: 'Вы уверены?'} do
+              = link_to user_path(user), class: 'btn btn-default btn-xs', method: :delete, data: { confirm: 'Вы уверены?', toggle: 'tooltip', placement: 'top', 'original-title' => 'Удалить'} do
                 %i.entypo-trash
 
 

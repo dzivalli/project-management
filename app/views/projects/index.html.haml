@@ -22,7 +22,7 @@
         %td= project.due_date
         %td= project.cost
         %td.m-r
-          = link_to edit_project_path(project), type: 'button', class: 'btn btn-default btn-xs get-modal' do
+          = link_to edit_project_path(project), type: 'button', class: 'btn btn-default btn-xs get-modal', data: { toggle: 'tooltip', placement: 'top', 'original-title' => 'Изменить' } do
             %i.entypo-tools
-          = link_to project_path(project), type: 'button', class: 'btn btn-default btn-xs', method: :delete, data: { confirm: 'Вы уверены?'} do
+          = link_to project_path(project), type: 'button', class: 'btn btn-default btn-xs', method: :delete, data: { confirm: 'Вы уверены?', toggle: 'tooltip', placement: 'top', 'original-title' => 'Удалить' } do
             %i.entypo-trash
