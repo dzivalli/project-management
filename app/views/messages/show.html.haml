@@ -2,11 +2,11 @@
   .mail-body
     -#.mail-header
     .panel.minimal.minimal-gray
-      = form_for @message do |f|
+      = form_tag message_path(params[:id]), method: :put do |f|
         .panel-body
-          = f.text_area :message, class: 'form-control autogrow', placeholder: 'Введите ваше сообщение'
+          = text_area_tag :message, nil, class: 'form-control autogrow', placeholder: 'Введите ваше сообщение'
           %br
-          = f.submit 'Отправить', class: 'btn btn-success pull-right'
+          = submit_tag 'Отправить', class: 'btn btn-success pull-right'
         .panel-body
           %br
           .timeline-centered

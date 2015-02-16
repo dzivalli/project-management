@@ -15,10 +15,8 @@ class CompaniesController < ApplicationController
 
   def create
     company = Company.new company_params
-    if company.save
-      redirect_to :back, notice: 'Компания успешно добавлена'
-    else
-      redirect_to :back, alert: 'Произошла ошибка, попробуйте еще раз'
+    store do
+      company.save
     end
   end
 
@@ -30,10 +28,8 @@ class CompaniesController < ApplicationController
 
   def update
     company = Company.find params[:id]
-    if company.update company_params
-      redirect_to :back, notice: 'Компания успешно добавлена'
-    else
-      redirect_to :back, alert: 'Произошла ошибка, попробуйте еще раз'
+    renew do
+      company.update company_params
     end
   end
 

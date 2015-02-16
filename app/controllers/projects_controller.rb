@@ -20,10 +20,8 @@ class ProjectsController < ApplicationController
 
   def create
     project = Project.new project_params
-    if (project.users = User.find(users_params)) && project.save
-      redirect_to projects_path, notice: 'Проект был успешно создан'
-    else
-      redirect_to projects_path, alert: "Произошла ошибка: #{project.errors.messages}"
+    store do
+      (project.users = User.find(users_params)) && project.save
     end
   end
 
@@ -38,10 +36,8 @@ class ProjectsController < ApplicationController
 
   def update
     project = Project.find(params[:id])
-    if (project.users = User.find(users_params)) && project.update(project_params)
-      redirect_to :back, notice: 'Данные были успешно изменены'
-    else
-      redirect_to :back, alert: 'Произошла ошибка, повторите еще раз'
+    renew do
+      (project.users = User.find(users_params)) && project.update(project_params)
     end
   end
 

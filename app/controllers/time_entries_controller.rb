@@ -23,10 +23,8 @@ class TimeEntriesController < ApplicationController
   def create
     te = TimeEntry.new(time_entry_params.merge!(user: current_user, status: 'completed',
                                                 project_id: params[:project_id]))
-    if te.save
-      redirect_to :back, notice: 'Время успешно добавлено'
-    else
-      redirect_to :back, alert: 'Произошла ошибка'
+    store do
+      te.save
     end
   end
 
@@ -42,11 +40,9 @@ class TimeEntriesController < ApplicationController
   def update
     if params.has_key?(:time_entry)
       te = TimeEntry.find params[:id]
-        if te.update(time_entry_params)
-          redirect_to :back, notice: 'Время обновленно успешно'
-        else
-          redirect_to :back, alert: 'Произошла ошибка'
-        end
+      renew do
+        te.update(time_entry_params)
+      end
     else
       if TimeEntry.update(params[:id], status: 'completed')
         redirect_to :back, notice: 'Таймер остановлен успешно'

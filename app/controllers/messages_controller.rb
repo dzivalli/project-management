@@ -13,7 +13,6 @@ class MessagesController < ApplicationController
   end
 
   def new
-    @message = Message.new
     @roles = Role.all
     @users = User.all
     @recipients = Message.recipients_for(current_user.id)
@@ -22,10 +21,16 @@ class MessagesController < ApplicationController
   def create
     msg = Message.new message_params.merge(recipients: recipients_params, status: 'unread',
                                            user: current_user)
-    if msg.save
-      redirect_to :back, notice: 'Сообщение отправленно'
-    else
-      redirect_to :back, alert: 'Произошла ошибка'
+    store do
+      msg.save
+    end
+  end
+
+  def update
+    msg = Message.new(message: params[:message], recipients: [params[:id].to_i],
+                           user: current_user, status: 'unread')
+    store do
+      msg.save
     end
   end
 

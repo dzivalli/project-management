@@ -15,11 +15,8 @@ class UsersController < ApplicationController
 
   def create
     user = User.new(permitted(params))
-    if user.save
-      redirect_to :back, notice: 'Пользователь был успешно создан'
-    else
-      # TODO active records errors i18
-      redirect_to :back, alert: "Ошибка#{user.errors.inspect}"
+    store do
+      user.save
     end
   end
 
@@ -40,10 +37,8 @@ class UsersController < ApplicationController
 
   def update
     user = User.find params[:id]
-    if user.update(permitted(params))
-      redirect_to :back, notice: 'Данные были успешно обновленны'
-    else
-      redirect_to :back, alert: 'Произошла ошибка, попробуйте еще раз'
+    renew do
+      user.update(permitted(params))
     end
   end
 

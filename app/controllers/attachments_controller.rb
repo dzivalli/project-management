@@ -13,10 +13,8 @@ class AttachmentsController < ApplicationController
 
   def create
     attachment = Attachment.new attachment_params.merge(user: current_user, project_id: params[:project_id])
-    if attachment.save
-      redirect_to :back, notice: 'Файл загружен успешно'
-    else
-      redirect_to :back, alert: 'Произошла ошибка'
+    store do
+      attachment.save
     end
   end
 

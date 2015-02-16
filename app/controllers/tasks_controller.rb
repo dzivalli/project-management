@@ -15,10 +15,8 @@ class TasksController < ApplicationController
 
   def create
     task =  Task.new task_params.merge(project_id: params[:project_id], owner: current_user)
-    if (task.users = User.find(users_params)) && task.save!
-      redirect_to :back, notice: 'Задача создано успешно'
-    else
-      redirect_to :back, alert: 'Произошла ошибка'
+    store do
+      (task.users = User.find(users_params)) && task.save
     end
   end
 
@@ -31,10 +29,8 @@ class TasksController < ApplicationController
 
   def update
     task = Task.find params[:id]
-    if (task.users = User.find(users_params)) && task.update!(task_params)
-      redirect_to :back, notice: 'Задача обновленна успешно'
-    else
-      redirect_to :back, alert: 'Произошла ошибка'
+    renew do
+      (task.users = User.find(users_params)) && task.update(task_params)
     end
   end
 

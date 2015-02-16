@@ -8,4 +8,25 @@ class ApplicationController < ActionController::Base
   def user_for_paper_trail
     current_user.username if current_user
   end
+
+  def store
+    if yield
+      redirect_to :back, notice: 'Объект был успешно создан'
+    else
+      redirect_to :back, alert: 'Произошла ошибка'
+    end
+  end
+
+  def renew
+    puts controller_name.inspect
+    if yield
+      redirect_to :back, notice: 'Данные были успешно изменены'
+    else
+      redirect_to :back, alert: 'Произошла ошибка'
+    end
+  end
+
+  # def obj_name
+  #   controller_name.singularize
+  # end
 end

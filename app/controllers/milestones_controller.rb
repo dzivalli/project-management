@@ -15,10 +15,8 @@ class MilestonesController < ApplicationController
 
   def create
     milestone = Milestone.new milestone_params.merge(project_id: params[:project_id])
-    if milestone.save
-      redirect_to :back, notice: 'Этап был создан успешно'
-    else
-      redirect_to :back, alert: 'Произошла ошибка'
+    store do
+      milestone.save
     end
   end
 
@@ -30,11 +28,8 @@ class MilestonesController < ApplicationController
 
   def update
     milestone = Milestone.find params[:id]
-    milestone.update(permitted(params))
-    if milestone.save
-      redirect_to :back, notice: 'Данные были успешно обновленны'
-    else
-      redirect_to :back, alert: 'Произошла ошибка'
+    renew do
+      milestone.update(permitted(params))
     end
   end
 

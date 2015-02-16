@@ -6,19 +6,19 @@ Rails.application.routes.draw do
   devise_for :users, skip: [:passwords]
 
   resources :users do
-    member do
-      get 'password'
-    end
+    get 'password', on: :member
   end
 
   resources :companies do
     resources :users, only: [:new] do
-      member do
-        get 'primary'
-      end
+      get 'primary', on: :member
     end
   end
-  resources :messages
+
+  resources :messages do
+
+  end
+
   resources :tickets
 
   # TODO constrain all routes
