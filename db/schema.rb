@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150209132414) do
+ActiveRecord::Schema.define(version: 20150216090020) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -196,14 +196,26 @@ ActiveRecord::Schema.define(version: 20150209132414) do
 
   add_index "tasks_users", ["user_id", "task_id"], name: "index_tasks_users_on_user_id_and_task_id", unique: true, using: :btree
 
+  create_table "ticket_replies", force: :cascade do |t|
+    t.text     "body"
+    t.integer  "ticket_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "ticket_replies", ["ticket_id"], name: "index_ticket_replies_on_ticket_id", using: :btree
+  add_index "ticket_replies", ["user_id"], name: "index_ticket_replies_on_user_id", using: :btree
+
   create_table "tickets", force: :cascade do |t|
     t.string   "subject"
+    t.string   "code"
     t.text     "body"
-    t.string   "status"
+    t.integer  "status"
     t.integer  "priority"
     t.text     "additional"
     t.string   "attachment"
-    t.integer  "users_id"
+    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -274,6 +286,8 @@ ActiveRecord::Schema.define(version: 20150209132414) do
   add_foreign_key "tasks", "milestones"
   add_foreign_key "tasks", "projects"
   add_foreign_key "tasks", "projects"
+  add_foreign_key "ticket_replies", "tickets"
+  add_foreign_key "ticket_replies", "users"
   add_foreign_key "time_entries", "projects"
   add_foreign_key "time_entries", "projects"
   add_foreign_key "time_entries", "tasks"

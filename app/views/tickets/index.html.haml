@@ -1,2 +1,26 @@
-%h1 Tickets#index
-%p Find me in app/views/tickets/index.html.haml
+%h3
+  Заявки
+  = link_to new_ticket_path, type: 'button', class: 'btn btn-blue btn-icon icon-left pull-right get-modal' do
+    Новая заявка
+    %i.entypo-plus
+%br
+%table.pm-table.table.table-bordered.datatablee
+  %thead
+    %tr
+      %th Код заявки
+      %th Тема
+      %th Создатель
+      %th Приоритет
+      %th Статус
+      %th Параметры
+  %tbody
+    - @tickets.each do |ticket|
+      %tr
+        %td
+          .label.label-info= ticket.code
+        %td
+          %strong= link_to ticket.subject, ticket_path(ticket), class: 'text-info'
+        %td= ticket.user.full_name
+        %td= ticket.priority
+        %td= status_label(ticket.status)
+        %td.m-r

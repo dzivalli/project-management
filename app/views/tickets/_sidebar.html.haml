@@ -1,0 +1,7 @@
+.panel.panel-info
+  .panel-heading
+    .panel-title
+      Все заявки
+  .list-group
+    - @tickets.each do |ticket|
+      =link_to ticket.code, ticket_path(ticket), class: 'list-group-item'

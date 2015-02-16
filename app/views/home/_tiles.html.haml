@@ -10,8 +10,8 @@
     .tile-stats.tile-aqua
       .icon
         %i.entypo-mail
-      .num= Message.recipients_for(current_user.id).count
-      %h3= Russian::pluralize(Message.recipients_for(current_user.id).count, 'Сообщение', 'Сообщения', 'Сообщений')
+      .num= @message_count
+      %h3= Russian::pluralize(@message_count, 'Сообщение', 'Сообщения', 'Сообщений')
 .col-sm-3
   .tile-stats.tile-aqua
     .icon
@@ -20,11 +20,12 @@
     %h3 Счетов
 - if current_user.admin?
   .col-sm-3
-    .tile-stats.tile-aqua
-      .icon
-        %i.entypo-publish
-      .num 0
-      %h3 Заявок
+    = link_to tickets_path do
+      .tile-stats.tile-aqua
+        .icon
+          %i.entypo-publish
+        .num= @ticket_count
+        %h3= Russian::pluralize(@ticket_count, 'Заявка', 'Заявки', 'Заявок')
 - elsif current_user.client?
   .col-sm-3
     .tile-stats.tile-aqua

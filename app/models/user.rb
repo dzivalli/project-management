@@ -20,10 +20,16 @@ class User < ActiveRecord::Base
 
   # TODO make hook after delete to check if user primary contact
 
-  Role.pluck(:name).each do |role_name|
-    define_method "#{role_name}?" do
-      role.name == role_name
-    end
+  def client?
+    role.name == 'client'
+  end
+
+  def admin?
+    role.name == 'admin'
+  end
+
+  def staff?
+    role.name == 'staff'
   end
 
 end

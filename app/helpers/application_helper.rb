@@ -19,4 +19,17 @@ module ApplicationHelper
       version.object['name']
     end
   end
+
+  def status_label(status)
+    case status
+      when 'новая'
+        content_tag :div, status, class: 'label label-danger'
+      when 'ответ послан'
+        content_tag :div, status, class: 'label label-default'
+      when 'в процессе'
+        content_tag :div, status, class: 'label label-primary'
+      when 'закрыта'
+        content_tag :div, status, class: 'label label-success'
+    end
+  end
 end

@@ -1,2 +1,13 @@
-%h1 Tickets#new
-%p Find me in app/views/tickets/new.html.haml
+= form_for @ticket, html: { class: 'form-horizontal' } do |f|
+  .form-group
+    = f.label 'Тема', nil, class: 'col-sm-4 control-label'
+    .col-sm-5
+      = f.text_field :subject, class: 'form-control'
+  .form-group
+    = f.label 'Приоритет', nil, class: 'col-sm-4 control-label'
+    .col-sm-5
+      = f.select :priority, Ticket.priorities, class: 'form-control'
+  .form-group
+    = f.label 'Текст', nil, class: 'col-sm-4 control-label'
+    .col-sm-5
+      = f.text_area :body, class: 'form-control'

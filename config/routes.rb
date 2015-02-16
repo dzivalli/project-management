@@ -15,10 +15,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :messages do
-
-  end
-
+  resources :messages
   resources :tickets
 
   # TODO constrain all routes
