@@ -6,6 +6,7 @@ class ProjectsController < ApplicationController
 
   def show
     @project = Project.includes(:attachments).find params[:id]
+    @logged_time = TimeEntry.logged_time_for(@project)
   end
 
   def new

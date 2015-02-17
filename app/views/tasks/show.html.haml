@@ -2,7 +2,6 @@
   .panel.panel-primary
     .panel-heading
       .panel-title
-        = link_to 'Добавить фаил', '#', class: 'btn btn-default'
         = link_to 'Изменить', edit_project_task_path(@task.project, @task), class: 'btn btn-default get-modal'
         = link_to 'Удалить', project_task_path(@task.project, @task), class: 'btn btn-default', method: :delete
     .panel-body
@@ -24,10 +23,11 @@
         .col-lg-6
           %ul.list-group
             %li.list-group-item
-              %span.pull-right время
+              %span.pull-right= time_interval_to_human @logged_time
               Потрачено время
             %li.list-group-item
-              %span.pull-right= @task.estimated_hours
+              %span.pull-right
+                = to_hours @task.estimated_hours
               Время
             %li.list-group-item
               %span.pull-right= @task.users.pluck(:username).join(', ')

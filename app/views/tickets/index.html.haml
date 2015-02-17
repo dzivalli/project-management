@@ -22,5 +22,5 @@
           %strong= link_to ticket.subject, ticket_path(ticket), class: 'text-info'
         %td= ticket.user.full_name
         %td= ticket.priority
-        %td= status_label(ticket.status)
+        %td= status(ticket.status, 'label')
         %td.m-r

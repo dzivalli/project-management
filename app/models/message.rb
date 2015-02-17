@@ -8,14 +8,6 @@ class Message < ActiveRecord::Base
           recipient_id, user_id, user_id, recipient_id).order(created_at: :desc)
   end
 
-  def self.recipients_count(my_id)
-    if recipients_for(my_id)
-      recipients_for(my_id).count
-    else
-      0
-    end
-  end
-
   def self.recipients_for(my_id)
     if my(my_id).any?
       ids = my(my_id).pluck(:user_id, :recipients).flatten(1).uniq

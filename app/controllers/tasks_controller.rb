@@ -36,12 +36,13 @@ class TasksController < ApplicationController
 
   def show
     @task = Task.find params[:id]
+    @logged_time = TimeEntry.logged_time_for(@task)
   end
 
   def destroy
     task = Task.find params[:id]
     if task.destroy
-      redirect_to project_task_path(id: params[:project_id]), notice: 'Задача удалена успешно'
+      redirect_to project_tasks_path(id: params[:project_id]), notice: 'Задача удалена успешно'
     end
   end
 

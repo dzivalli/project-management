@@ -24,8 +24,8 @@
       .tile-stats.tile-aqua
         .icon
           %i.entypo-publish
-        .num= @ticket_count
-        %h3= Russian::pluralize(@ticket_count, 'Заявка', 'Заявки', 'Заявок')
+        .num= @tickets.count
+        %h3= Russian::pluralize(@tickets.count, 'Заявка', 'Заявки', 'Заявок')
 - elsif current_user.client?
   .col-sm-3
     .tile-stats.tile-aqua

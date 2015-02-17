@@ -1,5 +1,6 @@
 class Ticket < ActiveRecord::Base
   belongs_to :user
+  has_many :ticket_replies
 
   enum priority: %w(низкий средний высокий)
   enum status: ['новая' , 'ответ послан' , 'в процессе' , 'закрыта']

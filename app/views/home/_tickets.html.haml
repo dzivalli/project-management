@@ -3,3 +3,12 @@
     .panel-title
       Последние заявки
   .panel-body
+    %ul.list-group
+      - @tickets.each do |ticket|
+        = link_to ticket_path(ticket), class: 'list-group-item' do
+          %strong= ticket.code
+          -
+          = ticket.priority
+          .pull-right= status(ticket.status, 'badge')
+
+

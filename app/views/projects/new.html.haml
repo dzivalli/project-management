@@ -26,7 +26,7 @@
     =f.label 'Дата начала', nil, class: 'col-sm-4 control-label'
     .col-sm-5
       .input-group
-        =f.text_field :start_date, class: 'form-control datepicker'
+        =f.text_field :start_date, class: 'form-control datepicker', value: (@project.start_date.strftime('%d-%m-%Y'))
         .input-group-addon
           = link_to '#' do
             %i.entypo-calendar
@@ -35,7 +35,7 @@
     =f.label 'Дата конца', nil, class: 'col-sm-4 control-label'
     .col-sm-5
       .input-group
-        =f.text_field :due_date, class: 'form-control datepicker'
+        =f.text_field :due_date, class: 'form-control datepicker', value: (@project.due_date.strftime('%d-%m-%Y'))
         .input-group-addon
           = link_to '#' do
             %i.entypo-calendar

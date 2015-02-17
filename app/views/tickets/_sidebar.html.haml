@@ -1,7 +1,11 @@
-.panel.panel-info
+.panel.panel-default
   .panel-heading
     .panel-title
       Все заявки
   .list-group
     - @tickets.each do |ticket|
-      =link_to ticket.code, ticket_path(ticket), class: 'list-group-item'
+      =link_to ticket_path(ticket), class: 'list-group-item' do
+        %strong= ticket.code
+        .pull-right= status(ticket.status, 'label')
+        %br
+        %small= "#{ticket.user.full_name} | #{Russian::strftime(ticket.created_at, '%d %b %Y')}"

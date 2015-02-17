@@ -6,7 +6,6 @@
       .panel-heading
         .panel-title
           = link_to 'Изменить', edit_ticket_path(@ticket), class: 'btn btn-default get-modal'
-          = link_to 'Сменить статус', '#', class: 'btn btn-default'
         .panel-title.pull-right
           = link_to 'Удалить', '#', class: 'btn btn-default'
       .panel-body
@@ -21,7 +20,7 @@
                 .pull-right= @ticket.user.full_name
               .list-group-item
                 Статус
-                .pull-right= status_label @ticket.status
+                .pull-right= status @ticket.status, 'label'
               .list-group-item
                 Приоритет
                 .pull-right= @ticket.priority
@@ -35,7 +34,21 @@
               %blockquote
                 = @ticket.body
           .col-sm-8
+            %ul.comments-list
+              %li
+                = form_for [@ticket, @ticket_reply] do |f|
+                  = f.text_area :body, class: 'form-control autogrow', placeholder: 'Ответ...'
+                  = f.submit 'Отправить', class: 'btn btn-success pull-right'
 
-
-
+              - @ticket.ticket_replies.each do |tr|
+                %li
+                  .comment-details
+                    .comment-head
+                      = link_to tr.user.full_name, '#'
+                      ответил:
+                    %p.comment-text
+                      = tr.body
+                    .comment-footer
+                      .comment-time= time_ago_in_words(tr.created_at)
+                      .action-links
 

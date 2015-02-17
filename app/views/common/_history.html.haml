@@ -5,7 +5,7 @@
         %li
           %time.cbp_tmtime
             %span= version.created_at.strftime('%R')
-            %span= version.created_at.strftime('%d %B')
+            %span= time_ago_in_words(version.created_at)
           .cbp_tmicon
             %i.entypo-user
           .cbp_tmlabel

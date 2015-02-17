@@ -229,7 +229,6 @@ ActiveRecord::Schema.define(version: 20150216090020) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "time_entries", ["project_id", "user_id", "task_id"], name: "index_time_entries_on_project_id_and_user_id_and_task_id", unique: true, using: :btree
   add_index "time_entries", ["project_id"], name: "index_time_entries_on_project_id", using: :btree
   add_index "time_entries", ["task_id"], name: "index_time_entries_on_task_id", using: :btree
   add_index "time_entries", ["user_id"], name: "index_time_entries_on_user_id", using: :btree
@@ -289,10 +288,7 @@ ActiveRecord::Schema.define(version: 20150216090020) do
   add_foreign_key "ticket_replies", "tickets"
   add_foreign_key "ticket_replies", "users"
   add_foreign_key "time_entries", "projects"
-  add_foreign_key "time_entries", "projects"
   add_foreign_key "time_entries", "tasks"
-  add_foreign_key "time_entries", "tasks"
-  add_foreign_key "time_entries", "users"
   add_foreign_key "time_entries", "users"
   add_foreign_key "users", "companies"
   add_foreign_key "users", "companies"

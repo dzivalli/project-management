@@ -21,7 +21,7 @@
               %td= convert_time(te.updated_at)
               %td= te.user.username
               %td= te.task.name
-              %td= te.spent
+              %td= time_interval_to_human(te.updated_at - te.created_at)
               %td.m-r
                 = link_to edit_project_time_entry_path(@project, te), type: 'button', class: 'btn btn-default btn-xs get-modal' do
                   %i.entypo-pencil

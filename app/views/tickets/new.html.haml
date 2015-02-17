@@ -6,8 +6,14 @@
   .form-group
     = f.label 'Приоритет', nil, class: 'col-sm-4 control-label'
     .col-sm-5
-      = f.select :priority, Ticket.priorities, class: 'form-control'
+      = f.select :priority, Ticket.priorities, selected: Ticket.priorities[@ticket.priority], class: 'form-control'
   .form-group
     = f.label 'Текст', nil, class: 'col-sm-4 control-label'
     .col-sm-5
       = f.text_area :body, class: 'form-control'
+
+  - if current_user.admin? && action_name != 'new'
+    .form-group
+      = f.label 'Статус', nil, class: 'col-sm-4 control-label'
+      .col-sm-5
+        = f.select :status, Ticket.statuses, selected: Ticket.statuses[@ticket.status], class: 'form-control'
