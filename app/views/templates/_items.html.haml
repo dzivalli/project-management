@@ -1,0 +1,27 @@
+.row
+  .col-sm-12
+    .pull-right
+      = link_to new_item_template_path, class: 'btn btn-blue btn-icon icon-left get-modal' do
+        %i.entypo-plus
+        Элемент
+%br
+.row
+  .col-sm-12
+    %table.table.table-bordered.pm-table
+      %thead
+        %tr
+          %th Имя
+          %th Описание
+          %th Цена
+          %th Параметры
+      %tbody
+        - @item_templates.each do |item|
+          %tr
+            %td= item.name
+            %td= item.description
+            %td= item.cost
+            %td.m-r
+              = link_to edit_item_template_path(item), class: 'btn btn-default btn-xs get-modal' do
+                %i.entypo-pencil
+              = link_to item_template_path(item), type: 'button', class: 'btn btn-default btn-xs', method: :delete, data: { confirm: 'Вы уверены?'} do
+                %i.entypo-trash

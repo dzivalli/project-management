@@ -20,6 +20,11 @@ Rails.application.routes.draw do
     resources :ticket_replies
   end
 
+  resources :templates, only: [:index]
+  resources :task_templates
+  resources :milestone_templates
+  resources :item_templates
+
   # TODO constrain all routes
   resources :projects do
     resources :milestones

@@ -45,5 +45,5 @@
     =f.label 'Видимость клиенту', nil, class: 'col-sm-4 control-label'
     .col-sm-5
       .make-switch.switch-small
-        =f.check_box :visible, class: 'form-control'
+        =f.check_box :visible, {}, @task.visible
 

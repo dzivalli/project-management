@@ -1,0 +1,25 @@
+.row
+  .col-sm-12
+    .pull-right
+      = link_to new_milestone_template_path, class: 'btn btn-blue btn-icon icon-left get-modal' do
+        %i.entypo-plus
+        Этап
+%br
+.row
+  .col-sm-12
+    %table.table.table-bordered.pm-table
+      %thead
+        %tr
+          %th Имя
+          %th Описание
+          %th Параметры
+      %tbody
+        - @milestone_templates.each do |milestone|
+          %tr
+            %td= milestone.name
+            %td= milestone.description
+            %td.m-r
+              = link_to edit_milestone_template_path(milestone), class: 'btn btn-default btn-xs get-modal' do
+                %i.entypo-pencil
+              = link_to milestone_template_path(milestone), type: 'button', class: 'btn btn-default btn-xs', method: :delete, data: { confirm: 'Вы уверены?'} do
+                %i.entypo-trash

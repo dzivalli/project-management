@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150216090020) do
+ActiveRecord::Schema.define(version: 20150218115907) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +38,14 @@ ActiveRecord::Schema.define(version: 20150216090020) do
     t.integer  "contact_id"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+  end
+
+  create_table "item_templates", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "cost"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "mailboxer_conversation_opt_outs", force: :cascade do |t|
@@ -105,6 +113,16 @@ ActiveRecord::Schema.define(version: 20150216090020) do
     t.datetime "updated_at",                 null: false
   end
 
+  create_table "milestone_templates", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "owner_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "milestone_templates", ["owner_id"], name: "index_milestone_templates_on_owner_id", using: :btree
+
   create_table "milestones", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
@@ -169,6 +187,18 @@ ActiveRecord::Schema.define(version: 20150216090020) do
   end
 
   add_index "settings", ["key"], name: "index_settings_on_key", unique: true, using: :btree
+
+  create_table "task_templates", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "estimated_hours"
+    t.boolean  "visible"
+    t.integer  "owner_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "task_templates", ["owner_id"], name: "index_task_templates_on_owner_id", using: :btree
 
   create_table "tasks", force: :cascade do |t|
     t.string   "name"

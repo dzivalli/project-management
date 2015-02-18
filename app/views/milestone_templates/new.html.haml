@@ -1,0 +1,11 @@
+= form_for @milestone_template, html: { class: 'form-horizontal' } do |f|
+  .form-group
+    =f.label 'Имя этапа', nil, class: 'col-sm-4 control-label'
+    .col-sm-5
+      =f.text_field :name, class: 'form-control'
+
+  .form-group
+    =f.label 'Описание', nil, class: 'col-sm-4 control-label'
+    .col-sm-5
+      =f.text_area :description, class: 'form-control'
+

@@ -7,7 +7,7 @@ class TasksController < ApplicationController
   end
 
   def new
-    @task = @project.tasks.build
+    @task = Task.new(due_date: Time.now.strftime("%d-%m-%Y"))
     @title = 'Новая задача'
     @users = User.all
     render layout: 'modal'

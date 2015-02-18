@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   has_many :permissions
   has_many :messages
   has_many :tickets
+  has_many :task_templates
 
   has_and_belongs_to_many :projects
   has_and_belongs_to_many :tasks

@@ -87,7 +87,7 @@ init = ->
 
   bindBootstrapSwitch = ->
     bSwitch = modal.find('.make-switch')
-    checkbox = modal.find('#project_fixed_price')
+    checkbox = modal.find('[type=checkbox]')
     elements = modal.find('.pm-price')
 
     bSwitch.bootstrapSwitch()

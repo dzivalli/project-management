@@ -1,0 +1,27 @@
+.row
+  .col-sm-12
+    .pull-right
+      = link_to new_task_template_path, class: 'btn btn-blue btn-icon icon-left get-modal' do
+        %i.entypo-plus
+        Задача
+%br
+.row
+  .col-sm-12
+    %table.table.table-bordered.pm-table
+      %thead
+        %tr
+          %th Имя
+          %th Видимость
+          %th Колличество часов
+          %th Параметры
+      %tbody
+        - @task_templates.each do |task|
+          %tr
+            %td= task.name
+            %td= task.visible
+            %td= task.estimated_hours
+            %td.m-r
+              = link_to edit_task_template_path(task), class: 'btn btn-default btn-xs get-modal' do
+                %i.entypo-pencil
+              = link_to task_template_path(task), type: 'button', class: 'btn btn-default btn-xs', method: :delete, data: { confirm: 'Вы уверены?'} do
+                %i.entypo-trash

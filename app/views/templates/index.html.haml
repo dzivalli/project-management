@@ -1,0 +1,16 @@
+%h3 Шаблоны
+.tabs-vertical-env
+  %ul.nav.tabs-vertical
+    %li{class: ('active' if flash[:from] == 'task' || flash[:from].nil?) }
+      = link_to 'Задачи', '#tasks', data: {toggle: 'tab'}
+    %li{class: ('active' if flash[:from] == 'milestone')}
+      = link_to 'Этапы', '#milestones', data: {toggle: 'tab'}
+    %li{class: ('active' if flash[:from] == 'item')}
+      = link_to 'Элементы для счетов', '#items', data: {toggle: 'tab'}
+  .tab-content
+    #tasks.tab-pane{class: ('active' if flash[:from] == 'task' || flash[:from].nil?) }
+      = render 'tasks'
+    #milestones.tab-pane{class: ('active' if flash[:from] == 'milestone')}
+      = render 'milestones'
+    #items.tab-pane{class: ('active' if flash[:from] == 'item')}
+      = render 'items'
