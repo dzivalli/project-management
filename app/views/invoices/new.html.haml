@@ -1,0 +1,32 @@
+= form_for @invoice, html: { class: 'form-horizontal' } do |f|
+
+  .form-group
+    =f.label 'Номер', nil, class: 'col-sm-4 control-label'
+    .col-sm-5
+      =f.text_field :reference_no, class: 'form-control'
+
+  .form-group
+    =f.label 'Клиент', nil, class: 'col-sm-4 control-label'
+    .col-sm-5
+      =f.collection_select :company_id, @companies, :id, :name, class: 'form-control'
+
+  .form-group
+    =f.label 'Дата конца', nil, class: 'col-sm-4 control-label'
+    .col-sm-5
+      .input-group.pm-datepicker
+        =f.text_field :due_date, class: 'form-control datepicker', value: (@invoice.due_date.strftime('%d-%m-%Y'))
+        .input-group-addon
+          = link_to '#' do
+            %i.entypo-calendar
+
+  .form-group
+    =f.label 'Налог', nil, class: 'col-sm-4 control-label'
+    .col-sm-5
+      .input-group
+        .input-group-addon %
+        =f.number_field :tax, class: 'form-control'
+
+  .form-group
+    =f.label 'Заметки', nil, class: 'col-sm-4 control-label'
+    .col-sm-5
+      =f.text_area :notes, class: 'form-control'

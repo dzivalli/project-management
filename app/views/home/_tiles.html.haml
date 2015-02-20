@@ -13,11 +13,12 @@
       .num= @message_count
       %h3= Russian::pluralize(@message_count, 'Сообщение', 'Сообщения', 'Сообщений')
 .col-sm-3
-  .tile-stats.tile-aqua
-    .icon
-      %i.entypo-credit-card
-    .num 0
-    %h3 Счетов
+  = link_to invoices_path do
+    .tile-stats.tile-aqua
+      .icon
+        %i.entypo-credit-card
+      .num= @invoice_count
+      %h3= Russian::pluralize(@invoice_count, 'Счет', 'Счета', 'Счетов')
 - if current_user.admin?
   .col-sm-3
     = link_to tickets_path do

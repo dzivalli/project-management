@@ -9,9 +9,9 @@ class ApplicationController < ActionController::Base
     current_user.username if current_user
   end
 
-  def store
+  def store(path = :back)
     if yield
-      redirect_to :back, notice: 'Объект был успешно создан'
+      redirect_to path, notice: 'Объект был успешно создан'
     else
       redirect_to :back, alert: 'Произошла ошибка'
     end

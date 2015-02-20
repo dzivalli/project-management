@@ -1,0 +1,11 @@
+= form_tag invoice_items_path(params[:invoice_id]), class: 'form-horizontal', id: 'new_item' do
+
+  .form-group
+    = label_tag 'Шаблоны', nil, class: 'col-sm-4 control-label'
+    .col-sm-5
+      = select_tag :item_template, options_from_collection_for_select(@item_templates, :id, :name), class: 'form-control'
+
+  .form-group
+    = label_tag 'Количество', nil, class: 'col-sm-4 control-label'
+    .col-sm-5
+      = number_field_tag :quantity, nil, class: 'form-control'

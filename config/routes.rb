@@ -24,6 +24,12 @@ Rails.application.routes.draw do
   resources :task_templates
   resources :milestone_templates
   resources :item_templates
+  resources :invoices do
+   resources :items
+    get 'pdf', on: :member
+  end
+
+  # resources :payments
 
   # TODO constrain all routes
   resources :projects do

@@ -1,0 +1,53 @@
+.invoice
+  .row
+    .col-sm-6.invoice-left
+      %h4= @invoice.company.name
+      %br
+      = @invoice.company.city
+      %br
+      = @invoice.company.address
+      %br
+      = @invoice.company.phone
+    .col-sm-6.invoice-right
+      %h3= "Номер счета: #{@invoice.reference_no}"
+      %span= @invoice.created_at.strftime("%d-%m-%Y")
+  .margin
+  %table.table.table-bordered
+    %thead
+      %tr
+        %th Имя
+        %th Описание
+        %th Количество
+        %th Цена
+        %th Сумма
+    %tbody
+      - @invoice.items.each do |item|
+        %tr
+          %td= item.name
+          %td= item.description
+          %td= item.quantity
+          %td.text-right= item.cost
+          %td.text-right
+            = item.total
+            = link_to invoice_item_path(@invoice, item), method: :delete do
+              %i.entypo-trash.text-danger
+      = form_for [@invoice, @item] do |f|
+        %tr
+          %td= f.text_field :name, class: 'form-control'
+          %td= f.text_field :description, class: 'form-control'
+          %td= f.number_field :quantity, class: 'form-control'
+          %td= f.number_field :cost, class: 'form-control'
+          %td= f.submit 'Добавить', class: 'btn btn-success'
+  .margin
+  .row
+    .col-sm-12.invoice-right
+      %ul.list-unstyled
+        %li
+          Подитог:
+          %strong= @invoice.sub_total
+        %li
+          Налог:
+          %strong= @invoice.tax
+        %li
+          Общий итог:
+          %strong= @invoice.total

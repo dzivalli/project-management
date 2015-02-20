@@ -1,0 +1,12 @@
+.panel.panel-default
+  .panel-heading
+    .panel-title
+      Все счета
+  .list-group
+    - @invoices.each do |invoice|
+      =link_to invoice_path(invoice), class: 'list-group-item' do
+        %strong= invoice.company.name
+        .pull-right Full amount
+        %br
+        = invoice.reference_no
+        %small= status(invoice.status, 'badge')

@@ -1,6 +1,6 @@
 class CompaniesController < ApplicationController
   def index
-    @companies = Company.every
+    @companies = Company.clients
   end
 
   def show

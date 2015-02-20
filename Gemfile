@@ -7,6 +7,8 @@ gem 'quiet_assets'
 gem 'russian'
 gem 'carrierwave'
 gem 'paper_trail', '~> 4.0.0.beta'
+gem 'wkhtmltopdf-binary'
+gem 'wicked_pdf'
 # for heroku deployment
 gem 'rails_12factor', group: :production
 

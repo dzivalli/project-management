@@ -38,6 +38,7 @@
               %li
                 = form_for [@ticket, @ticket_reply] do |f|
                   = f.text_area :body, class: 'form-control autogrow', placeholder: 'Ответ...'
+                  %br
                   = f.submit 'Отправить', class: 'btn btn-success pull-right'
 
               - @ticket.ticket_replies.each do |tr|

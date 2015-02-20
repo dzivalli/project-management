@@ -32,11 +32,11 @@ module ApplicationHelper
     end
   end
 
-  def status(status, form)
+  def status(status, form = 'label')
     case status
       when 'новая'
         content_tag :div, status, class:  "#{form} #{form}-danger"
-      when 'ответ послан'
+      when 'ответ послан', 'черновик'
         content_tag :div, status, class: "#{form} #{form}-default"
       when 'в процессе'
         content_tag :div, status, class: "#{form} #{form}-primary"

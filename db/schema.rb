@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150218115907) do
+ActiveRecord::Schema.define(version: 20150218124427) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,31 @@ ActiveRecord::Schema.define(version: 20150218115907) do
     t.datetime "updated_at",              null: false
   end
 
+  create_table "invoices", force: :cascade do |t|
+    t.string   "reference_no"
+    t.integer  "company_id"
+    t.date     "due_date"
+    t.text     "notes"
+    t.float    "tax"
+    t.integer  "discount"
+    t.boolean  "recurring"
+    t.integer  "recur_freq"
+    t.date     "recur_start_date"
+    t.date     "recur_end_date"
+    t.date     "recur_next_date"
+    t.integer  "status"
+    t.integer  "archived"
+    t.date     "sent_date"
+    t.boolean  "deleted"
+    t.boolean  "emailed"
+    t.boolean  "visible"
+    t.boolean  "viewed"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "invoices", ["company_id"], name: "index_invoices_on_company_id", using: :btree
+
   create_table "item_templates", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
@@ -47,6 +72,18 @@ ActiveRecord::Schema.define(version: 20150218115907) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  create_table "items", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "cost"
+    t.integer  "quantity"
+    t.integer  "invoice_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "items", ["invoice_id"], name: "index_items_on_invoice_id", using: :btree
 
   create_table "mailboxer_conversation_opt_outs", force: :cascade do |t|
     t.integer "unsubscriber_id"
@@ -301,6 +338,8 @@ ActiveRecord::Schema.define(version: 20150218115907) do
   add_foreign_key "attachments", "projects"
   add_foreign_key "attachments", "users"
   add_foreign_key "attachments", "users"
+  add_foreign_key "invoices", "companies"
+  add_foreign_key "items", "invoices"
   add_foreign_key "mailboxer_conversation_opt_outs", "mailboxer_conversations", column: "conversation_id", name: "mb_opt_outs_on_conversations_id"
   add_foreign_key "mailboxer_notifications", "mailboxer_conversations", column: "conversation_id", name: "notifications_on_conversation_id"
   add_foreign_key "mailboxer_receipts", "mailboxer_notifications", column: "notification_id", name: "receipts_on_notification_id"

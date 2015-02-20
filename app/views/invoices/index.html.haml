@@ -1,0 +1,42 @@
+%h3
+  Счета
+  = link_to new_invoice_path, type: 'button', class: 'btn btn-blue btn-icon icon-left pull-right get-modal' do
+    Создать счет
+    %i.entypo-plus
+%br
+%table.pm-table.table.table-bordered
+  %thead
+    %tr
+      %th Статус
+      %th Номер
+      %th Дата конца
+      %th Имя клиента
+      %th Сумма
+      %th Сумма задолженности
+      %th Параметры
+  %tbody
+    - @invoices.each do |invoice|
+      %tr
+        %td= status(invoice.status)
+        %td
+          = link_to invoice_path(invoice) do
+            %strong.text-info= invoice.reference_no
+        %td= invoice.due_date
+        %td= invoice.company.name
+        %td Amount
+        %td Amount due
+        %td
+          .btn-group
+            = button_tag class: 'btn btn-default btn-xs dropdown-toggle', data: {toggle: 'dropdown'} do
+              Действия
+              %span.caret
+            %ul.dropdown-menu.dropdown-default{role: 'menu'}
+              %li= link_to 'Просмотр', invoice_path(invoice)
+              %li= link_to 'Изменить', edit_invoice_path(invoice), class: 'get-modal'
+              %li= link_to 'Удалить', invoice_path(invoice), method: :delete
+              %li= link_to 'История', '#'
+              %li= link_to 'Выслать на почту', '#'
+              %li= link_to 'Повторная отправка', '#'
+
+
+

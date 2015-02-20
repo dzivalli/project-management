@@ -14,7 +14,7 @@ class ProjectsController < ApplicationController
     @roles = Role.all
     @project = Project.new
     @project.start_date = @project.due_date = Time.now.strftime("%d-%m-%Y")
-    @companies = Company.every
+    @companies = Company.clients
     @title = 'Новый проект'
     render layout: 'modal'
   end
@@ -30,7 +30,7 @@ class ProjectsController < ApplicationController
     @users = User.all
     @roles = Role.all
     @project = Project.find params[:id]
-    @companies = Company.every
+    @companies = Company.clients
     @title = 'Изменить данные'
     render 'new', layout: 'modal'
   end

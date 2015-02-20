@@ -11,38 +11,49 @@
         = link_to '#', class: 'with-animation' do
           %i.entypo-menu
   %ul#main-menu.main-menu
-    %li
+    %li{class: ('active' if controller_name == 'home')}
       = link_to root_path do
         %i.entypo-gauge
         %span.title Главная
     - if can? :index, Company
-      %li
+      %li{class: ('active' if controller_name == 'companies')}
         = link_to companies_path do
           %i.entypo-users
           %span.title Клиенты
-    %li
+    %li{class: ('active' if controller_name == 'projects')}
       = link_to projects_path do
         %i.entypo-cup
         %span.title Проекты
     %li
+      = link_to '#' do
+        %i.entypo-basket
+        %span.title Продажи
+      %ul{class: ('visible' if controller_name == 'invoices')}
+        %li{class: ('active' if controller_name == 'invoices')}
+          = link_to invoices_path do
+            %span.title Счета
+        %li
+          = link_to '#' do
+            %span.title Платежи
+    %li{class: ('active' if controller_name == 'templates')}
       = link_to templates_path do
         %i.entypo-list
         %span.title Шаблоны
-    %li
+    %li{class: ('active' if controller_name == 'messages')}
       = link_to messages_path do
         %i.entypo-mail
         %span.title Сообщения
-    %li
+    %li{class: ('active' if controller_name == 'tickets')}
       = link_to tickets_path do
         %i.entypo-ticket
         %span.title Заявки
     - if can? :index, Setting
-      %li
+      %li{class: ('active' if controller_name == 'settings')}
         = link_to settings_general_path do
           %i.entypo-cog
           %span.title Настройки
     - if can? :index, User
-      %li
+      %li{class: ('active' if controller_name == 'users')}
         = link_to users_path do
           %i.entypo-lock
           %span.title Пользователи
