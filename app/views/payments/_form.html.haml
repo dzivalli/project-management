@@ -1,0 +1,28 @@
+.form-group
+  =f.label 'Номер транзакции', nil, class: 'col-sm-4 control-label'
+  .col-sm-5
+    =f.text_field :trans, class: 'form-control', readonly: ''
+
+.form-group
+  =f.label 'Сумма', nil, class: 'col-sm-4 control-label'
+  .col-sm-5
+    =f.number_field :amount, class: 'form-control'
+
+.form-group
+  =f.label 'Дата платежа', nil, class: 'col-sm-4 control-label'
+  .col-sm-5
+    .input-group.pm-datepicker
+      =f.text_field :payment_date, class: 'form-control datepicker', value: (@payment.payment_date.strftime('%d-%m-%Y'))
+      .input-group-addon
+        = link_to '#' do
+          %i.entypo-calendar
+
+.form-group
+  =f.label 'Метод', nil, class: 'col-sm-4 control-label'
+  .col-sm-5
+    =f.collection_select :payment_method_id, @payment_methods, :id, :name, class: 'form-control'
+
+.form-group
+  =f.label 'Заметки', nil, class: 'col-sm-4 control-label'
+  .col-sm-5
+    =f.text_area :notes, class: 'form-control'

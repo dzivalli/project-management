@@ -2,6 +2,7 @@ class Invoice < ActiveRecord::Base
   belongs_to :company
 
   has_many :items
+  has_many :payments
 
   enum status: %w(черновик)
 
@@ -18,6 +19,12 @@ class Invoice < ActiveRecord::Base
   def total
     sum = sub_total.to_f
     (sum / 100 * tax) + sum
+  end
+
+  def amount_due
+    # TODO add check if total bigger then amount of invoice
+    paid = payments.pluck(:amount).inject(:+)
+    paid ? (total - paid).abs.round(2) : total
   end
 
 end

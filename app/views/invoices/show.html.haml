@@ -7,6 +7,9 @@
         .panel-title
           = link_to '#', class: 'btn btn-default' do
             %i.entypo-print
+          = link_to new_invoice_payment_path(@invoice), class: 'btn btn-default get-modal' do
+            %i.entypo-credit-card
+            Оплатить
           = link_to 'Из шаблона', new_invoice_item_path(@invoice), class: 'btn btn-default get-modal'
           .btn-group
             = button_tag class: 'btn btn-default dropdown-toggle', data: {toggle: 'dropdown'} do

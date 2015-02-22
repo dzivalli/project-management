@@ -1,0 +1,11 @@
+.panel.panel-primary
+  .panel-heading
+    .panel-title
+      %strong Все заявки
+  .list-group
+    - @payments.each do |payment|
+      =link_to payment_path(payment), class: (@payment.id == payment.id ? 'list-group-item active' : 'list-group-item')do
+        %strong= payment.company.name
+        .pull-right= number_to_currency payment.amount
+        %br
+        = "#{payment.trans} | #{payment.payment_date}"

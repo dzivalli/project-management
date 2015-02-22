@@ -23,8 +23,8 @@
             %strong.text-info= invoice.reference_no
         %td= invoice.due_date
         %td= invoice.company.name
-        %td Amount
-        %td Amount due
+        %td= invoice.total
+        %td= invoice.amount_due
         %td
           .btn-group
             = button_tag class: 'btn btn-default btn-xs dropdown-toggle', data: {toggle: 'dropdown'} do

@@ -20,4 +20,4 @@ User.create!(username: 'admin', full_name: 'admin', email: 'admin@example.com',
             password: 'admin', password_confirmation: 'admin',
             role: Role.find_by_name('admin'), company: company)
 
-
+PaymentMethod.create!([{name: 'Онлайн'}, {name: 'Наличные'}, {name: 'Перевод'}])

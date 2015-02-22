@@ -1,10 +1,10 @@
-.panel.panel-default
+.panel.panel-primary
   .panel-heading
     .panel-title
-      Все заявки
+      %strong Все заявки
   .list-group
     - @tickets.each do |ticket|
-      =link_to ticket_path(ticket), class: 'list-group-item' do
+      =link_to ticket_path(ticket), class: (@ticket.id == ticket.id ? 'list-group-item active' : 'list-group-item') do
         %strong= ticket.code
         .pull-right= status(ticket.status, 'label')
         %br

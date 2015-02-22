@@ -28,12 +28,12 @@
       = link_to '#' do
         %i.entypo-basket
         %span.title Продажи
-      %ul{class: ('visible' if controller_name == 'invoices')}
+      %ul{class: ('visible' if %w(invoices payments).include?(controller_name))}
         %li{class: ('active' if controller_name == 'invoices')}
           = link_to invoices_path do
             %span.title Счета
-        %li
-          = link_to '#' do
+        %li{class: ('active' if controller_name == 'payments')}
+          = link_to payments_path do
             %span.title Платежи
     %li{class: ('active' if controller_name == 'templates')}
       = link_to templates_path do

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150218124427) do
+ActiveRecord::Schema.define(version: 20150222072937) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -171,6 +171,28 @@ ActiveRecord::Schema.define(version: 20150218124427) do
   end
 
   add_index "milestones", ["project_id"], name: "index_milestones_on_project_id", using: :btree
+
+  create_table "payment_methods", force: :cascade do |t|
+    t.string "name"
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.integer  "invoice_id"
+    t.integer  "company_id"
+    t.string   "payer_email"
+    t.integer  "payment_method_id"
+    t.float    "amount"
+    t.string   "trans"
+    t.date     "payment_date"
+    t.boolean  "deleted"
+    t.text     "notes"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  add_index "payments", ["company_id"], name: "index_payments_on_company_id", using: :btree
+  add_index "payments", ["invoice_id"], name: "index_payments_on_invoice_id", using: :btree
+  add_index "payments", ["payment_method_id"], name: "index_payments_on_payment_method_id", using: :btree
 
   create_table "permissions", force: :cascade do |t|
     t.integer  "user_id"
@@ -346,6 +368,9 @@ ActiveRecord::Schema.define(version: 20150218124427) do
   add_foreign_key "messages", "users"
   add_foreign_key "milestones", "projects"
   add_foreign_key "milestones", "projects"
+  add_foreign_key "payments", "companies"
+  add_foreign_key "payments", "invoices"
+  add_foreign_key "payments", "payment_methods"
   add_foreign_key "permissions", "companies"
   add_foreign_key "permissions", "companies"
   add_foreign_key "permissions", "users"

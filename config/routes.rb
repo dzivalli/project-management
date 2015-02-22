@@ -24,8 +24,10 @@ Rails.application.routes.draw do
   resources :task_templates
   resources :milestone_templates
   resources :item_templates
+  resources :payments, except: [:new, :create]
   resources :invoices do
-   resources :items
+    resources :payments, only: [:new, :create]
+    resources :items
     get 'pdf', on: :member
   end
 

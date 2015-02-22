@@ -34,11 +34,11 @@ module ApplicationHelper
 
   def status(status, form = 'label')
     case status
-      when 'новая'
+      when 'новая', 'Перевод'
         content_tag :div, status, class:  "#{form} #{form}-danger"
-      when 'ответ послан', 'черновик'
+      when 'ответ послан', 'черновик', 'Онлайн'
         content_tag :div, status, class: "#{form} #{form}-default"
-      when 'в процессе'
+      when 'в процессе', 'Наличные'
         content_tag :div, status, class: "#{form} #{form}-primary"
       when 'закрыта'
         content_tag :div, status, class: "#{form} #{form}-success"

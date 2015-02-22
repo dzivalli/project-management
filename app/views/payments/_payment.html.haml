@@ -1,0 +1,43 @@
+%h3.text-center Полученный платеж
+%br
+.row
+  .col-sm-7
+    %table.table.responsive
+      %tbody
+        %tr
+          %td Дата платежа
+          %td= @payment.payment_date
+        %tr
+          %td ID транзакции
+          %td= @payment.trans
+        %tr
+          %td Получен от
+          %td= @payment.company.name
+        %tr
+          %td Способ оплаты
+          %td= @payment.payment_method.name
+        %tr
+          %td Заметки
+          %td= @payment.notes
+  .col-sm-5
+    .tile-stats.tile-cyan
+      .icon
+        %i.entypo-credit-card
+      .num= number_to_currency @payment.amount
+      %h3 Получено
+.row
+  .col-sm-12
+    %h3 Платеж за
+    %table.table.table-bordered
+      %thead
+        %tr
+          %th Номер счета
+          %th Дата
+          %th Сумма счета
+          %th Сумма платежа
+      %tdata
+        %tr
+          %td= @payment.invoice.reference_no
+          %td= @payment.invoice.created_at
+          %td= @payment.invoice.total
+          %td= @payment.amount

@@ -1,0 +1,12 @@
+.row
+  .col-sm-3
+    =render 'sidebar'
+  .col-sm-9
+    .panel.panel-primary
+      .panel-heading
+        .panel-title
+          = link_to edit_payment_path, class: 'btn btn-default icon- get-modal' do
+            %i.entypo-pencil
+            Изменить
+      .panel-body
+        = render 'payment'

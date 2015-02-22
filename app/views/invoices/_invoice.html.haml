@@ -11,6 +11,8 @@
     .col-sm-6.invoice-right
       %h3= "Номер счета: #{@invoice.reference_no}"
       %span= @invoice.created_at.strftime("%d-%m-%Y")
+      %br
+      Статус платежа:
   .margin
   %table.table.table-bordered
     %thead
