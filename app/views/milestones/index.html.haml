@@ -21,7 +21,8 @@
                   %strong.text-info= milestone.name
               %td= milestone.start_date
               %td= milestone.due_date
-              %td Прогресс
+              %td= render partial: 'common/bar', locals: {progress: milestone.progress}
+
               %td.m-r
                 = link_to edit_project_milestone_path(@project, milestone), type: 'button', class: 'btn btn-default btn-xs get-modal' do
                   %i.entypo-tools

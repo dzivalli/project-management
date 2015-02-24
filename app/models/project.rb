@@ -1,4 +1,6 @@
 class Project < ActiveRecord::Base
+  include Progressable
+
   belongs_to :company
   has_many :milestones, dependent: :destroy
   has_many :tasks, dependent: :destroy
@@ -34,7 +36,7 @@ class Project < ActiveRecord::Base
   def cost
     if fixed_price
       fixed_rate
-    elsif estimated_hours
+    elsif estimated_hours && hourly_rate
       hourly_rate * estimated_hours
     end
   end
@@ -43,14 +45,4 @@ class Project < ActiveRecord::Base
     time_entries.where(user: user, status: 'active')
   end
 
-  # TODO delete all progress fields and change name for one below
-  def progres
-    time = TimeEntry.logged_time_for(self)/3600
-    if estimated_hours && estimated_hours != 0
-      (time / (estimated_hours.to_f/100)).round
-    else
-      100
-    end
-
-  end
 end

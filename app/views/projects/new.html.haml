@@ -16,13 +16,6 @@
         = user.grouped_collection_select :id, @roles, :users, :name, :id, :username, {selected: @project.users.ids}, { class: 'form-control', multiple: ''}
 
   .form-group
-    =f.label 'Прогресс', nil, class: 'col-sm-4 control-label'
-    .col-sm-5
-      %br
-      #slider.slider.slider-blue
-      =f.number_field :progress, class: 'form-control hide'
-
-  .form-group
     =f.label 'Дата начала', nil, class: 'col-sm-4 control-label'
     .col-sm-5
       .input-group

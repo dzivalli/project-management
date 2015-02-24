@@ -13,6 +13,8 @@ class TimeEntry < ActiveRecord::Base
     case obj.class.name
       when 'Project'
         entries = where(project: obj, status: 'completed')
+      when 'Milestone'
+        entries = where(task: obj.tasks.ids, status: 'completed')
       when 'Task'
         entries = where(task: obj, status: 'completed')
     end

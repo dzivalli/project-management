@@ -28,7 +28,7 @@ RSpec.describe Project, :type => :model do
   #   end
   # end
 
-  context 'progres' do
+  context 'progress' do
     before :all do
       @time = Time.now
       @project = create(:project, estimated_hours: 1)
@@ -36,24 +36,24 @@ RSpec.describe Project, :type => :model do
 
     it 'should return 100%' do
       create(:completed_time_entry, project: @project, created_at: @time, updated_at: @time + 3600)
-      expect(@project.progres).to eq(100)
+      expect(@project.progress).to eq(100)
     end
 
     it 'should return 0%' do
       create(:completed_time_entry, project: @project, created_at: @time)
-      expect(@project.progres).to eq(0)
+      expect(@project.progress).to eq(1)
     end
 
     it 'should return 0 if there are no time entry' do
-      expect(@project.progres).to eq(0)
+      expect(@project.progress).to eq(1)
     end
 
     it 'should return 100% if estimated_hours == nil or 0' do
       @project.estimated_hours = nil
-      expect(@project.progres).to eq(100)
+      expect(@project.progress).to eq(100)
 
       @project.estimated_hours = 0
-      expect(@project.progres).to eq(100)
+      expect(@project.progress).to eq(100)
     end
 
 

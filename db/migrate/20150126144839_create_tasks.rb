@@ -8,7 +8,6 @@ class CreateTasks < ActiveRecord::Migration
       t.references :project, index: true
       t.references :milestone, index: true
       t.boolean :visible
-      t.integer :progress, null: false, default: 0
       t.references :owner, index: true
       t.boolean :auto_progress
 

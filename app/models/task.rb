@@ -1,4 +1,6 @@
 class Task < ActiveRecord::Base
+  include Progressable
+
   belongs_to :project
   belongs_to :milestone
   belongs_to :owner, class_name: 'User'

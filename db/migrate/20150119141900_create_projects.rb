@@ -12,7 +12,6 @@ class CreateProjects < ActiveRecord::Migration
       t.boolean :deleted
       t.text :notes
       t.integer :estimated_hours
-      t.integer :progress, null: false, default: 0
       t.references :company
 
       t.timestamps null: false

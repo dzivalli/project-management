@@ -35,13 +35,6 @@
             %i.entypo-calendar
 
   .form-group
-    =f.label 'Прогресс', nil, class: 'col-sm-4 control-label'
-    .col-sm-5
-      %br
-      #slider.slider.slider-blue
-      =f.number_field :progress, class: 'hide'
-
-  .form-group
     =f.label 'Видимость клиенту', nil, class: 'col-sm-4 control-label'
     .col-sm-5
       .make-switch.switch-small

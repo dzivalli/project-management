@@ -1,9 +1,15 @@
 class Milestone < ActiveRecord::Base
+  include Progressable
+
   belongs_to :project
   has_many :tasks
 
   validates_presence_of :name, :start_date, :due_date
 
   has_paper_trail
+
+  def estimated_hours
+    tasks.inject(0) { |sum, task| sum + task.estimated_hours }
+  end
 
 end
