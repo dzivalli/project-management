@@ -13,7 +13,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def sub_total
-    items.inject(0) { |sum, item| sum + item.total }
+    items.inject(0) { |sum, item| sum + item.sum }
   end
 
   def total
@@ -24,7 +24,15 @@ class Invoice < ActiveRecord::Base
   def amount_due
     # TODO add check if total bigger then amount of invoice
     paid = payments.pluck(:amount).inject(:+)
-    paid ? (total - paid).abs.round(2) : total
+    if !paid
+      total
+    elsif paid > total
+      # TODO overpaid put any flag?
+      0
+    else
+      (total - paid).round(2)
+    end
+
   end
 
 end

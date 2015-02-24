@@ -43,4 +43,14 @@ class Project < ActiveRecord::Base
     time_entries.where(user: user, status: 'active')
   end
 
+  # TODO delete all progress fields and change name for one below
+  def progres
+    time = TimeEntry.logged_time_for(self)/3600
+    if estimated_hours && estimated_hours != 0
+      (time / (estimated_hours.to_f/100)).round
+    else
+      100
+    end
+
+  end
 end
