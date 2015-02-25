@@ -1,6 +1,7 @@
 class TasksController < ApplicationController
   include ProjectCommon
-  load_and_authorize_resource
+  # load_and_authorize_resource
+  layout 'modal', only: [:new, :edit, :templates]
 
   def index
     @project = Project.includes(:tasks).find params[:project_id]
@@ -10,11 +11,18 @@ class TasksController < ApplicationController
     @task = Task.new(due_date: Time.now.strftime("%d-%m-%Y"))
     @title = 'Новая задача'
     @users = User.all
-    render layout: 'modal'
   end
 
   def create
-    task =  Task.new task_params.merge(project_id: params[:project_id], owner: current_user)
+    task =  if params.has_key?(:task_template)
+      attrs = TaskTemplate.attributes_for(params[:task_template])
+      Task.new attrs.merge(project_id: params[:project_id],
+                           milestone_id: params[:milestone_id],
+                           owner: current_user,
+                           due_date: params[:due_date])
+    else
+      Task.new task_params.merge(project_id: params[:project_id], owner: current_user)
+    end
     store do
       (task.users = User.find(users_params)) && task.save
     end
@@ -24,7 +32,7 @@ class TasksController < ApplicationController
     @task = Task.find params[:id]
     @title = 'Измениить данные'
     @users = User.all
-    render 'new', layout: 'modal'
+    render 'new'
   end
 
   def update
@@ -46,6 +54,13 @@ class TasksController < ApplicationController
     end
   end
 
+  def templates
+    @title = 'Вставить задачу из шаблона'
+    @task_templates = TaskTemplate.all
+    @users = User.all
+    @milestones = Milestone.where(project_id: params[:project_id])
+  end
+
   private
 
   def task_params
@@ -55,7 +70,11 @@ class TasksController < ApplicationController
   end
 
   def users_params
-    ids = params.require(:users).permit(id: [])[:id]
-    ids.reject! { |id| id.empty? }
+    ids = if params.has_key?(:user_ids)
+            params[:user_ids]
+          else
+            params.require(:users).permit(id: [])[:id]
+          end
+    ids.reject { |id| id.empty? }
   end
 end

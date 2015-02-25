@@ -1,0 +1,24 @@
+= form_tag project_milestones_path(params[:project_id]), class: 'form-horizontal', id: 'new_task' do
+
+  .form-group
+    = label_tag 'Шаблоны', nil, class: 'col-sm-4 control-label'
+    .col-sm-5
+      = select_tag :milestone_template, options_from_collection_for_select(@milestone_templates, :id, :name), class: 'form-control'
+
+  .form-group
+    = label_tag 'Дата начала', nil, class: 'col-sm-4 control-label'
+    .col-sm-5
+      .input-group
+        = text_field_tag :start_date, nil, class: 'form-control datepicker', value: (time_now)
+        .input-group-addon
+          = link_to '#' do
+            %i.entypo-calendar
+
+  .form-group
+    = label_tag 'Дата конца', nil, class: 'col-sm-4 control-label'
+    .col-sm-5
+      .input-group
+        = text_field_tag :due_date, nil, class: 'form-control datepicker', value: (time_now)
+        .input-group-addon
+          = link_to '#' do
+            %i.entypo-calendar

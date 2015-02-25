@@ -3,7 +3,7 @@
     .panel-heading
       .panel-title
         = link_to 'Добавить', new_project_task_path(@project), class: 'btn btn-default get-modal'
-        = link_to 'Из шаблона', '#', class: 'btn btn-default'
+        = link_to 'Из шаблона', templates_project_tasks_path(@project), class: 'btn btn-default get-modal'
     .panel-body.with-table
       %table.pm-table.table.table-bordered.datatable
         %thead

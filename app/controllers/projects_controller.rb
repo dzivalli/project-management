@@ -77,7 +77,7 @@ class ProjectsController < ApplicationController
 
   def users_params
     ids = params.require(:users).permit(id: [])[:id]
-    ids.reject! { |id| id.empty? }
+    ids.reject { |id| id.empty? }
   end
 
 end

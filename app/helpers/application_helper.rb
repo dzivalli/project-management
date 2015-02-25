@@ -1,6 +1,6 @@
 module ApplicationHelper
   def time_now
-    Russian::strftime(Time.now, "%d-%m-%Y %H:%M")
+    Russian::strftime(Time.now, "%d-%m-%Y")
   end
 
   def convert_time(time)

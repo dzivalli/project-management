@@ -45,6 +45,6 @@ class MessagesController < ApplicationController
 
   def recipients_params
     ids = params.require(:recipients).permit(id: [])[:id]
-    ids.reject! { |id| id.empty? }
+    ids.reject { |id| id.empty? }
   end
 end

@@ -35,8 +35,12 @@ Rails.application.routes.draw do
 
   # TODO constrain all routes
   resources :projects do
-    resources :milestones
-    resources :tasks
+    resources :milestones do
+      get 'templates', on: :collection
+    end
+    resources :tasks do
+      get 'templates', on: :collection
+    end
     resources :time_entries
     resources :attachments
     resources :histories, only: [:index]

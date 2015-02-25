@@ -1,6 +1,7 @@
 class MilestonesController < ApplicationController
   include ProjectCommon
-  load_and_authorize_resource
+  # load_and_authorize_resource
+  layout 'modal', only: [:new, :edit, :templates]
 
   def index
     @project = Project.includes(:milestones).find params[:project_id]
@@ -10,11 +11,17 @@ class MilestonesController < ApplicationController
     @milestone = Milestone.new
     @milestone.start_date = @milestone.due_date = Time.now.strftime("%d-%m-%Y")
     @title = 'Новый этап'
-    render layout: 'modal'
   end
 
   def create
-    milestone = Milestone.new milestone_params.merge(project_id: params[:project_id])
+    milestone = if params.has_key?(:milestone_template)
+                  attrs = MilestoneTemplate.attributes_for(params[:milestone_template])
+                  Milestone.new attrs.merge(project_id: params[:project_id],
+                                            start_date: params[:start_date],
+                                            due_date: params[:due_date])
+                else
+                  Milestone.new milestone_params.merge(project_id: params[:project_id])
+                end
     store do
       milestone.save
     end
@@ -23,7 +30,7 @@ class MilestonesController < ApplicationController
   def edit
     @milestone = Milestone.find params[:id]
     @title = 'Изменить данные'
-    render 'new', layout: 'modal'
+    render 'new'
   end
 
   def update
@@ -42,6 +49,11 @@ class MilestonesController < ApplicationController
 
   def show
     @milestone = Milestone.find params[:id]
+  end
+
+  def templates
+    @title = 'Добавить этап из шаблона'
+    @milestone_templates = MilestoneTemplate.all
   end
 
   private
