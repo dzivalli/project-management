@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150222072937) do
+ActiveRecord::Schema.define(version: 20150225121652) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -199,10 +199,12 @@ ActiveRecord::Schema.define(version: 20150222072937) do
     t.integer  "estimated_hours"
     t.boolean  "visible"
     t.integer  "owner_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.integer  "milestone_template_id"
   end
 
+  add_index "task_templates", ["milestone_template_id"], name: "index_task_templates_on_milestone_template_id", using: :btree
   add_index "task_templates", ["owner_id"], name: "index_task_templates_on_owner_id", using: :btree
 
   create_table "tasks", force: :cascade do |t|
@@ -312,6 +314,7 @@ ActiveRecord::Schema.define(version: 20150222072937) do
   add_foreign_key "payments", "payment_methods"
   add_foreign_key "permissions", "companies"
   add_foreign_key "permissions", "users"
+  add_foreign_key "task_templates", "milestone_templates"
   add_foreign_key "tasks", "milestones"
   add_foreign_key "tasks", "projects"
   add_foreign_key "ticket_replies", "tickets"

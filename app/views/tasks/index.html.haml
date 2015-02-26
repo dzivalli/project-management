@@ -5,31 +5,4 @@
         = link_to 'Добавить', new_project_task_path(@project), class: 'btn btn-default get-modal'
         = link_to 'Из шаблона', templates_project_tasks_path(@project), class: 'btn btn-default get-modal'
     .panel-body.with-table
-      %table.pm-table.table.table-bordered.datatable
-        %thead
-          %tr
-            %th Таймер
-            %th Имя
-            %th Конец
-            %th Прогресс
-            %th Параметры
-        %tbody
-          - @project.tasks.each do |task|
-            %tr
-              %td Таймер
-              %td
-                = link_to project_task_path(@project, task) do
-                  %strong.text-info= task.name
-              %td= task.due_date
-              %td= render partial: 'common/bar', locals: {progress: task.progress}
-              %td
-                = link_to edit_project_task_path(@project, task), type: 'button', class: 'btn btn-default btn-xs get-modal' do
-                  %i.entypo-tools
-                - if task.active(current_user).any?
-                  = link_to project_time_entry_path(id: task.active(current_user).first), type: 'button', method: :put, class: 'btn btn-danger btn-xs' do
-                    %i.entypo-stop
-                    Таймер
-                - else
-                  = link_to new_project_time_entry_path(task_id: task.id), class: 'btn btn-default btn-xs' do
-                    %i.entypo-play
-                    Таймер
+      = render partial: 'tasks', locals: {tasks: @project.tasks}

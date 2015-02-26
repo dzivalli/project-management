@@ -9,3 +9,8 @@
     .col-sm-5
       =f.text_area :description, class: 'form-control'
 
+  .form-group
+    =f.label 'Задачи', nil, class: 'col-sm-4 control-label'
+    .col-sm-5
+      = fields_for :task_templates, @milestone_template.task_templates do |tt|
+        =tt.collection_select :ids, @task_templates, :id, :name, {}, { class: 'form-control', multiple: true}

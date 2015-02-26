@@ -12,12 +12,14 @@
         %tr
           %th Имя
           %th Описание
+          %th Этапы
           %th Параметры
       %tbody
         - @milestone_templates.each do |milestone|
           %tr
             %td= milestone.name
             %td= milestone.description
+            %td= milestone.task_templates.pluck(:name).join(', ')
             %td.m-r
               = link_to edit_milestone_template_path(milestone), class: 'btn btn-default btn-xs get-modal' do
                 %i.entypo-pencil

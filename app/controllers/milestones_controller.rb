@@ -16,6 +16,9 @@ class MilestonesController < ApplicationController
   def create
     milestone = if params.has_key?(:milestone_template)
                   attrs = MilestoneTemplate.attributes_for(params[:milestone_template])
+                  tasks = TaskTemplate.where(milestone_template_id:  params[:milestone_template]).map do |task|
+                    task.make_a_task(params, current_user.id)
+                  end
                   Milestone.new attrs.merge(project_id: params[:project_id],
                                             start_date: params[:start_date],
                                             due_date: params[:due_date])
@@ -23,7 +26,7 @@ class MilestonesController < ApplicationController
                   Milestone.new milestone_params.merge(project_id: params[:project_id])
                 end
     store do
-      milestone.save
+      milestone.save && (milestone.tasks = tasks)
     end
   end
 
@@ -36,7 +39,7 @@ class MilestonesController < ApplicationController
   def update
     milestone = Milestone.find params[:id]
     renew do
-      milestone.update(permitted(params))
+      milestone.update milestone_params
     end
   end
 
@@ -53,6 +56,7 @@ class MilestonesController < ApplicationController
 
   def templates
     @title = 'Добавить этап из шаблона'
+    @users = User.all
     @milestone_templates = MilestoneTemplate.all
   end
 

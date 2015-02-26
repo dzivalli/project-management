@@ -22,3 +22,8 @@
         .input-group-addon
           = link_to '#' do
             %i.entypo-calendar
+
+  .form-group
+    = label_tag 'Ответственные для задач', nil, class: 'col-sm-4 control-label'
+    .col-sm-5
+      = select_tag :user_ids, options_from_collection_for_select(@users, :id, :username), { class: 'form-control', multiple: true}
