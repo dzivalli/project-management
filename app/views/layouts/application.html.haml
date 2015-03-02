@@ -6,8 +6,13 @@
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = javascript_include_tag 'login' if controller_name == 'sessions'
     = csrf_meta_tags
-  %body.page-body{ class: ('login-page login-form-fall' if controller_name == 'sessions') }
-    - unless content_for? :login
+  %body.page-body{ class: ('login-page login-form-fall' if %w(clients sessions).include?(controller_name) && action_name != 'edit') }
+    - if content_for? :login
+      = yield :login
+    - elsif content_for? :wizard
+      .container
+        = yield :wizard
+    - else
       .page-container
         = render 'common/sidebar'
         .main-content
@@ -26,5 +31,4 @@
             = yield
           = render 'common/flash'
           #new-modal.modal.fade
-    - else
-      = yield :login
+

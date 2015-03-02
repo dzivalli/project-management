@@ -6,6 +6,8 @@ class Invoice < ActiveRecord::Base
 
   enum status: %w(черновик)
 
+  scope :client_invoices, -> (client) { where(company: client.companies.ids) }
+
   def generate_reference
     last_id = Invoice.pluck(:id).last || 0
     number = self.id.to_s.length

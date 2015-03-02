@@ -1,12 +1,12 @@
 class InvoicesController < ApplicationController
   def index
-    @invoices = Invoice.all
+    @invoices = Invoice.client_invoices(client)
   end
 
   def new
     @invoice = Invoice.new(due_date: Time.now.strftime("%d-%m-%Y"))
     @invoice.generate_reference
-    @companies = Company.clients
+    @companies = client.companies
     @title = 'Новый счет'
     render layout: 'modal'
   end
@@ -22,27 +22,27 @@ class InvoicesController < ApplicationController
   end
 
   def edit
-    @invoice = Invoice.find params[:id]
-    @companies = Company.clients
+    @invoice = Invoice.client_invoices(client).find params[:id]
+    @companies = client.companies
     @title = 'Изменить счет'
     render 'new', layout: 'modal'
   end
 
   def update
-    invoice = Invoice.find params[:id]
+    invoice = Invoice.client_invoices(client).find params[:id]
     renew do
       invoice.update invoice_params
     end
   end
 
   def show
-    @invoices = Invoice.all
-    @invoice = Invoice.includes(:items).find params[:id]
+    @invoices = Invoice.client_invoices(client)
+    @invoice = Invoice.includes(:items).client_invoices(client).find params[:id]
     @item = Item.new
   end
 
   def pdf
-    @invoice = Invoice.find params[:id]
+    @invoice = Invoice.client_invoices(client).find params[:id]
     pdf = render_to_string pdf: 'file.pdf', template: 'invoices/pdf.html.erb'
     send_data pdf, filename: "#{@invoice.reference_no}.pdf"
   end

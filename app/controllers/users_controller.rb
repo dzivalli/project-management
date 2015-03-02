@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   def index
-    @users = User.includes(:role, :company).all
+    @users = User.customer_users(client).includes(:role, :company)
   end
 
   def new
@@ -8,22 +8,22 @@ class UsersController < ApplicationController
 
     @user = User.new
     @roles = Role.all
-    @companies = Company.all
+    @companies = client.companies.all
     @title = 'Новый пользователь'
     render layout: 'modal'
   end
 
   def create
-    user = User.new(permitted(params))
+    user = User.new(permitted(params).merge(client: client))
     store do
       user.save
     end
   end
 
   def edit
-    @user = User.find params[:id]
+    @user = User.customer_users(client).find_by_id params[:id]
     @roles = Role.all
-    @companies = Company.all
+    @companies = client.companies
     @title = 'Изменить данные'
     render 'new', layout: 'modal'
   end
@@ -43,15 +43,15 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    user = User.find params[:id]
+    user = User.customer_users(client).find params[:id]
     if user.destroy!
       redirect_to :back, notice: 'Пользователь был успешно удален'
     end
   end
 
   def primary
-    company = Company.find params[:company_id]
-    if company.update(contact: User.find(params[:id]))
+    company = Company.customer_companies(client).find params[:company_id]
+    if company.update(contact: User.customer_users(client).find(params[:id]))
       redirect_to :back, notice: 'Основной контакт успешно установлен'
     end
   end

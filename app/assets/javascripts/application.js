@@ -28,6 +28,7 @@
 //= require neon/datatable/datatables.responsive
 //= require neon/select2.min
 //= require neon/jquery.validate.min
+//= require neon/jquery.bootstrap.wizard.min
 //= require neon/toastr
 //= require neon/neon-custom
 //= require neon/messages_ru

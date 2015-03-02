@@ -1,10 +1,10 @@
 class MilestonesController < ApplicationController
-  include ProjectCommon
+  include Projectable
   # load_and_authorize_resource
   layout 'modal', only: [:new, :edit, :templates]
 
   def index
-    @project = Project.includes(:milestones).find params[:project_id]
+    @project = project { includes(:milestones) }
   end
 
   def new
@@ -19,39 +19,39 @@ class MilestonesController < ApplicationController
                   tasks = TaskTemplate.where(milestone_template_id:  params[:milestone_template]).map do |task|
                     task.make_a_task(params, current_user.id)
                   end
-                  Milestone.new attrs.merge(project_id: params[:project_id],
-                                            start_date: params[:start_date],
+                  Milestone.new attrs.merge(start_date: params[:start_date],
                                             due_date: params[:due_date])
                 else
-                  Milestone.new milestone_params.merge(project_id: params[:project_id])
+                  Milestone.new milestone_params
                 end
     store do
-      milestone.save && (milestone.tasks = tasks)
+      milestone.tasks = tasks if tasks
+      project.milestones << milestone
     end
   end
 
   def edit
-    @milestone = Milestone.find params[:id]
+    @milestone = @project.milestones.find params[:id]
     @title = 'Изменить данные'
     render 'new'
   end
 
   def update
-    milestone = Milestone.find params[:id]
+    milestone = project.milestones.find params[:id]
     renew do
       milestone.update milestone_params
     end
   end
 
   def destroy
-    milestone = Milestone.find params[:id]
+    milestone = project.milestones.find params[:id]
     if milestone.destroy!
       redirect_to project_milestones_path(params[:project_id]), notice: 'Этап был успешно удален'
     end
   end
 
   def show
-    @milestone = Milestone.find params[:id]
+    @milestone = @project.milestones.find params[:id]
   end
 
   def templates

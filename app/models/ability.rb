@@ -7,7 +7,7 @@ class Ability
     #   user ||= User.new # guest user (not logged in)
       if user.admin?
         can :manage, :all
-      elsif user.client?
+      elsif user.customer?
         can do |action, klass, project|
           action = action.to_s
           # kind of alias, 'show' and 'index' are 'read'

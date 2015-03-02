@@ -28,6 +28,15 @@ ActiveRecord::Schema.define(version: 20150225121652) do
   add_index "attachments", ["project_id"], name: "index_attachments_on_project_id", using: :btree
   add_index "attachments", ["user_id"], name: "index_attachments_on_user_id", using: :btree
 
+  create_table "clients", force: :cascade do |t|
+    t.integer  "main_company_id"
+    t.integer  "owner_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "clients", ["main_company_id", "owner_id"], name: "index_clients_on_main_company_id_and_owner_id", using: :btree
+
   create_table "companies", force: :cascade do |t|
     t.string   "name",       default: "", null: false
     t.string   "email"
@@ -36,6 +45,7 @@ ActiveRecord::Schema.define(version: 20150225121652) do
     t.string   "website"
     t.integer  "phone"
     t.integer  "contact_id"
+    t.integer  "client_id"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
   end
@@ -187,6 +197,7 @@ ActiveRecord::Schema.define(version: 20150225121652) do
   create_table "settings", id: false, force: :cascade do |t|
     t.string   "key",        null: false
     t.string   "value"
+    t.integer  "client_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -275,6 +286,7 @@ ActiveRecord::Schema.define(version: 20150225121652) do
     t.string   "phone"
     t.integer  "role_id"
     t.integer  "company_id"
+    t.integer  "client_id"
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
@@ -285,6 +297,8 @@ ActiveRecord::Schema.define(version: 20150225121652) do
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -314,6 +328,7 @@ ActiveRecord::Schema.define(version: 20150225121652) do
   add_foreign_key "payments", "payment_methods"
   add_foreign_key "permissions", "companies"
   add_foreign_key "permissions", "users"
+  add_foreign_key "settings", "clients"
   add_foreign_key "task_templates", "milestone_templates"
   add_foreign_key "tasks", "milestones"
   add_foreign_key "tasks", "projects"

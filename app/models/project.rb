@@ -24,12 +24,14 @@ class Project < ActiveRecord::Base
 
   # accepts_nested_attributes_for :milestones
 
+  def self.client_projects(client)
+    Project.where(company: client.companies)
+  end
+
 
   def self.for_user(user)
-    if user.client?
+    if user.customer?
       user.company.projects
-    else
-      Project.all
     end
   end
 

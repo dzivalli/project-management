@@ -8,6 +8,7 @@ class CreateCompanies < ActiveRecord::Migration
       t.string :website
       t.integer :phone
       t.references :contact
+      t.references :client
 
       t.timestamps null: false
     end

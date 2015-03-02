@@ -5,6 +5,8 @@ class Ticket < ActiveRecord::Base
   enum priority: %w(низкий средний высокий)
   enum status: ['новая' , 'ответ послан' , 'в процессе' , 'закрыта']
 
+  scope :client_tickets, -> (client) { where(user_id: client.users.ids) }
+
   def self.generate_code
     begin
       code = Array.new(8){rand(36).to_s(36)}.join.upcase

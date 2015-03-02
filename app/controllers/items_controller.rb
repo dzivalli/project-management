@@ -13,18 +13,22 @@ class ItemsController < ApplicationController
       Item.new item_params.merge(invoice_id: params[:invoice_id])
     end
     store(invoice_path(params[:invoice_id])) do
-      item.save
+      item.save if client_invoice?
     end
   end
 
   def destroy
     item = Item.find params[:id]
-    if item.destroy
+    if client_invoice? && item.destroy
       redirect_to :back, notice: 'Элемент удален'
     end
   end
 
   private
+
+  def client_invoice?
+    Invoice.client_invoices(client).ids.include?(params[:invoice_id].to_i)
+  end
 
   def item_params
     params.require(:item).permit(:name, :description, :cost, :quantity)

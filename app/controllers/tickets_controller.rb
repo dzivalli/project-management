@@ -1,6 +1,6 @@
 class TicketsController < ApplicationController
   def index
-    @tickets = Ticket.all
+    @tickets = Ticket.client_tickets(client)
   end
 
   def new
@@ -19,12 +19,12 @@ class TicketsController < ApplicationController
 
   def edit
     @title = 'Изменить данные'
-    @ticket = Ticket.find params[:id]
+    @ticket = Ticket.client_tickets(client).find params[:id]
     render 'new', layout: 'modal'
   end
 
   def update
-    ticket = Ticket.find params[:id]
+    ticket = Ticket.client_tickets(client).find params[:id]
     renew do
       ticket.update ticket_params
     end
@@ -32,8 +32,8 @@ class TicketsController < ApplicationController
   end
 
   def show
-    @tickets = Ticket.all
-    @ticket = Ticket.includes(:ticket_replies).find params[:id]
+    @tickets = Ticket.client_tickets(client)
+    @ticket = Ticket.includes(:ticket_replies).client_tickets(client).find params[:id]
     @ticket_reply = TicketReply.new
   end
 

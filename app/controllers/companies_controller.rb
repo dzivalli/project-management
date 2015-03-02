@@ -1,10 +1,10 @@
 class CompaniesController < ApplicationController
   def index
-    @companies = Company.clients
+    @companies = Company.customer_companies(client)
   end
 
   def show
-    @company = Company.includes(:users, :projects).find(params[:id])
+    @company = Company.customer_companies(client).includes(:users, :projects).find(params[:id])
   end
 
   def new
@@ -14,27 +14,27 @@ class CompaniesController < ApplicationController
   end
 
   def create
-    company = Company.new company_params
+    company = Company.new company_params.merge!(client: client)
     store do
       company.save
     end
   end
 
   def edit
-    @company = Company.find params[:id]
+    @company = Company.customer_companies(client).find params[:id]
     @title = 'Изменить данные'
     render 'new', layout: 'modal'
   end
 
   def update
-    company = Company.find params[:id]
+    company = Company.customer_companies(client).find params[:id]
     renew do
       company.update company_params
     end
   end
 
   def destroy
-    company = Company.find(params[:id])
+    company = Company.customer_companies(client).find(params[:id])
     if company.destroy
       redirect_to companies_path, notice: 'Компания была успешно удалена'
     else

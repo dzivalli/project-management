@@ -1,6 +1,6 @@
 class TimeEntriesController < ApplicationController
   def index
-    @project = Project.find params[:project_id]
+    @project = Project.client_projects(client).find params[:project_id]
     @time_entries = TimeEntry.completed(@project)
   end
 
@@ -24,7 +24,7 @@ class TimeEntriesController < ApplicationController
     te = TimeEntry.new(time_entry_params.merge!(user: current_user, status: 'completed',
                                                 project_id: params[:project_id]))
     store do
-      te.save
+      te.save if client_project?
     end
   end
 
@@ -41,7 +41,7 @@ class TimeEntriesController < ApplicationController
     if params.has_key?(:time_entry)
       te = TimeEntry.find params[:id]
       renew do
-        te.update(time_entry_params)
+        te.update(time_entry_params) if client_project?
       end
     else
       if TimeEntry.update(params[:id], status: 'completed')
@@ -51,12 +51,16 @@ class TimeEntriesController < ApplicationController
   end
 
   def destroy
-    if TimeEntry.find(params[:id]).destroy
+    if client_project? && TimeEntry.find(params[:id]).destroy
       redirect_to :back, notice: 'Временной отрезок был удален успешно'
     end
   end
 
   private
+
+  def client_project?
+    Project.client_projects(client).ids.include?(params[:project_id].to_i)
+  end
 
   def time_entry_params
     params.require(:time_entry).permit(:created_at, :updated_at, :task_id)

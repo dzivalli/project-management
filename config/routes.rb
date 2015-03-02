@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
   devise_for :users, skip: [:passwords]
 
+  resources :clients
+
   resources :users do
     get 'password', on: :member
   end

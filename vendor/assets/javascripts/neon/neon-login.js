@@ -10,7 +10,7 @@ var neonLogin = neonLogin || {};
 {
 	"use strict";
 	
-	$(document).ready(function()
+	var init = function()
 	{
 		neonLogin.$container = $("#form_login");
 		
@@ -386,6 +386,8 @@ var neonLogin = neonLogin || {};
 			ctx.restore();
 		}
 		
-	});
-	
+	};
+
+    $(document).on('page:load', init)
+    $(document).ready(init)
 })(jQuery, window);

@@ -6,7 +6,7 @@
   .col-sm-4
     - if current_user.admin?
       = render 'paid_invoices'
-    - elsif current_user.client?
+    - elsif current_user.customer?
       -#= render 'payments'
 .row
   .col-md-8

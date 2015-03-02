@@ -1,6 +1,6 @@
 class SettingsController < ApplicationController
   def general
-    @company = Company.default
+    @company = client.main_company
   end
 
   def email
@@ -8,10 +8,8 @@ class SettingsController < ApplicationController
 
   def update
     if params.has_key? :company
-       if Company.default.first.update(permitted(params, :company))
-         redirect_to settings_general_path, notice: 'Данные успешно обновлены'
-       else
-         redirect_to settings_general_path, alert: 'Произошла ошибка, попробуйте еще раз'
+       renew do
+         client.main_company.update(permitted(params, :company))
        end
     end
   end

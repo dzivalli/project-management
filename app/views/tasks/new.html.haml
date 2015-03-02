@@ -12,8 +12,8 @@
   .form-group
     =f.label 'Ответственные', nil, class: 'col-sm-4 control-label'
     .col-sm-5
-      = fields_for :users, @task.users do |user|
-        =user.collection_select :id, @users, :id, :username, {selected: @task.users.ids}, { class: 'form-control', multiple: true}
+      = fields_for :users, @task.users do |u|
+        =u.collection_select :id, @users, :id, :full_name, {selected: @task.users.ids}, { class: 'form-control', multiple: true}
 
   .form-group
     =f.label 'Описание', nil, class: 'col-sm-4 control-label'

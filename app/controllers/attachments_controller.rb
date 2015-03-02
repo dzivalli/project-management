@@ -1,25 +1,25 @@
 class AttachmentsController < ApplicationController
+  include Projectable
 
   def index
-    @project = Project.includes(:attachments).find params[:project_id]
+    @project = project { includes(:attachments) }
   end
 
   def new
-    @project = Project.find params[:project_id]
     @attachment = Attachment.new
     @title = 'Загрузка файла'
     render layout: 'modal'
   end
 
   def create
-    attachment = Attachment.new attachment_params.merge(user: current_user, project_id: params[:project_id])
+    attachment = Attachment.new attachment_params.merge(user: current_user)
     store do
-      attachment.save
+      project.attachments << attachment
     end
   end
 
   def destroy
-    attachment = Attachment.find params[:id]
+    attachment = project.attachments.find params[:id]
     if attachment.destroy
       redirect_to :back, notice: 'Файл удален успешно'
     end

@@ -56,4 +56,8 @@ module ApplicationHelper
     s > 0 ? sec = to_seconds(s.round) : sec = nil
     [hours, min, sec].compact.join(', ')
   end
+
+  def name_for_versions(id)
+    User.find_by_id(id) ? User.find(id).full_name : ''
+  end
 end

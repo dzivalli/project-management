@@ -5,8 +5,10 @@ class ApplicationController < ActionController::Base
 
   before_action :authenticate_user!, except: [:sessions]
 
+  private
+
   def user_for_paper_trail
-    current_user.username if current_user
+    current_user.id if current_user
   end
 
   def store(path = :back)
@@ -26,7 +28,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  # def obj_name
-  #   controller_name.singularize
-  # end
+  def not_found
+    raise ActionController::RoutingError.new('Not Found')
+  end
+
+  def client
+    current_user.client
+  end
 end

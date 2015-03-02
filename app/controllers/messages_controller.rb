@@ -3,7 +3,7 @@ class MessagesController < ApplicationController
     @recipients = Message.recipients_for(current_user.id)
     @message = Message.new
     @roles = Role.all
-    @users = User.all
+    @users = User.customer_users(client)
   end
 
   def show
@@ -14,7 +14,7 @@ class MessagesController < ApplicationController
 
   def new
     @roles = Role.all
-    @users = User.all
+    @users = User.customer_users(client)
     @recipients = Message.recipients_for(current_user.id)
   end
 

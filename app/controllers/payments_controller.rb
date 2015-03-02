@@ -23,20 +23,20 @@ class PaymentsController < ApplicationController
   def edit
     @title = 'Изменить счет'
     @payment_methods = PaymentMethod.all
-    @payment = Payment.find params[:id]
+    @payment = Payment.client_payments(client).find params[:id]
     render layout: 'modal'
   end
 
   def update
-    payment = Payment.find params[:id]
+    payment = Payment.client_payments(client).find params[:id]
     renew do
       payment.update payment_params
     end
   end
 
   def show
-    @payment = Payment.find params[:id]
-    @payments = Payment.all
+    @payment = Payment.client_payments(client).find params[:id]
+    @payments = Payment.client_payments(client)
   end
 
   def destroy

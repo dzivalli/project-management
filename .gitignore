@@ -12,6 +12,7 @@
 !/log/.keep
 /tmp
 /spec
+/public/uploads/
 
 /.idea
 /vendor/tpl

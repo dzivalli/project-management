@@ -1,10 +1,10 @@
 class HomeController < ApplicationController
   def index
-    @projects = Project.for_user(current_user)
-    @versions = PaperTrail::Version.last(5)
+    @projects = Project.client_projects(client)
+    @versions = PaperTrail::Version.where(whodunnit: client.users.ids).last(5)
     @message_count = Message.recipients_for(current_user.id).count
-    @invoice_count = Invoice.count
-    @tickets = Ticket.last(10)
-    @payments = Payment.last(10)
+    @invoice_count = Invoice.client_invoices(client).count
+    @tickets = Ticket.client_tickets(client)
+    @payments = Payment.client_payments(client)
   end
 end

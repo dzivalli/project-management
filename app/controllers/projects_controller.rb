@@ -1,20 +1,20 @@
 class ProjectsController < ApplicationController
 
   def index
-    @projects = Project.for_user(current_user)
+    # TODO check by role
+    @projects = Project.client_projects(client)
   end
 
   def show
-    @project = Project.includes(:attachments).find params[:id]
+    @project = Project.includes(:attachments).client_projects(client).find params[:id]
     @logged_time = TimeEntry.logged_time_for(@project)
   end
 
   def new
-    @users = User.all
-    @roles = Role.all
+    @users = client.users
     @project = Project.new
     @project.start_date = @project.due_date = Time.now.strftime("%d-%m-%Y")
-    @companies = Company.clients
+    @companies = client.companies
     @title = 'Новый проект'
     render layout: 'modal'
   end
@@ -22,34 +22,33 @@ class ProjectsController < ApplicationController
   def create
     project = Project.new project_params
     store do
-      (project.users = User.find(users_params)) && project.save
+      (project.users = client.users.find(users_params)) && project.save
     end
   end
 
   def edit
-    @users = User.all
-    @roles = Role.all
-    @project = Project.find params[:id]
-    @companies = Company.clients
+    @users = client.users
+    @project = Project.client_projects(client).find params[:id]
+    @companies = client.companies
     @title = 'Изменить данные'
     render 'new', layout: 'modal'
   end
 
   def update
-    project = Project.find(params[:id])
+    project = Project.client_projects(client).find params[:id]
     renew do
-      (project.users = User.find(users_params)) && project.update(project_params)
+      (project.users = client.users.find(users_params)) && project.update(project_params)
     end
   end
 
   def destroy
-    if Project.destroy params[:id]
+    if Project.client_projects(client).destroy params[:id]
       redirect_to projects_path, notice: 'Проект был успешно удален'
     end
   end
 
   def team
-    @project = Project.includes(:users).find params[:id]
+    @project = Project.client_projects(client).includes(:users).find params[:id]
     authorize! :team, @project
   end
 

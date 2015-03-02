@@ -30,7 +30,7 @@
           %td= item.quantity
           %td.text-right= item.cost
           %td.text-right
-            = item.total
+            = item.sum
             = link_to invoice_item_path(@invoice, item), method: :delete do
               %i.entypo-trash.text-danger
       = form_for [@invoice, @item] do |f|

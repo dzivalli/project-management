@@ -11,7 +11,7 @@
           %th Имя
           %th Параметры
       %tbody
-        - @projects.each do |project|
+        - @projects.last(10).each do |project|
           %tr
             %td Таймер
             %td= render partial: 'common/bar', locals: {progress: project.progress}

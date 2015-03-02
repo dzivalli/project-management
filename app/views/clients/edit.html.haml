@@ -1,0 +1,82 @@
+- content_for :wizard do
+  .well.well-sm
+    %h4 Пожалуйста, введите данные
+  = form_for @client, html: {class: 'form-wizard'} do |f|
+    .steps-progress
+      .progress-indicator
+    %ul
+      %li.active
+        %a{"data-toggle" => "tab", :href => "#tab2-1"}
+          %span> 1
+          Личная информация
+      %li
+        %a{"data-toggle" => "tab", :href => "#tab2-2"}
+          %span> 2
+          Данные компании
+    .tab-content
+      #tab2-1.tab-pane.active
+        = fields_for @client.owner do |u|
+          .row
+            .col-md-6
+              .form-group
+                %label.control-label{:for => "full_name"} Полное имя
+                = u.text_field :full_name, placeholder: 'Имя и фамилия', class: 'form-control'
+            .col-md-6
+              .form-group
+                %label.control-label{:for => "phone"} Телефон
+                = u.text_field :phone, class: 'form-control'
+          .row
+            .col-md-6
+              .form-group
+                %label.control-label Пароль
+                .input-group
+                  .input-group-addon
+                    %i.entypo-key
+                  = u.password_field :password, class: 'form-control'
+            .col-md-6
+              .form-group
+                %label.control-label Подтверждение пароля
+                .input-group
+                  .input-group-addon
+                    %i.entypo-cw
+                  = u.password_field :password_confirmation, class: 'form-control'
+      #tab2-2.tab-pane
+        = fields_for @client.main_company do |c|
+          .row
+            .col-md-6
+              .form-group
+                =c.label 'Имя компании', nil, class: 'control-label'
+                =c.text_field :name, class: 'form-control'
+            .col-md-6
+              .form-group
+                =c.label 'Email', nil, class: 'control-label'
+                =c.text_field :email, class: 'form-control'
+          .row
+            .col-md-12
+              .form-group
+                =c.label 'Адрес', nil, class: 'control-label'
+                =c.text_field :address, class: 'form-control'
+          .row
+            .col-md-4
+              .form-group
+                =c.label 'Город', nil, class: 'control-label'
+                =c.text_field :city, class: 'form-control'
+            .col-md-4
+              .form-group
+                =c.label 'Вебсайт', nil, class: 'control-label'
+                =c.text_field :website, class: 'form-control'
+            .col-md-4
+              .form-group
+                =c.label 'Телефон', nil, class: 'control-label'
+                =c.text_field :phone, class: 'form-control'
+        .form-group
+          = f.submit 'Закончить регистрацию', class: 'btn btn-primary'
+      %ul.pager.wizard
+        %li.previous
+          %a{:href => "#"}
+            %i.entypo-left-open
+            Предыдущая
+        %li.next
+          %a{:href => "#"}
+            Следующая
+            %i.entypo-right-open

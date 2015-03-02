@@ -4,7 +4,7 @@
       Оплаченные счета
   .panel-body
     %ul.list-group
-    - @payments.each do |payment|
+    - @payments.last(10).each do |payment|
       = link_to invoice_path(payment.invoice), class: 'list-group-item' do
         %strong= payment.invoice.reference_no
         = "-"

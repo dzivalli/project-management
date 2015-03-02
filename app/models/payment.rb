@@ -3,6 +3,8 @@ class Payment < ActiveRecord::Base
   belongs_to :company
   belongs_to :payment_method
 
+  scope :client_payments, -> (client) { where(company_id: client.companies.ids ) }
+
   def generate_trans
     begin
       trans = rand(100000..999999)

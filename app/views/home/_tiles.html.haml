@@ -27,7 +27,7 @@
           %i.entypo-publish
         .num= @tickets.count
         %h3= Russian::pluralize(@tickets.count, 'Заявка', 'Заявки', 'Заявок')
-- elsif current_user.client?
+- elsif current_user.customer?
   .col-sm-3
     .tile-stats.tile-aqua
       .icon
