@@ -9,6 +9,7 @@
   %body.page-body{ class: ('login-page login-form-fall' if %w(clients sessions).include?(controller_name) && action_name != 'edit') }
     - if content_for? :login
       = yield :login
+      = render 'common/flash'
     - elsif content_for? :wizard
       .container
         = yield :wizard

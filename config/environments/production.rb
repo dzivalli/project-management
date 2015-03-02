@@ -80,4 +80,16 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.default_url_options = { :host => 'project-system.herokuapp.com' }
+  config.action_mailer.smtp_settings = {
+      :address => "smtp.yandex.ru",
+      :port => 587,
+      :domain => 'yandex.ru',
+      :authentication => :plain,
+      :user_name => 'email-tests@yandex.ru',
+      :password => 'rhjirfrfhnjirf',
+      :enable_starttls_auto => true
+  }
 end

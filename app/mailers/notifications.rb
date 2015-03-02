@@ -1,5 +1,5 @@
 class Notifications < ApplicationMailer
-  default from: 'no-reply@example.com'
+  default from: 'email-tests@yandex.ru'
   layout false
 
 

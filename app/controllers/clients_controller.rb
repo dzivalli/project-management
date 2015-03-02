@@ -7,15 +7,19 @@ class ClientsController < ApplicationController
   end
 
   def create
-    client = Client.new
-    owner = client.build_owner(owner_params.merge!(client: client))
-    owner.generate_password!
-         .generate_token!
-         .admin!
-    if client.save && Notifications.signup(client).deliver_now
-      redirect_to new_user_session_path
+    if User.find_by_email(params[:user][:email])
+      redirect_to :back, alert: 'Пользователь с таким email уже существует'
     else
-      render 'new', alert: 'Произошла ошибка'
+      client = Client.new
+      owner = client.build_owner(owner_params.merge!(client: client))
+      owner.generate_password!
+           .generate_token!
+           .admin!
+      if client.save && Notifications.signup(client).deliver_now
+        redirect_to new_user_session_path, notice: 'Письмо было успешно выслано'
+      else
+        redirect_to :back, alert: 'Произошла ошибка'
+      end
     end
   end
 
