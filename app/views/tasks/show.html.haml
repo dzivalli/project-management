@@ -30,7 +30,7 @@
                 = to_hours @task.estimated_hours
               Время
             %li.list-group-item
-              %span.pull-right= @task.users.pluck(:username).join(', ')
+              %span.pull-right= @task.users.pluck(:full_name).join(', ')
               Ответственные
             %li.list-group-item
               %span.pull-right статус

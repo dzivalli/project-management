@@ -15,7 +15,7 @@
         %tbody
           - @project.attachments.each do |attachment|
             %tr
-              %td= attachment.user.username
+              %td= attachment.user.full_name
               %td
                 = link_to attachment.file.url do
                   %strong.text-info= attachment.file_identifier

@@ -8,7 +8,7 @@
   %thead
     %tr
       %th Полное имя
-      %th Логин
+      %th Email
       %th Компания
       %th Роль
       %th Зарегистрирован
@@ -18,7 +18,7 @@
     - @users.each do |user|
       %tr
         %td= user.full_name
-        %td= user.username
+        %td= user.email
         %td= user.company.name
         %td= user.role.name
         %td= convert_time(user.created_at)

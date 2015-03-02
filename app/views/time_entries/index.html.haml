@@ -19,7 +19,7 @@
             %tr
               %td= convert_time(te.created_at)
               %td= convert_time(te.updated_at)
-              %td= te.user.username
+              %td= te.user.full_name
               %td= te.task.name
               %td= time_interval_to_human(te.updated_at - te.created_at)
               %td.m-r

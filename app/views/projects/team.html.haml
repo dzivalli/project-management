@@ -8,7 +8,7 @@
         %thead
           %tr
             %th Аватар
-            %th Логин
+            %th Email
             %th Полное имя
             %th Телефон
             %th Email
@@ -16,7 +16,7 @@
           - @project.users.each do |member|
             %tr
               %td Картинка
-              %td= member.username
+              %td= member.email
               %td= member.full_name
               %td= member.phone
               %td= member.email

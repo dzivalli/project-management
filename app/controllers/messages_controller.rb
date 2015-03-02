@@ -2,7 +2,6 @@ class MessagesController < ApplicationController
   def index
     @recipients = Message.recipients_for(current_user.id)
     @message = Message.new
-    @roles = Role.all
     @users = User.customer_users(client)
   end
 
@@ -13,7 +12,6 @@ class MessagesController < ApplicationController
   end
 
   def new
-    @roles = Role.all
     @users = User.customer_users(client)
     @recipients = Message.recipients_for(current_user.id)
   end
@@ -44,7 +42,7 @@ class MessagesController < ApplicationController
   end
 
   def recipients_params
-    ids = params.require(:recipients).permit(id: [])[:id]
+    ids = params.require(:recipients).permit(ids: [])[:ids]
     ids.reject { |id| id.empty? }
   end
 end

@@ -26,7 +26,7 @@
           %span.pull-right= number_to_currency @project.cost
           Стоимость
         %li.list-group-item
-          %span.pull-right= @project.users.pluck(:username).join(', ')
+          %span.pull-right= @project.users.pluck(:full_name).join(', ')
           Ответственные
         %li.list-group-item
           %span.pull-right

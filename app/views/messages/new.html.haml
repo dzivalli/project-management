@@ -8,7 +8,7 @@
         = f.label 'Получатели', nil, class: 'col-sm-3 control-label'
         .col-sm-5
           = fields_for :recipients do |r|
-            = r.grouped_collection_select :id, @roles, :users, :name, :id, :username, {selected: @message.recipients}, { class: 'form-control select2', multiple: ''}
+            = r.grouped_collection_select :id, @roles, :users, :name, :id, :full_name, {selected: @message.recipients}, { class: 'form-control select2', multiple: ''}
       .form-group
         = f.label 'Текст', nil, class: 'control-label col-sm-3'
         .col-sm-5

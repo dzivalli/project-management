@@ -45,7 +45,6 @@ init = ->
   generateRules = (obj) ->
     tmp = {}
     tmp["#{obj}[full_name]"] = 'required'
-    tmp["#{obj}[username]"] = 'required'
     tmp["#{obj}[name]"] = 'required'
     tmp["#{obj}[password]"] =
       required: true

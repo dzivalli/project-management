@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   validates_length_of :full_name, :email, maximum: 255
   validates_uniqueness_of :email
 #   TODO add email regex
-
+#    TODO delete login field at the end
   # TODO make hook after delete to check if user primary contact
 
   scope :customer_users, -> (client) { where(client: client).where.not(id: client.owner.id) }
