@@ -55,7 +55,7 @@ class TasksController < ApplicationController
 
   def templates
     @title = 'Вставить задачу из шаблона'
-    @task_templates = TaskTemplate.all
+    @task_templates = TaskTemplate.for_client(client)
     @users = client.users
     @milestones = Milestone.where(project_id: params[:project_id])
   end

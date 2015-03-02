@@ -6,7 +6,7 @@ class ItemTemplatesController < ApplicationController
   end
 
   def create
-    item_template = ItemTemplate.new item_template_params
+    item_template = ItemTemplate.new item_template_params.merge!(client: client)
     store do
       item_template.save
     end
@@ -15,12 +15,12 @@ class ItemTemplatesController < ApplicationController
 
   def edit
     @title = 'Изменить шаблон'
-    @item_template = ItemTemplate.find params[:id]
+    @item_template = ItemTemplate.for_client(client).find params[:id]
     render 'new', layout: 'modal'
   end
 
   def update
-    item_template = ItemTemplate.find params[:id]
+    item_template = ItemTemplate.for_client(client).find params[:id]
     renew do
       item_template.update item_template_params
     end
@@ -28,7 +28,7 @@ class ItemTemplatesController < ApplicationController
   end
 
   def destroy
-    item_template = ItemTemplate.find params[:id]
+    item_template = ItemTemplate.for_client(client).find params[:id]
     if item_template.destroy
       redirect_to :back, notice: 'Шаблон удален'
     end

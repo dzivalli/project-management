@@ -56,8 +56,8 @@ class MilestonesController < ApplicationController
 
   def templates
     @title = 'Добавить этап из шаблона'
-    @users = User.all
-    @milestone_templates = MilestoneTemplate.all
+    @users = client.users
+    @milestone_templates = MilestoneTemplate.for_client(client)
   end
 
   private

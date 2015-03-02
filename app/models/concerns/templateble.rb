@@ -1,5 +1,11 @@
-module Attributes
+module Templateble
   extend ActiveSupport::Concern
+
+  included do
+    belongs_to :client
+
+    scope :for_client, -> (client) { where(client: client) }
+  end
 
   class_methods do
     def attributes_for(id)

@@ -1,5 +1,5 @@
 %ul.nav.tabs-vertical
-  %li{class: ('active' if action_name == 'show')}
+  %li{class: ('active' if action_name == 'show' && controller_name == 'projects')}
     = link_to project_path(@project) do
       %i.entypo-home
       Главная

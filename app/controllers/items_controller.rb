@@ -1,12 +1,13 @@
 class ItemsController < ApplicationController
   def new
-    @item_templates = ItemTemplate.all
+    @item_templates = ItemTemplate.for_client(client)
     @title = 'Вставить элемент из шаблона'
     render layout: 'modal'
   end
 
   def create
     item = if params.has_key?(:item_template)
+      # TODO check if template id belongs to client templates scope, same for all templates
       attrs = ItemTemplate.attributes_for(params[:item_template])
       Item.new attrs.merge(quantity: params[:quantity], invoice_id: params[:invoice_id])
     else

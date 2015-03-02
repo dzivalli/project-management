@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150225121652) do
+ActiveRecord::Schema.define(version: 20150302130445) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,7 +81,10 @@ ActiveRecord::Schema.define(version: 20150225121652) do
     t.integer  "cost"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "client_id"
   end
+
+  add_index "item_templates", ["client_id"], name: "index_item_templates_on_client_id", using: :btree
 
   create_table "items", force: :cascade do |t|
     t.string   "name"
@@ -110,12 +113,12 @@ ActiveRecord::Schema.define(version: 20150225121652) do
   create_table "milestone_templates", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
-    t.integer  "owner_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "client_id"
   end
 
-  add_index "milestone_templates", ["owner_id"], name: "index_milestone_templates_on_owner_id", using: :btree
+  add_index "milestone_templates", ["client_id"], name: "index_milestone_templates_on_client_id", using: :btree
 
   create_table "milestones", force: :cascade do |t|
     t.string   "name"
@@ -209,14 +212,14 @@ ActiveRecord::Schema.define(version: 20150225121652) do
     t.text     "description"
     t.integer  "estimated_hours"
     t.boolean  "visible"
-    t.integer  "owner_id"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
     t.integer  "milestone_template_id"
+    t.integer  "client_id"
   end
 
+  add_index "task_templates", ["client_id"], name: "index_task_templates_on_client_id", using: :btree
   add_index "task_templates", ["milestone_template_id"], name: "index_task_templates_on_milestone_template_id", using: :btree
-  add_index "task_templates", ["owner_id"], name: "index_task_templates_on_owner_id", using: :btree
 
   create_table "tasks", force: :cascade do |t|
     t.string   "name"
@@ -320,8 +323,10 @@ ActiveRecord::Schema.define(version: 20150225121652) do
   add_foreign_key "attachments", "projects"
   add_foreign_key "attachments", "users"
   add_foreign_key "invoices", "companies"
+  add_foreign_key "item_templates", "clients"
   add_foreign_key "items", "invoices"
   add_foreign_key "messages", "users"
+  add_foreign_key "milestone_templates", "clients"
   add_foreign_key "milestones", "projects"
   add_foreign_key "payments", "companies"
   add_foreign_key "payments", "invoices"
@@ -329,6 +334,7 @@ ActiveRecord::Schema.define(version: 20150225121652) do
   add_foreign_key "permissions", "companies"
   add_foreign_key "permissions", "users"
   add_foreign_key "settings", "clients"
+  add_foreign_key "task_templates", "clients"
   add_foreign_key "task_templates", "milestone_templates"
   add_foreign_key "tasks", "milestones"
   add_foreign_key "tasks", "projects"

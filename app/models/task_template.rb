@@ -1,5 +1,5 @@
 class TaskTemplate < ActiveRecord::Base
-  include Attributes
+  include Templateble
 
   belongs_to :owner, class_name: 'User'
   belongs_to :milestone_template

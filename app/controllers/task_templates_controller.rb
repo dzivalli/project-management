@@ -6,7 +6,7 @@ class TaskTemplatesController < ApplicationController
   end
 
   def create
-    task_template = TaskTemplate.new task_template_params.merge(owner: current_user)
+    task_template = TaskTemplate.new task_template_params.merge(owner: current_user, client: client)
     store do
       task_template.save
     end
@@ -15,12 +15,12 @@ class TaskTemplatesController < ApplicationController
 
   def edit
     @title = 'Изменить шаблон'
-    @task_template = TaskTemplate.find params[:id]
+    @task_template = TaskTemplate.for_client(client).find params[:id]
     render 'new', layout: 'modal'
   end
 
   def update
-    task_template = TaskTemplate.find params[:id]
+    task_template = TaskTemplate.for_client(client).find params[:id]
     renew do
       task_template.update task_template_params
     end
@@ -28,7 +28,7 @@ class TaskTemplatesController < ApplicationController
   end
 
   def destroy
-    task_template = TaskTemplate.find params[:id]
+    task_template = TaskTemplate.for_client(client).find params[:id]
     if task_template.destroy
       redirect_to :back, notice: 'Шаблон удален'
     end
