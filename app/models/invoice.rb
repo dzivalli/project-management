@@ -4,7 +4,7 @@ class Invoice < ActiveRecord::Base
   has_many :items
   has_many :payments
 
-  enum status: %w(черновик)
+  enum status: ['черновик', 'счет выставлен']
 
   scope :client_invoices, -> (client) { where(company: client.companies.ids) }
 
@@ -35,6 +35,21 @@ class Invoice < ActiveRecord::Base
       (total - paid).round(2)
     end
 
+  end
+
+  def payment_status
+    if payments.none?
+      'неоплачен'
+    elsif amount_due == 0
+      'оплачен'
+    elsif amount_due > 0
+      'оплачен частично'
+    end
+
+  end
+
+  def invoiced!
+    update(status: 'счет выставлен')
   end
 
 end

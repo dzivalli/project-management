@@ -48,10 +48,17 @@
         %i.entypo-ticket
         %span.title Заявки
     - if can? :index, Setting
-      %li{class: ('active' if controller_name == 'settings')}
-        = link_to settings_general_path do
+      %li
+        = link_to '#' do
           %i.entypo-cog
           %span.title Настройки
+        %ul{class: ('visible' if %w(settings email_templates).include?(controller_name))}
+          %li{class: ('active' if controller_name == 'settings')}
+            = link_to settings_general_path do
+              %span.title Общие
+          %li{class: ('active' if controller_name == 'email_templates')}
+            = link_to email_templates_path do
+              %span.title Шаблоны для писем
     - if can? :index, User
       %li{class: ('active' if controller_name == 'users')}
         = link_to users_path do

@@ -23,14 +23,14 @@ Rails.application.routes.draw do
   end
 
   resources :templates, only: [:index]
-  resources :task_templates
-  resources :milestone_templates
-  resources :item_templates
+  resources :task_templates, :milestone_templates, :item_templates, :email_templates
+
   resources :payments, except: [:new, :create]
   resources :invoices do
     resources :payments, only: [:new, :create]
     resources :items
     get 'pdf', on: :member
+    get 'notice', on: :member
   end
 
   # resources :payments

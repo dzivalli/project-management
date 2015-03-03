@@ -13,6 +13,7 @@
       %span= @invoice.created_at.strftime("%d-%m-%Y")
       %br
       Статус платежа:
+      = status(@invoice.payment_status, 'badge')
   .margin
   %table.table.table-bordered
     %thead

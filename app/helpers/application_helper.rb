@@ -36,12 +36,14 @@ module ApplicationHelper
     case status
       when 'новая', 'Перевод'
         content_tag :div, status, class:  "#{form} #{form}-danger"
-      when 'ответ послан', 'черновик', 'Онлайн'
+      when 'ответ послан', 'черновик', 'Онлайн', 'оплачен частично'
         content_tag :div, status, class: "#{form} #{form}-default"
-      when 'в процессе', 'Наличные'
+      when 'в процессе', 'Наличные', 'неоплачен'
         content_tag :div, status, class: "#{form} #{form}-primary"
-      when 'закрыта'
+      when 'закрыта', 'оплачен'
         content_tag :div, status, class: "#{form} #{form}-success"
+      else
+        status
     end
   end
 

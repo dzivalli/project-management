@@ -1,0 +1,15 @@
+%h3 Шаблоны для писем
+.tabs-vertical-env
+  = render 'menu'
+  .tab-content
+    - case @group
+      - when 'Счета'
+        %ul.nav.nav-tabs.bordered
+          - @tabs.each do |tab|
+            %li{class: ('active' if tab.id == @email_template.id)}
+              = link_to tab.name, email_template_path(tab.id)
+        .tab-content
+          = form_for @email_template, role: 'form' do |f|
+            .form-group
+              = f.text_area :body, class: 'form-control wysihtml5'
+            = f.submit 'Сохранить', class: 'btn btn-success'

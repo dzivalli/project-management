@@ -37,7 +37,7 @@ Rails.application.configure do
 
   # compile assets from fonts folder for heroku deployment
   config.assets.paths << "#{Rails.root}/vendor/assets/fonts"
-  config.assets.precompile << /\.(?:svg|eot|woff|ttf|gif)$/
+  config.assets.precompile << /\.(?:svg|eot|woff|ttf|gif|js)$/
 
   # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb
 

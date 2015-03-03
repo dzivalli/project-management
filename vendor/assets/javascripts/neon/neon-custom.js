@@ -1174,6 +1174,7 @@ var public_vars = public_vars || {};
 					stylesheets = attrDefault($this, 'stylesheet-url', '')
 
 				$(".wysihtml5").wysihtml5({
+                    'color': false,
 					stylesheets: stylesheets.split(',')
 				});
 			});

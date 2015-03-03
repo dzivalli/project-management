@@ -34,6 +34,9 @@
 //= require neon/messages_ru
 //= require neon/bootstrap-datepicker
 //= require neon/bootstrap-switch.min
+//= require neon/wysihtml5-0.4.0pre.min
+//= require neon/bootstrap-wysihtml5
+
 
 // common settings and functions
 //= require common

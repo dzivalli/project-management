@@ -37,7 +37,9 @@
           %th Сумма платежа
       %tdata
         %tr
-          %td= @payment.invoice.reference_no
+          %td
+            = link_to  invoice_path(@payment.invoice) do
+              %strong.text-info= @payment.invoice.reference_no
           %td= @payment.invoice.created_at
           %td= @payment.invoice.total
           %td= @payment.amount

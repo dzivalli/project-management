@@ -16,8 +16,26 @@
 
 Role.create!([{name: 'admin'}, {name: 'customer'}, {name: 'staff'}, {name: 'root'}])
 
-User.create!(username: 'admin', full_name: 'admin', email: 'admin@example.com',
-            password: 'admin', password_confirmation: 'admin',
-            role: Role.find_by_name('root'))
+# User.create!(username: 'admin', full_name: 'admin', email: 'admin@example.com',
+#             password: 'admin', password_confirmation: 'admin',
+#             role: Role.find_by_name('root'))
 
 PaymentMethod.create!([{name: 'Онлайн'}, {name: 'Наличные'}, {name: 'Перевод'}])
+
+EmailTemplate.create!(
+    [{name: 'Платеж получен', group: 'Счета', body: ''},
+     {name: 'Выставление счета', group: 'Счета', body: ''},
+     {name: 'Повторная отправка', group: 'Счета', body: ''},
+     {name: 'Регистрация', group: 'Аккаунт', body: ''},
+     {name: 'Восстановление пароля', group: 'Аккаунт', body: ''},
+     {name: 'Сброс пароля', group: 'Аккаунт', body: ''},
+     {name: 'Смена почты', group: 'Аккаунт', body: ''},
+     {name: 'Добавление файла', group: 'Проекты', body: ''},
+     {name: 'Назначение проекта', group: 'Проекты', body: ''},
+     {name: 'Завершение проекта', group: 'Проекты', body: ''},
+     {name: 'Назначение задачи', group: 'Проекты', body: ''},
+     {name: 'Завершение задачи', group: 'Проекты', body: ''},
+     {name: 'Оповищение комманде', group: 'Заявки', body: ''},
+     {name: 'Оповищение клиенту', group: 'Заявки', body: ''},
+     {name: 'Ответ', group: 'Заявки', body: ''},
+     {name: 'Закрытие', group: 'Заявки', body: ''}])

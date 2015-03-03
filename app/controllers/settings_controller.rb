@@ -4,6 +4,7 @@ class SettingsController < ApplicationController
   end
 
   def email
+
   end
 
   def update
