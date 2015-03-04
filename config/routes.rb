@@ -17,6 +17,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :profile, only: [:index, :update]
+
   resources :messages
   resources :tickets do
     resources :ticket_replies

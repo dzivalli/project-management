@@ -4,14 +4,18 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :recoverable, :rememberable,
          :trackable, :validatable
 
+  after_create :create_avatar!
+
   belongs_to :company
   belongs_to :role
+  belongs_to :client
 
   has_many :permissions
   has_many :messages
   has_many :tickets
   has_many :task_templates
-  belongs_to :client
+
+  belongs_to :avatar, class_name: 'Attachment'
 
   has_and_belongs_to_many :projects
   has_and_belongs_to_many :tasks
@@ -22,6 +26,7 @@ class User < ActiveRecord::Base
 #   TODO add email regex
 #    TODO delete login field at the end
   # TODO make hook after delete to check if user primary contact
+
 
   scope :customer_users, -> (client) { where(client: client).where.not(id: client.owner.id) }
 
@@ -60,4 +65,14 @@ class User < ActiveRecord::Base
     role.name == 'root'
   end
 
+  def update_avatar!(file)
+    self.avatar.update(file: file)
+  end
+
+  private
+
+  def create_avatar!
+    self.create_avatar
+    self.save
+  end
 end

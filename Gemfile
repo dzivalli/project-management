@@ -11,6 +11,7 @@ gem 'wkhtmltopdf-binary'
 gem 'wicked_pdf'
 # for heroku deployment
 gem 'rails_12factor', group: :production
+gem 'rmagick'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

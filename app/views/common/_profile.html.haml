@@ -3,12 +3,12 @@
     %ul.user-info.pull-left.pull-none-xsm
       %li.profile-info.dropdown
         = link_to '#', class: 'dropdown-toggle', data: {toggle: 'dropdown'} do
-          = image_tag 'thumb-1@2x.png', width: 44, class: 'img-circle'
+          = image_tag current_user.avatar.file.thumb.url, width: 44, class: 'img-circle'
           = current_user.full_name
         %ul.dropdown-menu
           %li.caret
           %li
-            = link_to '#' do
+            = link_to profile_index_path do
               %i.entypo-user
               Профиль
 

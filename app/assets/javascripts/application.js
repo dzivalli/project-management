@@ -36,6 +36,7 @@
 //= require neon/bootstrap-switch.min
 //= require neon/wysihtml5-0.4.0pre.min
 //= require neon/bootstrap-wysihtml5
+//= require neon/fileinput
 
 
 // common settings and functions

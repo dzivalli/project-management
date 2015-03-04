@@ -92,8 +92,8 @@
 
 /* The icons */
 .cbp_tmtimeline > li .cbp_tmicon {
-	width: 40px;
-	height: 40px;
+	/*width: 40px;*/
+	/*height: 40px;*/
 	speak: none;
 	font-style: normal;
 	font-weight: normal;

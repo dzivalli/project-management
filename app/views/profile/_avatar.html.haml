@@ -1,0 +1,15 @@
+= form_for @user, url: profile_path(@user), html: { class: 'form-horizontal' } do |f|
+  .form-group
+    =f.label 'Аватар', nil, class: 'col-sm-3 control-label'
+    .col-sm-9
+      .fileinput.fileinput-new{"data-provides" => "fileinput"}
+        .fileinput-new.thumbnail{"data-trigger" => "fileinput", :style => "width: 200px; height: 150px;"}
+          %img{:alt => "...", :src => "http://placehold.it/200x150"}
+        .fileinput-preview.fileinput-exists.thumbnail{:style => "max-width: 200px; max-height: 150px"}
+        %div
+          %span.btn.btn-white.btn-file
+            %span.fileinput-new Выбрать картинку
+            %span.fileinput-exists Изменить
+            = f.file_field  :avatar
+            -#%input{:accept => "image/*", :name => "Сохранить", :type => "file"}
+          %a.btn.btn-orange.fileinput-exists{"data-dismiss" => "fileinput", :href => "#"} Удалить
