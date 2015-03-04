@@ -25,7 +25,14 @@ Rails.application.routes.draw do
   resources :templates, only: [:index]
   resources :task_templates, :milestone_templates, :item_templates, :email_templates
 
-  resources :payments, except: [:new, :create]
+  resources :payments, except: [:new, :create] do
+    member do
+      get 'pay'
+      get 'result'
+      get 'success'
+      get 'fail'
+    end
+  end
   resources :invoices do
     resources :payments, only: [:new, :create]
     resources :items

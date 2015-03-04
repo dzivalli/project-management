@@ -1,0 +1,16 @@
+= form_tag @pay_desc['mrh_url'], authenticity_token: false do
+  .form-group
+    Номер счета:
+    = @pay_desc['shp_item']
+  .form-group
+    Сумма:
+    = @pay_desc['out_summ']
+
+  %input{:name => "MrchLogin", :type => "hidden", :value => @pay_desc['mrh_login']}
+  %input{:name => "OutSum", :type => "hidden", :value => @pay_desc['out_summ']}
+  %input{:name => "InvId", :type => "hidden", :value => @pay_desc['inv_id']}
+  %input{:name => "Desc", :type => "hidden", :value => @pay_desc['inv_desc']}
+  %input{:name => "SignatureValue", :type => "hidden", :value => @pay_desc['crc']}
+  %input{:name => "Shp_item", :type => "hidden", :value => @pay_desc['shp_item']}
+  %input{:name => "IncCurrLabel", :type => "hidden", :value => @pay_desc['in_curr']}
+  %input{:name => "Culture", :type => "hidden", :value => @pay_desc['culture']}

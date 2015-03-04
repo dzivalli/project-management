@@ -52,4 +52,19 @@ class Invoice < ActiveRecord::Base
     update(status: 'счет выставлен')
   end
 
+  def send_email!(type)
+    case type
+      when 'invoiced'
+        if Notifications.notice_invoice(self, 'Выставление счета').deliver_now
+          notice = 'Письмо отправленно успешно, счет выставлен'
+          invoiced!
+        end
+      when 'remainder'
+        if Notifications.notice_invoice(self, 'Повторная отправка').deliver_now
+          notice = 'Повторное письмо отправленно успешно'
+        end
+    end
+    notice
+  end
+
 end

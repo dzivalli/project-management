@@ -49,19 +49,7 @@ class InvoicesController < ApplicationController
 
   def notice
     invoice = Invoice.client_invoices(client).find params[:id]
-    type = params[:type]
-    case type
-      when 'invoiced'
-        if Notifications.notice_invoice(invoice, 'Выставление счета').deliver_now
-          notice = 'Письмо отправленно успешно'
-          invoice.invoiced!
-        end
-      when 'remainder'
-        if Notifications.notice_invoice(invoice, 'Повторная отправка').deliver_now
-          notice = 'Письмо отправленно успешно'
-        end
-
-    end
+    notice = invoice.send_email!(params[:type])
     redirect_to :back, notice: notice
   end
 

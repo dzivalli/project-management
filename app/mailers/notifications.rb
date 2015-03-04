@@ -11,7 +11,8 @@ class Notifications < ApplicationMailer
   def signup(client)
     @client = client
 
-    mail to: client.owner.email, subject: 'Регистрация'
+    mail to: client.owner.email,
+         subject: 'Регистрация'
   end
 
   def notice_invoice(invoice, template)
@@ -20,6 +21,10 @@ class Notifications < ApplicationMailer
     body.sub!('{{URL_TO_PAY}}', 'custom url')
     body.sub!('{{INVOICE}}', invoice.reference_no)
     body.sub!('{{SIGN}}', invoice.company.name)
-    mail to: invoice.company.email, subject: template, body: body, content_type: 'text/html'
+
+    mail to: invoice.company.email,
+         subject: template,
+         body: body,
+         content_type: 'text/html'
   end
 end
