@@ -34,16 +34,11 @@
   %hr
   .row
     .col-lg-6
-      .panel.panel-primary
-        .panel-heading
-          .panel-title Задачи прогресс бар
-        .panel-body
+      = render 'tasks'
     .col-lg-6
       = render 'files'
   .row
-    .col-lg-6
-      = render 'tasks'
-    .col-lg-6
+    .col-lg-offset-6.col-lg-6
       .panel.panel-primary
         .panel-heading
           .panel-title Последние баги

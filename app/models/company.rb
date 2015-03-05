@@ -15,7 +15,11 @@ class Company < ActiveRecord::Base
 
   scope :customer_companies, -> (client) { where(client: client).where.not(id: client.main_company.id) }
 
-  scope :default, -> { find(Setting.company) }
-  scope :clients, -> { where.not(id: Setting.company) }
+  # scope :default, -> { find(Setting.company) }
+  # scope :clients, -> { where.not(id: Setting.company) }
+
+  def received_amount
+    payments.inject(0) { |sum, payment| sum + payment.amount}
+  end
 
 end

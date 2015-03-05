@@ -5,15 +5,18 @@ class InvoicesController < ApplicationController
 
   def new
     @invoice = Invoice.new(due_date: Time.now.strftime("%d-%m-%Y"))
-    @invoice.generate_reference
-    @companies = client.companies
+    @invoice.generate_reference!
+    @companies = Company.customer_companies(client)
     @title = 'Новый счет'
     render layout: 'modal'
   end
 
   def create
-    invoice = Invoice.new invoice_params.merge(status: 'черновик')
-    # TODO redirect to show page
+    invoice = if params.key?(:project)
+                Invoice.from_project(params)
+              else
+                Invoice.new invoice_params.merge(status: 'черновик')
+              end
     if invoice.save
       redirect_to invoice_path(invoice.id), notice: 'Элемент создан успешно'
     else
@@ -23,7 +26,7 @@ class InvoicesController < ApplicationController
 
   def edit
     @invoice = Invoice.client_invoices(client).find params[:id]
-    @companies = client.companies
+    @companies = Company.customer_companies(client)
     @title = 'Изменить счет'
     render 'new', layout: 'modal'
   end
@@ -41,6 +44,13 @@ class InvoicesController < ApplicationController
     @item = Item.new
   end
 
+  def destroy
+    invoice = Invoice.client_invoices(client).find params[:id]
+    if invoice.destroy
+      redirect_to invoices_path, notice: 'Счет успешно удален'
+    end
+  end
+
   def pdf
     @invoice = Invoice.client_invoices(client).find params[:id]
     pdf = render_to_string pdf: 'file.pdf', template: 'invoices/pdf.html.erb'
@@ -53,6 +63,12 @@ class InvoicesController < ApplicationController
     redirect_to :back, notice: notice
   end
 
+  def pay
+    @title = 'Оплата счета с помощью Робокассы'
+    invoice = Invoice.client_invoices(client).find params[:id]
+    @pay_desc = invoice.pay_hash
+    render layout: 'modal'
+  end
 
   private
 

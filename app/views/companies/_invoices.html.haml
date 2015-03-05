@@ -1,0 +1,22 @@
+.panel.panel-default.panel-shadow
+  .panel-heading
+    .panel-title
+      %i.entypo-doc-text
+      Счета
+  .panel-body.with-table
+    %table.table.table-bordered
+      %thead
+        %tr
+          %td Счет
+          %td Создан
+          %td Срок платежа
+          %td Сумма
+      %tbody
+        - @company.invoices.each do |invoice|
+          %tr
+            %td
+              = link_to invoice_path(invoice) do
+                %strong.text-info= invoice.reference_no
+            %td= invoice.created_at
+            %td= invoice.due_date
+            %td= invoice.total

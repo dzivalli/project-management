@@ -23,9 +23,14 @@ Role.create!([{name: 'admin'}, {name: 'customer'}, {name: 'staff'}, {name: 'root
 PaymentMethod.create!([{name: 'Онлайн'}, {name: 'Наличные'}, {name: 'Перевод'}])
 
 EmailTemplate.create!(
-    [{name: 'Платеж получен', group: 'Счета', body: ''},
-     {name: 'Выставление счета', group: 'Счета', body: ''},
-     {name: 'Повторная отправка', group: 'Счета', body: ''},
+    [{name: 'Платеж получен', group: 'Счета', body: '<div>Уважаемый клиент,</div><div><br></div><div>Мы получили Ваш платеж
+      по счету: {{INVOICE}}</div><div><br></div><div>С уважением,</div>'},
+     {name: 'Выставление счета', group: 'Счета', body: '<div>Уважаемый клиент,&nbsp;</div><div><br></div><div>Вам выставлен счет
+      на сумму: {{AMOUNT_DUE}}</div><div>Вы можете его оплатить по ссылке: {{URL_TO_PAY}}</div><div><br></div><div>С
+      уважением,<br>{{SIGN}}</div>'},
+     {name: 'Повторная отправка', group: 'Счета', body: 'Уважаемый клиент,<br><br>Напоминаем Вам, что у вас есть задолженность по
+      счету: {{INVOICE}}<br><div>Вы можете его оплатить по ссылке: {{URL_TO_PAY}}</div><div><br></div><div>С
+      уважением,<br>{{SIGN}}</div>'},
      {name: 'Регистрация', group: 'Аккаунт', body: ''},
      {name: 'Восстановление пароля', group: 'Аккаунт', body: ''},
      {name: 'Сброс пароля', group: 'Аккаунт', body: ''},

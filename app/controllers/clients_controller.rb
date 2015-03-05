@@ -37,6 +37,7 @@ class ClientsController < ApplicationController
     if client.save && client.owner.update(owner_params)
       client.owner.update(confirmed_at: Time.now, company: client.main_company)
       client.owner.admin!
+      client.copy_email_templates!
       redirect_to root_path
     else
       render 'edit', alert: 'Произошла ошибка'

@@ -1,0 +1,14 @@
+= form_tag invoices_path, class: 'form-horizontal' do
+  .form-group
+    = label_tag 'Имя', nil, class: 'col-sm-4 control-label'
+    .col-sm-6
+      = text_field_tag :name, nil, class: 'form-control', readonly: true, value: "Проект ##{@project.id}"
+  .form-group
+    = label_tag 'Описание', nil, class: 'col-sm-4 control-label'
+    .col-sm-6
+      = text_field_tag :description, nil, class: 'form-control', value: "Счет за #{@project.for_what}"
+  .form-group
+    = label_tag 'Сумма', nil, class: 'col-sm-4 control-label'
+    .col-sm-6
+      = text_field_tag :cost, nil, class: 'form-control', value: @project.cost
+  = hidden_field_tag :project, @project.id

@@ -50,7 +50,10 @@
           %strong= @invoice.sub_total
         %li
           Налог:
-          %strong= @invoice.tax
+          %strong= "#{@invoice.tax}%"
+        %li
+          Оплачено:
+          %strong= @invoice.paid
         %li
           Общий итог:
-          %strong= @invoice.total
+          %strong= @invoice.total - @invoice.paid

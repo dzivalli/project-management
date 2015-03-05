@@ -47,4 +47,12 @@ class Project < ActiveRecord::Base
     time_entries.where(user: user, status: 'active')
   end
 
+  def for_what
+    if fixed_price
+      'фиксированную цену проекта'
+    else
+      "за #{estimated_hours} часов"
+    end
+  end
+
 end

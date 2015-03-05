@@ -29,7 +29,6 @@ Rails.application.routes.draw do
 
   resources :payments, except: [:new, :create] do
     member do
-      get 'pay'
       get 'result'
       get 'success'
       get 'fail'
@@ -38,8 +37,11 @@ Rails.application.routes.draw do
   resources :invoices do
     resources :payments, only: [:new, :create]
     resources :items
-    get 'pdf', on: :member
-    get 'notice', on: :member
+    member do
+      get 'pdf'
+      get 'notice'
+      get 'pay'
+    end
   end
 
   # resources :payments
@@ -56,6 +58,8 @@ Rails.application.routes.draw do
     resources :attachments
     resources :histories, only: [:index]
     member do
+      get 'invoice'
+      get 'copy'
       get 'team'
       get 'permissions'
       post 'permissions', action: 'update_permissions'

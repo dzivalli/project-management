@@ -10,9 +10,10 @@ class EmailTemplatesController < ApplicationController
 
   def show
     @email_template = EmailTemplate.for_client(client).find params[:id]
-    @groups = EmailTemplate.groups.keys
-    @tabs = EmailTemplate.for_client_by_group(client, @email_template.group).select(:id, :name)
     @group = @email_template.group
+    @groups = EmailTemplate.groups.keys
+    @tabs = EmailTemplate.for_client_by_group(client, EmailTemplate.groups[@group]).select(:id, :name)
+    # abort @tabs.inspect
   end
 
   def update

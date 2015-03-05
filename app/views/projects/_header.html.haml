@@ -5,12 +5,12 @@
         Изменить
         %i.entypo-pencil
     - if can? :new, @project
-      = link_to edit_project_path(@project), class: 'btn btn-blue btn-icon icon-left' do
+      = link_to copy_project_path(@project), class: 'btn btn-blue btn-icon icon-left get-modal' do
         Копировать
         %i.entypo-docs
     - if can? :index, @project
-      = link_to edit_project_path(@project), class: 'btn btn-blue btn-icon icon-left' do
-        Счета
+      = link_to invoice_project_path(@project), class: 'btn btn-blue btn-icon icon-left get-modal' do
+        Создать счет
         %i.entypo-credit-card
     - if can? :delete, @project
       = link_to project_path(@project), class: 'btn btn-default btn-icon icon-left', method: :delete do

@@ -14,7 +14,7 @@ class ProjectsController < ApplicationController
     @users = client.users
     @project = Project.new
     @project.start_date = @project.due_date = Time.now.strftime("%d-%m-%Y")
-    @companies = client.companies
+    @companies = Company.customer_companies(client)
     @title = 'Новый проект'
     render layout: 'modal'
   end
@@ -29,7 +29,7 @@ class ProjectsController < ApplicationController
   def edit
     @users = client.users
     @project = Project.client_projects(client).find params[:id]
-    @companies = client.companies
+    @companies = Company.customer_companies(client)
     @title = 'Изменить данные'
     render 'new', layout: 'modal'
   end
@@ -64,6 +64,23 @@ class ProjectsController < ApplicationController
     permissions = params.slice(:milestone, :team, :task).keys
     Permission.update_for_client permissions, Project.find(params[:id])
     redirect_to :back, notice: 'Параметры доступа были обновленны'
+  end
+
+
+  def invoice
+    @title = 'Создать счет за проект'
+    @project = Project.client_projects(client).find params[:id]
+    render layout: 'modal'
+  end
+
+  def copy
+    project = Project.client_projects(client).find(params[:id])
+    @companies = Company.customer_companies(client)
+    @users = client.users
+    @title = 'Копировать проект'
+    @project = project.dup
+    @project.name += ' копия'
+    render 'new', layout: 'modal'
   end
 
   private

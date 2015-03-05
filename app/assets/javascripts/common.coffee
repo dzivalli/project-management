@@ -68,7 +68,7 @@ init = ->
     e.preventDefault()
     $.get $(this).attr('href'), (result) ->
       modal.html(result).modal('show')
-      rulesFor = modal.find('form').attr('id').split("_")[1]
+      rulesFor = modal.find('form').attr('id').split("_")[1] if modal.find('form').attr('id')
       modal.find('form').validate(generateRules(rulesFor))
       modal.find('select').select2
         minimumResultsForSearch: -1

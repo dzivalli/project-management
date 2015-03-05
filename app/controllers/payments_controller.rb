@@ -1,6 +1,6 @@
 class PaymentsController < ApplicationController
   def index
-    @payments = Payment.all
+    @payments = Payment.client_payments(client)
   end
 
   def new
@@ -14,7 +14,8 @@ class PaymentsController < ApplicationController
   end
 
   def create
-    payment = Payment.new payment_params.merge(invoice_id: params[:invoice_id], company_id: current_user.company.id)
+    invoice = Invoice.client_invoices(client).find params[:invoice_id]
+    payment = Payment.new payment_params.merge(invoice: invoice, company: invoice.company)
     store do
       payment.save
     end
@@ -40,29 +41,26 @@ class PaymentsController < ApplicationController
   end
 
   def destroy
-
-  end
-
-  def pay
-    @title = 'Оплата счета с помощью Робокассы'
     payment = Payment.client_payments(client).find params[:id]
-    @pay_desc = payment.pay_hash
-    render layout: 'modal'
+    if payment.destroy
+      redirect_to :back, notice: 'Платеж удален успешно'
+    end
   end
 
   def result
-    crc = Payment.get_hash(params['OutSum'],
-                            params['InvId'],
-                            Payment.MERCHANT_PASS_2)
-    @result = "FAIL"
-    unless params['SignatureValue'].blank? && crc.casecmp(params['SignatureValue']) != 0
-      @order = Order.where(:id => params['Shp_item']).first
-      @order.payment.invid = params['InvId'].to_i
-      @order.payment.status =
-      @order.payment.save
-      # ...
-      @result = "OK#{params['InvId']}"
-    end
+
+    # crc = Payment.get_hash(params['OutSum'],
+    #                         params['InvId'],
+    #                         Payment.MERCHANT_PASS_2)
+    # @result = "FAIL"
+    # unless params['SignatureValue'].blank? && crc.casecmp(params['SignatureValue']) != 0
+    #   @order = Order.where(:id => params['Shp_item']).first
+    #   @order.payment.invid = params['InvId'].to_i
+    #   @order.payment.status =
+    #   @order.payment.save
+    #   # ...
+    #   @result = "OK#{params['InvId']}"
+    # end
   end
 
   private

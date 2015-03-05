@@ -10,7 +10,7 @@
           = link_to new_invoice_payment_path(@invoice), class: 'btn btn-default get-modal' do
             %i.entypo-credit-card
             Ввести оплату
-          = link_to pay_payment_path(@invoice), class: 'btn btn-default get-modal' do
+          = link_to pay_invoice_path(@invoice), class: 'btn btn-default get-modal' do
             %i.entypo-archive
             Робокасса
           = link_to 'Из шаблона', new_invoice_item_path(@invoice), class: 'btn btn-default get-modal'

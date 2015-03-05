@@ -65,10 +65,6 @@ class User < ActiveRecord::Base
     role.name == 'root'
   end
 
-  def update_avatar!(file)
-    self.avatar.update(file: file)
-  end
-
   private
 
   def create_avatar!

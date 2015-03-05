@@ -12,27 +12,40 @@
         .col-md-4 Название
         .col-md-6= @company.name
       .row
-        .col-md-4 Email
+        .col-md-4 Email компании
         .col-md-6= @company.email
       .row
         .col-md-4 Контакт
         .col-md-6= (@company.contact.full_name if @company.contact)
-      %h4 Другие детали
-      .row
-        .col-md-4 Город
-        .col-md-6= @company.city
+        .col-md-6
     .col-md-6
       %h4 Полученные платежи
+      .row
+        .col-md-12
+          %h2.text-success= number_to_currency @company.received_amount
+    .col-md-12
+      %h4 Другие детали
+      .row
+        .col-md-6
+          .row
+            .col-md-4 Город
+            .col-md-6= @company.city
+          .row
+            .col-md-4 Адрес
+            .col-md-6= @company.address
+        .col-md-6
+          .row
+            .col-md-4 Телефон
+            .col-md-6= @company.phone
+          .row
+            .col-md-4 Вебсайт
+            .col-md-6= @company.website
+
   .panel-body
     .col-md-12
       =render 'users'
     .col-md-6
-      .panel.panel-default.panel-shadow
-        .panel-heading
-          .panel-title
-            %i.entypo-doc-text
-            Счета
-        .panel-body
+      = render 'invoices'
     .col-md-6
       = render 'projects'
 
