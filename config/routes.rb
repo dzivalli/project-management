@@ -57,10 +57,10 @@ Rails.application.routes.draw do
     resources :time_entries
     resources :attachments
     resources :histories, only: [:index]
+    resources :team, only: [:index, :new, :create]
     member do
       get 'invoice'
       get 'copy'
-      get 'team'
       get 'permissions'
       post 'permissions', action: 'update_permissions'
     end

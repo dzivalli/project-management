@@ -49,7 +49,6 @@ class ProjectsController < ApplicationController
 
   def team
     @project = Project.client_projects(client).includes(:users).find params[:id]
-    authorize! :team, @project
   end
 
 

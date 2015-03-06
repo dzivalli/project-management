@@ -4,9 +4,9 @@
       %i.entypo-home
       Главная
 
-  - if can? :team, @project
-    %li{class: ('active' if action_name == 'team')}
-      = link_to team_project_path(@project) do
+  - if can? :read, TeamController
+    %li{class: ('active' if controller_name == 'team')}
+      = link_to project_team_index_path(@project) do
         %i.entypo-users
         Команда
 

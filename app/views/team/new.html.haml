@@ -1,0 +1,6 @@
+= form_tag project_team_index_path, class: 'form-horizontal' do
+
+  .form-group
+    = label_tag 'Пользователи', nil, class: 'col-sm-4 control-label'
+    .col-sm-5
+      = collection_select :team, :ids, @users, :id, :full_name, {selected: @project.users.ids}, {class: 'form-control', multiple: ''}
