@@ -1,12 +1,13 @@
 class ProjectsController < ApplicationController
+  include Projectable
 
   def index
     # TODO check by role
-    @projects = Project.client_projects(client)
+    @projects = Project.client_projects(client, current_user)
   end
 
   def show
-    @project = Project.includes(:attachments).client_projects(client).find params[:id]
+    @project = find_project { includes(:attachments) }
     @logged_time = TimeEntry.logged_time_for(@project)
   end
 
@@ -28,33 +29,34 @@ class ProjectsController < ApplicationController
 
   def edit
     @users = client.users
-    @project = Project.client_projects(client).find params[:id]
+    @project = find_project
     @companies = Company.customer_companies(client)
     @title = 'Изменить данные'
     render 'new', layout: 'modal'
   end
 
   def update
-    project = Project.client_projects(client).find params[:id]
+    project = find_project
     renew do
       (project.users = client.users.find(users_params)) && project.update(project_params)
     end
   end
 
   def destroy
-    if Project.client_projects(client).destroy params[:id]
+    project = find_project
+    if project.destroy params[:id]
       redirect_to projects_path, notice: 'Проект был успешно удален'
     end
   end
 
   def team
-    @project = Project.client_projects(client).includes(:users).find params[:id]
+    @project = find_project { includes(:users) }
   end
 
 
   # TODO maybe new controller
   def permissions
-    @project = Project.find params[:id]
+    @project = find_project
      # TODO create model method for:
     @permissions = Permission.for_client(@project).pluck(:subject_class, :action).flatten.uniq
   end
@@ -68,12 +70,12 @@ class ProjectsController < ApplicationController
 
   def invoice
     @title = 'Создать счет за проект'
-    @project = Project.client_projects(client).find params[:id]
+    @project = find_project
     render layout: 'modal'
   end
 
   def copy
-    project = Project.client_projects(client).find(params[:id])
+    project = find_project
     @companies = Company.customer_companies(client)
     @users = client.users
     @title = 'Копировать проект'

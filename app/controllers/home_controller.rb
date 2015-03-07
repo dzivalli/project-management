@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   def index
-    @projects = Project.client_projects(client)
+    @projects = Project.client_projects(client, current_user)
     @versions = PaperTrail::Version.where(whodunnit: client.users.ids).last(5)
     @message_count = Message.recipients_for(current_user.id).count
     @invoice_count = Invoice.client_invoices(client).count

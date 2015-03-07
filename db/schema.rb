@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150304143128) do
+ActiveRecord::Schema.define(version: 20150306115205) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(version: 20150304143128) do
     t.integer  "company_id"
     t.date     "due_date"
     t.text     "notes"
-    t.float    "tax"
+    t.float    "tax",              default: 0.0
     t.integer  "discount"
     t.boolean  "recurring"
     t.integer  "recur_freq"
@@ -80,8 +80,8 @@ ActiveRecord::Schema.define(version: 20150304143128) do
     t.boolean  "emailed"
     t.boolean  "visible"
     t.boolean  "viewed"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
   end
 
   add_index "invoices", ["company_id"], name: "index_invoices_on_company_id", using: :btree

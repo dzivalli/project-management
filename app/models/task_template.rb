@@ -1,7 +1,6 @@
 class TaskTemplate < ActiveRecord::Base
   include Templateble
 
-  belongs_to :owner, class_name: 'User'
   belongs_to :milestone_template
 
   scope :select_fields, -> (id) { select(:name, :estimated_hours, :description, :visible).find(id) }

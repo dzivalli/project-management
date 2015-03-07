@@ -5,7 +5,7 @@ class CreateInvoices < ActiveRecord::Migration
       t.references :company, index: true
       t.date :due_date
       t.text :notes
-      t.float :tax
+      t.float :tax, null: false, default: 0
       t.integer :discount
 
       # recurring

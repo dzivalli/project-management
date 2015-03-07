@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
 
   after_create :create_avatar!
 
+  delegate :can?, :cannot?, to: :ability
+
   belongs_to :company
   belongs_to :role
   belongs_to :client
@@ -29,6 +31,11 @@ class User < ActiveRecord::Base
 
 
   scope :customer_users, -> (client) { where(client: client).where.not(id: client.owner.id) }
+
+
+  def ability
+    @ability ||= Ability.new(self)
+  end
 
   def confirmed?
     !!confirmed_at

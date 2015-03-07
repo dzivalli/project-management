@@ -4,10 +4,11 @@ class TasksController < ApplicationController
   layout 'modal', only: [:new, :edit, :templates]
 
   def index
-    @project = project { includes(:tasks) }
+    @project = find_project { includes(:tasks) }
   end
 
   def new
+    @project = find_project
     @task = Task.new(due_date: Time.now.strftime("%d-%m-%Y"))
     @title = 'Новая задача'
     @users = client.users
@@ -23,31 +24,33 @@ class TasksController < ApplicationController
       Task.new task_params.merge(owner: current_user)
     end
     store do
-      (task.users = User.find(users_params)) && project.tasks << task
+      (task.users = User.find(users_params)) && find_project.tasks << task
     end
   end
 
   def edit
-    @task = project.tasks.find params[:id]
+    @project = find_project
+    @task = @project.tasks.find params[:id]
     @title = 'Измениить данные'
     @users = client.users
     render 'new'
   end
 
   def update
-    task = project.tasks.find params[:id]
+    task = find_project.tasks.find params[:id]
     renew do
       (task.users = User.find(users_params)) && task.update(task_params)
     end
   end
 
   def show
+    @project = find_project
     @task = @project.tasks.find params[:id]
     @logged_time = TimeEntry.logged_time_for(@task)
   end
 
   def destroy
-    task = project.tasks.find params[:id]
+    task = find_project.tasks.find params[:id]
     if task.destroy
       redirect_to project_tasks_path(id: params[:project_id]), notice: 'Задача удалена успешно'
     end

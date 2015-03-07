@@ -4,10 +4,11 @@ class MilestonesController < ApplicationController
   layout 'modal', only: [:new, :edit, :templates]
 
   def index
-    @project = project { includes(:milestones) }
+    @project = find_project { includes(:milestones) }
   end
 
   def new
+    @project = find_project
     @milestone = Milestone.new
     @milestone.start_date = @milestone.due_date = Time.now.strftime("%d-%m-%Y")
     @title = 'Новый этап'
@@ -26,31 +27,33 @@ class MilestonesController < ApplicationController
                 end
     store do
       milestone.tasks = tasks if tasks
-      project.milestones << milestone
+      find_project.milestones << milestone
     end
   end
 
   def edit
+    @project = find_project
     @milestone = @project.milestones.find params[:id]
     @title = 'Изменить данные'
     render 'new'
   end
 
   def update
-    milestone = project.milestones.find params[:id]
+    milestone = find_project.milestones.find params[:id]
     renew do
       milestone.update milestone_params
     end
   end
 
   def destroy
-    milestone = project.milestones.find params[:id]
+    milestone = find_project.milestones.find params[:id]
     if milestone.destroy!
       redirect_to project_milestones_path(params[:project_id]), notice: 'Этап был успешно удален'
     end
   end
 
   def show
+    @project = find_project
     @milestone = @project.milestones.find params[:id]
   end
 

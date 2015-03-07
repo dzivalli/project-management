@@ -21,7 +21,9 @@
                 = link_to project_milestone_path(@project, milestone) do
                   %strong.text-info= milestone.name
               %td= milestone.start_date
-              %td= milestone.due_date
+              %td
+                = milestone.due_date
+                = status('просрочен') if milestone.overdue?
               %td= render partial: 'common/bar', locals: {progress: milestone.progress}
 
               %td.m-r

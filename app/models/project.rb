@@ -19,15 +19,14 @@ class Project < ActiveRecord::Base
   validates :due_date, presence: true
   validates :start_date, presence: true
   validates :progress, numericality: true
-           # less_than_or_equal_to: 100, greater_than_or_equal_to: 0
 
-
-  # accepts_nested_attributes_for :milestones
-
-  def self.client_projects(client)
-    Project.where(company: client.companies)
+  def self.client_projects(client, user)
+    if user.admin? || user.root? || user.can?(:all, Project)
+      Project.where(company: client.companies)
+    else
+      Project.joins(:users).where(company: client.companies, users: {id: user.id})
+    end
   end
-
 
   def self.for_user(user)
     if user.customer?
@@ -53,6 +52,10 @@ class Project < ActiveRecord::Base
     else
       "за #{estimated_hours} часов"
     end
+  end
+
+  def overdue?
+    due_date <= Time.now
   end
 
 end

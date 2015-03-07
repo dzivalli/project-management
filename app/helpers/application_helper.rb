@@ -34,7 +34,7 @@ module ApplicationHelper
 
   def status(status, form = 'label')
     case status
-      when 'новая', 'Перевод'
+      when 'новая', 'Перевод', 'просрочен'
         content_tag :div, status, class:  "#{form} #{form}-danger"
       when 'ответ послан', 'черновик', 'Онлайн', 'оплачен частично'
         content_tag :div, status, class: "#{form} #{form}-default"

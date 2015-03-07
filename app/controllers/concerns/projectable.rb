@@ -1,23 +1,20 @@
 module Projectable
   extend ActiveSupport::Concern
 
-  included do
-    before_action :find_project, only: [:new, :edit, :show]
-  end
-
   private
 
-  def project(&block)
+  def find_project(&block)
+    key = if self.class.name == 'ProjectsController'
+            :id
+          else
+            :project_id
+          end
     if block_given?
-      Project.class_eval(&block).client_projects(client).find(params[:project_id])
+      Project.class_eval(&block).client_projects(client, current_user).find(params[key])
     else
-      Project.client_projects(client).find(params[:project_id])
+      Project.client_projects(client, current_user).find(params[key])
     end
 
-  end
-
-  def find_project
-    @project = project
   end
 
 end

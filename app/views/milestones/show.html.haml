@@ -23,7 +23,9 @@
               %span.pull-right= @milestone.start_date
               Начало
             %li.list-group-item
-              %span.pull-right= @project.due_date
+              %span.pull-right
+                = status('просрочен') if @milestone.overdue?
+                = @milestone.due_date
               Конец
       .row
         .col-sm-12

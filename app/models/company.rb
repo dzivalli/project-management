@@ -9,7 +9,7 @@ class Company < ActiveRecord::Base
 
   has_paper_trail
 
-  validates_presence_of :name, :address
+  validates_presence_of :name, :address, :city
   validates_uniqueness_of :name
   validates_length_of :name, :address, maximum: 255
 

@@ -15,7 +15,9 @@
           %span.pull-right= @project.start_date
           Начало
         %li.list-group-item
-          %span.pull-right= @project.due_date
+          %span.pull-right
+            = status('просрочен') if @project.overdue?
+            = @project.due_date
           Конец
     .col-lg-6
       %ul.list-group

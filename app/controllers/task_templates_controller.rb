@@ -6,7 +6,7 @@ class TaskTemplatesController < ApplicationController
   end
 
   def create
-    task_template = TaskTemplate.new task_template_params.merge(owner: current_user, client: client)
+    task_template = TaskTemplate.new task_template_params.merge(client: client)
     store do
       task_template.save
     end

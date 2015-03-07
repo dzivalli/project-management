@@ -14,7 +14,7 @@
 # s = Setting.find_or_create_by(key: 'company')
 # s.update(value: company.id)
 
-Role.create!([{name: 'admin'}, {name: 'customer'}, {name: 'staff'}, {name: 'root'}])
+Role.create!([{name: 'staff'}, {name: 'customer'}, {name: 'admin'}, {name: 'root'}])
 
 # User.create!(username: 'admin', full_name: 'admin', email: 'admin@example.com',
 #             password: 'admin', password_confirmation: 'admin',

@@ -46,6 +46,13 @@ init = ->
     tmp = {}
     tmp["#{obj}[full_name]"] = 'required'
     tmp["#{obj}[name]"] = 'required'
+    tmp["#{obj}[address]"] = 'required'
+    tmp["#{obj}[due_date]"] = 'required'
+    tmp["#{obj}[start_date]"] = 'required'
+    tmp["#{obj}[subject]"] = 'required'
+    tmp["#{obj}[subject]"] = 'required'
+    tmp["#{obj}[body]"] = 'required'
+    tmp["#{obj}[cost]"] = 'required'
     tmp["#{obj}[password]"] =
       required: true
       minlength: 5
@@ -68,7 +75,9 @@ init = ->
     e.preventDefault()
     $.get $(this).attr('href'), (result) ->
       modal.html(result).modal('show')
-      rulesFor = modal.find('form').attr('id').split("_")[1] if modal.find('form').attr('id')
+      id = modal.find('form').attr('id')
+      if id
+        rulesFor = id.substring(id.indexOf('_') + 1, id.length)
       modal.find('form').validate(generateRules(rulesFor))
       modal.find('select').select2
         minimumResultsForSearch: -1

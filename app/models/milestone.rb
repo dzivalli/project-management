@@ -12,4 +12,7 @@ class Milestone < ActiveRecord::Base
     tasks.inject(0) { |sum, task| sum + task.estimated_hours }
   end
 
+  def overdue?
+    due_date <= Time.now
+  end
 end

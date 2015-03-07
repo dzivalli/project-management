@@ -2,10 +2,11 @@ class TeamController < ApplicationController
   include Projectable
 
   def index
-    @project = project { includes(:users) }
+    @project = find_project { includes(:users) }
   end
 
   def new
+    @project = find_project
     @users = User.customer_users(client)
     render layout: 'modal'
   end
@@ -13,7 +14,7 @@ class TeamController < ApplicationController
   def create
     team = User.customer_users(client).find users_params
     renew do
-      project.users = team
+      find_project.users = team
     end
   end
 
