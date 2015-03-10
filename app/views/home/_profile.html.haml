@@ -1,0 +1,14 @@
+.panel.panel-primary
+  .panel-body.text-center
+    = image_tag current_user.avatar.file.url, class: 'img-circle', width: 120
+    %br
+    %h3= current_user.full_name
+  .panel-body.no-padding
+    .hours.text-center
+      0
+      %br
+      часов по проекту
+    .hours.text-center
+      0
+      %br
+      часов по задачам

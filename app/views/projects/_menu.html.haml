@@ -24,9 +24,9 @@
         - if @project.active_tasks(current_user).any?
           %span.badge.badge-secondary.pull-right= @project.active_tasks(current_user).count
 
-  - if can? :permission, @project
+  - if can? :permission, Permission
     %li{class: ('active' if action_name == 'permissions')}
-      = link_to permissions_project_path(@project) do
+      = link_to new_project_permission_path(@project) do
         %i.entypo-cog
         Доступ
 
@@ -42,7 +42,8 @@
         %i.entypo-clock
         Табель
 
-  %li{class: ('active' if controller_name == 'histories')}
-    = link_to project_histories_path(@project) do
-      %i.entypo-vcard
-      История
+  - if can? :read, HistoriesController
+    %li{class: ('active' if controller_name == 'histories')}
+      = link_to project_histories_path(@project) do
+        %i.entypo-vcard
+        История

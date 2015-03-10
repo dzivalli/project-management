@@ -5,9 +5,10 @@
     .panel.panel-primary
       .panel-heading
         .panel-title
-          = link_to new_invoice_payment_path(@invoice), class: 'btn btn-default get-modal' do
-            %i.entypo-credit-card
-            Ввести оплату
+          - if can? :add, Payment
+            = link_to new_invoice_payment_path(@invoice), class: 'btn btn-default get-modal' do
+              %i.entypo-credit-card
+              Ввести оплату
           = link_to pay_invoice_path(@invoice), class: 'btn btn-default get-modal' do
             %i.entypo-archive
             Робокасса
@@ -17,12 +18,15 @@
               Действия
               %span.caret
             %ul.dropdown-menu.dropdown-default{role: 'menu'}
-              %li= link_to 'Выслать на почту', notice_invoice_path(@invoice, type: 'invoiced')
-              %li= link_to 'Повторная отправка', notice_invoice_path(@invoice, type: 'remainder')
+              - if can? :notice, Invoice
+                %li= link_to 'Выслать на почту', notice_invoice_path(@invoice, type: 'invoiced')
+                %li= link_to 'Повторная отправка', notice_invoice_path(@invoice, type: 'remainder')
               %li= link_to 'История', '#'
               %hr
-              %li= link_to 'Изменить', edit_invoice_path(@invoice), class: 'get-modal'
-              %li= link_to 'Удалить', invoice_path(@invoice), method: :delete
+              - if can? :edit, Invoice
+                %li= link_to 'Изменить', edit_invoice_path(@invoice), class: 'get-modal'
+              - if can? :destroy, Invoice
+                %li= link_to 'Удалить', invoice_path(@invoice), method: :delete
         .panel-title.pull-right
           = link_to pdf_invoice_path(@invoice), class: 'btn btn-default' do
             %i.entypo-newspaper

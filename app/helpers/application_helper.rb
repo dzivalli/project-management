@@ -56,10 +56,20 @@ module ApplicationHelper
     hours = to_hours(h) if h > 0
     m > 0 ? min = to_minutes(m) : min = nil
     s > 0 ? sec = to_seconds(s.round) : sec = nil
-    [hours, min, sec].compact.join(', ')
+    if interval.zero?
+      '0 часов'
+    else
+      [hours, min, sec].compact.join(', ')
+    end
   end
 
   def name_for_versions(id)
     User.find_by_id(id) ? User.find(id).full_name : ''
+  end
+
+  def find_permission(permissions, action, obj)
+    permissions.one? do |p|
+      p[0] == action && p[1] == obj
+    end
   end
 end

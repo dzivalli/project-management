@@ -69,7 +69,7 @@ class User < ActiveRecord::Base
   end
 
   def root?
-    role.name == 'root'
+    Role.unscoped.find_by_name('root').name == 'root'
   end
 
   private

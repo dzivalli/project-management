@@ -1,8 +1,9 @@
 %h3
   Проекты
-  = link_to new_project_path, type: 'button', class: 'btn btn-blue btn-icon icon-left pull-right get-modal' do
-    Новый проект
-    %i.entypo-plus
+  - if can? :add, Project
+    = link_to new_project_path, type: 'button', class: 'btn btn-blue btn-icon icon-left pull-right get-modal' do
+      Новый проект
+      %i.entypo-plus
 %br
 %table.pm-table.table.table-bordered
   %thead
@@ -10,7 +11,10 @@
       %th Имя проекта
       %th Дата начала
       %th Дата конца
-      %th Стоимость
+      - if can? :cost, Project
+        %th Стоимость
+      - else
+        %th Потрачено часов
       %th Параметры
   %tbody
     - @projects.each do |project|
@@ -20,7 +24,10 @@
             %strong.text-info= project.name
         %td= project.start_date
         %td= project.due_date
-        %td= number_to_currency project.cost
+        - if can? :cost, Project
+          %td= number_to_currency project.cost
+        - else
+          %td= time_interval_to_human TimeEntry.logged_time_for(project)
         %td.m-r
           = link_to edit_project_path(project), type: 'button', class: 'btn btn-default btn-xs get-modal', data: { toggle: 'tooltip', placement: 'top', 'original-title' => 'Изменить' } do
             %i.entypo-tools

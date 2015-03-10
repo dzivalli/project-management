@@ -1,0 +1,28 @@
+.form-group
+  .checkbox-replace
+    = check_box_tag 'read_projects', nil, find_permission(@permissions, 'read', 'project')
+    = label_tag 'read_projects' , 'Просмотр всех проектов'
+.form-group
+  .checkbox-replace
+    = check_box_tag 'cost_project', nil, find_permission(@permissions, 'cost', 'project')
+    = label_tag 'cost_project' , 'Просмотр стоимости проекта'
+.form-group
+  .checkbox-replace
+    = check_box_tag 'add_project', nil, find_permission(@permissions, 'add', 'project')
+    = label_tag 'add_project' , 'Добавление проекта'
+.form-group
+  .checkbox-replace
+    = check_box_tag 'edit_projects', nil, find_permission(@permissions, 'edit', 'project')
+    = label_tag 'edit_all_projects' , 'Изменение всех проектов'
+.form-group
+  .checkbox-replace
+    = check_box_tag 'destroy_project', nil, find_permission(@permissions, 'destroy', 'project')
+    = label_tag 'destroy_project' , 'Удаление проекта'
+-#.form-group
+-#  .checkbox-replace
+-#    = check_box_tag 'view_project_notes'
+-#    = label_tag 'view_project_notes' , 'Просмотр заметок проекта'
+-#.form-group
+-#  .checkbox-replace
+-#    = check_box_tag 'read_companies', nil, find_permission(@permissions, 'read', 'company')
+-#    = label_tag 'read_companies' , 'Просмотр клиентов проекта'

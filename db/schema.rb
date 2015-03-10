@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150306115205) do
+ActiveRecord::Schema.define(version: 20150309111017) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -173,8 +173,10 @@ ActiveRecord::Schema.define(version: 20150306115205) do
     t.string   "action"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.integer  "client_id"
   end
 
+  add_index "permissions", ["client_id"], name: "index_permissions_on_client_id", using: :btree
   add_index "permissions", ["company_id"], name: "index_permissions_on_company_id", using: :btree
   add_index "permissions", ["user_id"], name: "index_permissions_on_user_id", using: :btree
 
@@ -345,6 +347,7 @@ ActiveRecord::Schema.define(version: 20150306115205) do
   add_foreign_key "payments", "companies"
   add_foreign_key "payments", "invoices"
   add_foreign_key "payments", "payment_methods"
+  add_foreign_key "permissions", "clients"
   add_foreign_key "permissions", "companies"
   add_foreign_key "permissions", "users"
   add_foreign_key "settings", "clients"

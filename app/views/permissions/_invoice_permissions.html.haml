@@ -1,0 +1,28 @@
+.form-group
+  .checkbox-replace
+    = check_box_tag 'read_invoices', nil, find_permission(@permissions, 'read', 'invoice')
+    = label_tag 'read_invoices' , 'Просмотр всех счетов'
+.form-group
+  .checkbox-replace
+    = check_box_tag 'add_payment', nil, find_permission(@permissions, 'add', 'payment')
+    = label_tag 'add_payment' , 'Добавление платежа оффлайн'
+.form-group
+  .checkbox-replace
+    = check_box_tag 'add_invoice', nil, find_permission(@permissions, 'add', 'invoice')
+    = label_tag 'add_invoice' , 'Добавление счета'
+.form-group
+  .checkbox-replace
+    = check_box_tag 'edit_invoices', nil, find_permission(@permissions, 'edit', 'invoice')
+    = label_tag 'edit_invoices' , 'Изменение всех счетов'
+.form-group
+  .checkbox-replace
+    = check_box_tag 'destroy_invoice', nil, find_permission(@permissions, 'destroy', 'invoice')
+    = label_tag 'destroy_invoice' , 'Удаление счета'
+.form-group
+  .checkbox-replace
+    = check_box_tag 'read_payments', nil, find_permission(@permissions, 'read', 'payment')
+    = label_tag 'read_payments' , 'Просмотр платежей'
+.form-group
+  .checkbox-replace
+    = check_box_tag 'notice_invoice', nil, find_permission(@permissions, 'notice', 'invoice')
+    = label_tag 'notice_invoice' , 'Возможность отправлять письма'

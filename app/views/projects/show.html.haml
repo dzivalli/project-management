@@ -24,15 +24,16 @@
         %li.list-group-item
           %span.pull-right= time_interval_to_human(@logged_time)
           Потраченно время
-        %li.list-group-item
-          %span.pull-right= number_to_currency @project.cost
-          Стоимость
+        - if can? :cost, Project
+          %li.list-group-item
+            %span.pull-right= number_to_currency @project.cost
+            Стоимость
         %li.list-group-item
           %span.pull-right= @project.users.pluck(:full_name).join(', ')
           Ответственные
-        %li.list-group-item
-          %span.pull-right
-          четвертая опция
+        -#%li.list-group-item
+        -#  %span.pull-right
+        -#  четвертая опция
   %hr
   .row
     .col-lg-6

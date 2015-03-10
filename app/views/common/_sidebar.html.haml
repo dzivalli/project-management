@@ -66,16 +66,41 @@
         = link_to '#' do
           %i.entypo-cog
           %span.title Настройки
-        %ul{class: ('visible' if %w(settings email_templates).include?(controller_name))}
+
+        %ul{class: ('visible' if %w(settings email_templates permissions).include?(controller_name))}
           %li{class: ('active' if controller_name == 'settings')}
             = link_to settings_general_path do
               %span.title Общие
+
           %li{class: ('active' if controller_name == 'email_templates')}
             = link_to email_templates_path do
               %span.title Шаблоны для писем
+
+          %li{class: ('active' if controller_name == 'permissions')}
+            = link_to permissions_path do
+              %span.title Разрешения для персонала
 
     - if can? :index, User
       %li{class: ('active' if controller_name == 'users')}
         = link_to users_path do
           %i.entypo-lock
           %span.title Пользователи
+
+    - if current_user.root?
+      %li
+        = link_to '#' do
+          %i.entypo-cog
+          %span.title root меню
+
+        %ul{class: ('visible' if %w(settings email_templates permissions).include?(controller_name))}
+          %li{class: ('active' if controller_name == 'email_templates')}
+            = link_to email_templates_path do
+              %span.title Глобальные клиенты
+
+          %li{class: ('active' if controller_name == 'permissions')}
+            = link_to permissions_path do
+              %span.title Тарифы
+
+          %li{class: ('active' if controller_name == 'permissions')}
+            = link_to permissions_path do
+              %span.title email шаблоны по-умолчанию

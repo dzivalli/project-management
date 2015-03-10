@@ -2,8 +2,8 @@
   .panel.panel-primary
     .panel-heading
       .panel-title
-        = "Настройка доступа к проекту #{@project.name}"
-    = form_tag do
+        = "Настройка доступа клиентов к проекту #{@project.name}"
+    = form_tag project_permissions_path(@project) do
       .panel-body
         .form-group
           .checkbox-replace

@@ -44,7 +44,7 @@ class ProjectsController < ApplicationController
 
   def destroy
     project = find_project
-    if project.destroy params[:id]
+    if project.destroy
       redirect_to projects_path, notice: 'Проект был успешно удален'
     end
   end
@@ -53,19 +53,6 @@ class ProjectsController < ApplicationController
     @project = find_project { includes(:users) }
   end
 
-
-  # TODO maybe new controller
-  def permissions
-    @project = find_project
-     # TODO create model method for:
-    @permissions = Permission.for_client(@project).pluck(:subject_class, :action).flatten.uniq
-  end
-
-  def update_permissions
-    permissions = params.slice(:milestone, :team, :task).keys
-    Permission.update_for_client permissions, Project.find(params[:id])
-    redirect_to :back, notice: 'Параметры доступа были обновленны'
-  end
 
 
   def invoice

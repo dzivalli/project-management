@@ -6,16 +6,14 @@
     %table.table.responsive
       %thead
         %tr
-          %th Таймер
+          %th Название
           %th Прогресс
-          %th Имя
           %th Параметры
       %tbody
         - @projects.last(10).each do |project|
           %tr
-            %td Таймер
-            %td= render partial: 'common/bar', locals: {progress: project.progress}
             %td= project.name
+            %td= render partial: 'common/bar', locals: {progress: project.progress}
             %td
               = link_to project_path(project), class: 'btn btn-default btn-icon btn-xs icon-left' do
                 Проект

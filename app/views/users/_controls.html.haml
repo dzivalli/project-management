@@ -1,0 +1,7 @@
+= link_to password_user_path(user), class: 'btn btn-default btn-icon icon-left btn-xs get-modal' do
+  Смена пароля
+  %i.entypo-lock
+= link_to edit_user_path(user), class: 'btn btn-default btn-xs get-modal' do
+  %i.entypo-tools
+= link_to user_path(user), class: 'btn btn-default btn-xs', method: :delete, data: { confirm: 'Вы уверены?'} do
+  %i.entypo-trash

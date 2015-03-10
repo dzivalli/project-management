@@ -1,0 +1,20 @@
+.panel.panel-default
+  .panel-heading
+    .panel-title
+      = "Настройка доступа для пользователя #{@user.full_name}"
+  = form_tag user_permissions_path(@user) do
+    .row
+      .col-md-6
+        .panel-body
+          %h3 Проекты
+          %br
+          = render 'project_permissions'
+
+      .col-md-6
+        .panel-body
+          %h3 Счета
+          %br
+          = render 'invoice_permissions'
+
+    .panel-body
+      = submit_tag 'Сохранить', class: 'btn btn-success'

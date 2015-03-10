@@ -1,8 +1,11 @@
 %h3
-  Пользователи
-  = link_to new_user_path, class: 'btn btn-blue btn-icon icon-left pull-right get-modal' do
-    Новый пользователь
-    %i.entypo-plus
+  - if controller_name == 'users'
+    Пользователи
+    = link_to new_user_path, class: 'btn btn-blue btn-icon icon-left pull-right get-modal' do
+      Новый пользователь
+      %i.entypo-plus
+  - elsif controller_name == 'permissions'
+    Редактирование доступа персонала
 %br
 %table.pm-table.table.table-bordered.datatable
   %thead
@@ -22,13 +25,5 @@
         %td= user.company.name
         %td= user.role.name
         %td= convert_time(user.created_at)
-        %td Аватар
-        %td.m-r
-          = link_to password_user_path(user), class: 'btn btn-default btn-icon icon-left btn-xs get-modal' do
-            Смена пароля
-            %i.entypo-lock
-          = link_to edit_user_path(user), class: 'btn btn-default btn-xs get-modal' do
-            %i.entypo-tools
-          = link_to user_path(user), class: 'btn btn-default btn-xs', method: :delete, data: { confirm: 'Вы уверены?'} do
-            %i.entypo-trash
-
+        %td= image_tag user.avatar.file.thumb.url, class: 'img-circle', width: 44
+        %td.m-r= render partial: 'controls', locals: {user: user}

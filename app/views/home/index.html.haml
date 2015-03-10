@@ -6,10 +6,15 @@
   .col-sm-4
     - if current_user.admin?
       = render 'paid_invoices'
-    - elsif current_user.customer?
-      -#= render 'payments'
+    - elsif current_user.staff? || current_user.customer?
+      = render 'profile'
+
 .row
-  .col-md-8
-    = render 'common/history'
-  .col-md-4
-    = render 'tickets'
+  - if current_user.admin?
+    .col-md-8
+      = render 'common/history'
+    .col-md-4
+      = render 'tickets'
+  - elsif current_user.staff? || current_user.customer?
+    .col-md-8
+      = render 'tickets'
