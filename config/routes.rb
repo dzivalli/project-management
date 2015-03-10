@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'plans/index'
+
    root 'home#index'
 
   # get 'home/index'
@@ -45,6 +47,9 @@ Rails.application.routes.draw do
       get 'pay'
     end
   end
+
+  resources :plans
+  resources :default_emails
 
   # TODO constrain all routes
   resources :projects do

@@ -1,0 +1,33 @@
+%h3
+  Клиенты
+%br
+%table.pm-table.table.table-bordered
+  %thead
+    %tr
+      %th Основная компания
+      %th Пользователь
+      %th Дата регистрации
+      %th Колличество пользователей
+      %th Количество клиентов
+      %th Тариф
+      %th Параметры
+  %tbody
+    - @clients.each do |c|
+      %tr
+        %td
+          - if c.owner_id == current_user.id
+            = link_to  settings_general_path do
+              %strong.text-info= c.main_company.name
+          - else
+            = link_to  company_path(client.main_company.id) do
+              %strong.text-info= c.main_company.name
+        %td= c.owner.full_name
+        %td= c.created_at
+        %td= c.users.count - 1
+        %td= c.companies.count - 1
+        %td Тариф
+        %td.m-r
+          -#= link_to edit_project_path(project), type: 'button', class: 'btn btn-default btn-xs get-modal', data: { toggle: 'tooltip', placement: 'top', 'original-title' => 'Изменить' } do
+          -#  %i.entypo-tools
+          -#= link_to project_path(project), type: 'button', class: 'btn btn-default btn-xs', method: :delete, data: { confirm: 'Вы уверены?', toggle: 'tooltip', placement: 'top', 'original-title' => 'Удалить' } do
+          -#  %i.entypo-trash

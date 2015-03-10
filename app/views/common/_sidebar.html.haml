@@ -92,15 +92,15 @@
           %i.entypo-cog
           %span.title root меню
 
-        %ul{class: ('visible' if %w(settings email_templates permissions).include?(controller_name))}
-          %li{class: ('active' if controller_name == 'email_templates')}
-            = link_to email_templates_path do
+        %ul{class: ('visible' if %w(clients plans permissions).include?(controller_name))}
+          %li{class: ('active' if controller_name == 'clients')}
+            = link_to clients_path do
               %span.title Глобальные клиенты
 
-          %li{class: ('active' if controller_name == 'permissions')}
-            = link_to permissions_path do
+          %li{class: ('active' if controller_name == 'plans')}
+            = link_to plans_path do
               %span.title Тарифы
 
           %li{class: ('active' if controller_name == 'permissions')}
-            = link_to permissions_path do
+            = link_to default_emails_path do
               %span.title email шаблоны по-умолчанию
