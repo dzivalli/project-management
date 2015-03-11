@@ -8,6 +8,7 @@ class Client < ActiveRecord::Base
   has_many :milestone_templates
   has_many :email_templates
   has_many :permissions
+  belongs_to :plan
 
   def copy_email_templates!
     self.email_templates = EmailTemplate.templates.dup

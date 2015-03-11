@@ -7,4 +7,8 @@ class HomeController < ApplicationController
     @tickets = Ticket.client_tickets(client)
     @payments = Payment.client_payments(client)
   end
+
+  def unpaid
+    render plain: 'не уплачено'
+  end
 end

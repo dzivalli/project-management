@@ -1,9 +1,6 @@
 Rails.application.routes.draw do
-  get 'plans/index'
-
-   root 'home#index'
-
-  # get 'home/index'
+  root 'home#index'
+  get 'unpaid', controller: 'home'
 
   devise_for :users, skip: [:passwords]
 

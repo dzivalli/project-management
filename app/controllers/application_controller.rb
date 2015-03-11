@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_action :authenticate_user!, except: [:sessions]
+  before_action :check_client_plan!, except: [:unpaid]
 
   private
 
@@ -34,5 +35,15 @@ class ApplicationController < ActionController::Base
 
   def client
     current_user.client
+  end
+
+  def check_client_plan!
+    if current_user
+      term = client.plan.term.months.to_i
+      paid_on = client.paid_on.to_time
+      if (client.plan.term != '999') && ((Time.now - paid_on) > term)
+        redirect_to unpaid_path
+      end
+    end
   end
 end

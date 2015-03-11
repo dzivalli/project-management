@@ -52,11 +52,11 @@ class User < ActiveRecord::Base
   end
 
   def customer?
-    role.name == 'customer'
+    role_id == Role.find_by_name('customer')
   end
 
   def admin?
-    role.name == 'admin'
+    (role_id == Role.find_by_name('admin')) || root?
   end
 
   def admin!
@@ -65,7 +65,7 @@ class User < ActiveRecord::Base
   end
 
   def staff?
-    role.name == 'staff'
+    role_id == Role.find_by_name('staff')
   end
 
   def root?

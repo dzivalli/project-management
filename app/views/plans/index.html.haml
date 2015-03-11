@@ -1,2 +1,26 @@
-%h1 Plans#index
-%p Find me in app/views/plans/index.html.haml
+%h3
+  Тарифные планы
+  = link_to new_plan_path, type: 'button', class: 'btn btn-blue btn-icon icon-left pull-right get-modal' do
+    Новый план
+    %i.entypo-plus
+%br
+%table.pm-table.table.table-bordered
+  %thead
+    %tr
+      %th Название
+      %th Цена
+      %th Колличество месяцев (период)
+      %th Параметры
+  %tbody
+    - @plans.each do |plan|
+      %tr
+        %td
+          = link_to plan_path(plan) do
+            %strong.text-info= plan.name
+        %td= plan.cost
+        %td= plan.term
+        %td.m-r
+          = link_to edit_plan_path(plan), type: 'button', class: 'btn btn-default btn-xs get-modal', data: { toggle: 'tooltip', placement: 'top', 'original-title' => 'Изменить' } do
+            %i.entypo-tools
+          = link_to plan_path(plan), type: 'button', class: 'btn btn-default btn-xs', method: :delete, data: { confirm: 'Вы уверены?', toggle: 'tooltip', placement: 'top', 'original-title' => 'Удалить' } do
+            %i.entypo-trash

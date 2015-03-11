@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150309111017) do
+ActiveRecord::Schema.define(version: 20150311120102) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,9 +33,12 @@ ActiveRecord::Schema.define(version: 20150309111017) do
     t.integer  "owner_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.integer  "plan_id"
+    t.date     "paid_on"
   end
 
   add_index "clients", ["main_company_id", "owner_id"], name: "index_clients_on_main_company_id_and_owner_id", using: :btree
+  add_index "clients", ["plan_id"], name: "index_clients_on_plan_id", using: :btree
 
   create_table "companies", force: :cascade do |t|
     t.string   "name",       default: "", null: false
@@ -179,6 +182,14 @@ ActiveRecord::Schema.define(version: 20150309111017) do
   add_index "permissions", ["client_id"], name: "index_permissions_on_client_id", using: :btree
   add_index "permissions", ["company_id"], name: "index_permissions_on_company_id", using: :btree
   add_index "permissions", ["user_id"], name: "index_permissions_on_user_id", using: :btree
+
+  create_table "plans", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "term"
+    t.float    "cost"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "projects", force: :cascade do |t|
     t.string   "name",            null: false
@@ -337,6 +348,7 @@ ActiveRecord::Schema.define(version: 20150309111017) do
 
   add_foreign_key "attachments", "projects"
   add_foreign_key "attachments", "users"
+  add_foreign_key "clients", "plans"
   add_foreign_key "email_templates", "clients"
   add_foreign_key "invoices", "companies"
   add_foreign_key "item_templates", "clients"
