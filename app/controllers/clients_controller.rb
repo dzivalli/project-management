@@ -24,7 +24,9 @@ class ClientsController < ApplicationController
       owner.generate_password!
            .generate_token!
            .admin!
-      if client.save && Notifications.signup(client).deliver_now
+      if client.save
+        Notifications.signup(client).deliver_later
+        client.set_trial_plan!
         redirect_to new_user_session_path, notice: 'Письмо было успешно выслано'
       else
         redirect_to :back, alert: 'Произошла ошибка'

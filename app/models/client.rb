@@ -16,4 +16,8 @@ class Client < ActiveRecord::Base
     end
   end
 
+  def set_trial_plan!
+    update(plan: Plan.trial, paid_on: Time.now)
+  end
+
 end

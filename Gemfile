@@ -12,6 +12,7 @@ gem 'wicked_pdf'
 # for heroku deployment
 gem 'rails_12factor', group: :production
 gem 'rmagick'
+gem 'letter_opener', group: :development
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

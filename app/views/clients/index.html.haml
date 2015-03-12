@@ -21,8 +21,7 @@
               %strong.text-info= c.main_company.name
             %small.text-muted вы владелец
           - else
-            = link_to  company_path(client.main_company.id) do
-              %strong.text-info= c.main_company.name
+            = c.main_company.name
         %td= c.owner.full_name
         %td= c.created_at
         %td= c.users.count - 1
