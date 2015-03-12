@@ -3,6 +3,11 @@
     .panel-title
       %i.entypo-doc-text
       Счета
+    .panel-title.pull-right
+      %div
+        = link_to new_company_invoice_path(@company), class: 'btn btn-blue btn-icon icon-left get-modal' do
+          Новый счет
+          %i.entypo-plus
   .panel-body.with-table
     %table.table.table-bordered
       %thead

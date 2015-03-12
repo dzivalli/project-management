@@ -16,6 +16,7 @@ class ProjectsController < ApplicationController
     @project = Project.new
     @project.start_date = @project.due_date = Time.now.strftime("%d-%m-%Y")
     @companies = Company.customer_companies(client)
+    @selected = params[:company_id] if params.key?(:company_id)
     @title = 'Новый проект'
     render layout: 'modal'
   end

@@ -4,9 +4,10 @@
       %i.entypo-user
       Контакты
     .panel-title.pull-right
-      = link_to new_company_user_path(@company), class: 'btn btn-info btn-icon icon-left pull-right get-modal' do
-        Новый пользователь
-        %i.entypo-plus
+      %div
+        = link_to new_company_user_path(@company), class: 'btn btn-blue btn-icon icon-left get-modal' do
+          Новый пользователь
+          %i.entypo-plus
   .panel-body.with-table
     %table.table.table-bordered
       %thead
@@ -24,7 +25,7 @@
             %td= user.phone
             %td= convert_time(user.last_sign_in_at)
             %td.m-r
-              = link_to primary_company_user_path(@company, user), class: 'btn btn-default btn-xs', data: { confirm: 'Вы уверены?', toggle: 'tooltip', placement: 'top', 'original-title' => 'Основной'} do
+              = link_to primary_company_user_path(@company, user), class: 'btn btn-default btn-xs', data: { toggle: 'tooltip', placement: 'top', 'original-title' => 'Основной'} do
                 %i.entypo-link{class: ('text-danger' if @company.contact && user.id == @company.contact.id)}
               = link_to edit_user_path(user), class: 'btn btn-default btn-xs get-modal', data: { toggle: 'tooltip', placement: 'top', 'original-title' => 'Изменить'} do
                 %i.entypo-tools

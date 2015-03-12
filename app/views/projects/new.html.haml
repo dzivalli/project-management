@@ -7,7 +7,7 @@
   .form-group
     =f.label 'Клиент', nil, class: 'col-sm-4 control-label'
     .col-sm-5
-      =f.collection_select :company_id, @companies, :id, :name, class: 'form-control'
+      =f.collection_select :company_id, @companies, :id, :name, class: 'form-control', selected: @selected
 
   .form-group
     =f.label 'Ответственные', nil, class: 'col-sm-4 control-label'

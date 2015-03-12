@@ -3,6 +3,11 @@
     .panel-title
       %i.entypo-folder
       Проекты
+    .panel-title.pull-right
+      %div
+        = link_to new_company_project_path(@company), class: 'btn btn-blue btn-icon icon-left get-modal' do
+          Новый проект
+          %i.entypo-plus
   .panel-body.with-table
     %table.table.table-bordered
       %thead

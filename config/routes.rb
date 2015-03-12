@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   end
 
   resources :companies do
+    resources :invoices, only: :new
+    resources :projects, only: :new
     resources :users, only: [:new] do
       get 'primary', on: :member
     end

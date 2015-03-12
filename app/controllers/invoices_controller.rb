@@ -7,6 +7,7 @@ class InvoicesController < ApplicationController
     @invoice = Invoice.new(due_date: Time.now.strftime("%d-%m-%Y"))
     @invoice.generate_reference!
     @companies = Company.customer_companies(client)
+    @selected = params[:company_id] if params.key?(:company_id)
     @title = 'Новый счет'
     render layout: 'modal'
   end
