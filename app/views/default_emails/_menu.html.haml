@@ -1,0 +1,4 @@
+%ul.nav.tabs-vertical
+  - @groups.each do |group|
+    %li{class: ('active' if group == @group)}
+      = link_to group, default_emails_path(group: group)

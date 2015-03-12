@@ -1,10 +1,35 @@
+#  init seed database
 
+Role.create!([{name: 'staff'},
+              {name: 'customer'},
+              {name: 'admin'},
+              {name: 'root'}])
 
-Role.create!([{name: 'staff'}, {name: 'customer'}, {name: 'admin'}, {name: 'root'}])
+PaymentMethod.create!([{name: 'Онлайн'},
+                       {name: 'Наличные'},
+                       {name: 'Перевод'}])
 
-PaymentMethod.create!([{name: 'Онлайн'}, {name: 'Наличные'}, {name: 'Перевод'}])
+Plan.create!([{name: 'Безлимитный (default for owner)', term: 999},
+              {name: 'Тестовый период (default for clients)', term: 1}])
 
-Plan.create!([{name: 'Безлимитный (default for owner)', term: 999}, {name: 'Тестовый период (default for clients)', term: 1}])
+main_company = Company.create!(name: 'Default',
+                               email: 'email@example.com',
+                               city: 'Краснодар',
+                               address: 'ул. Красная 1')
+
+owner = User.create!(full_name: 'root',
+                     email: 'root@example.com',
+                     password: '54321',
+                     password_confirmation: '54321',
+                     company: main_company,
+                     role: Role.unscoped.find_by_name('root'))
+
+client = Client.create!(owner: owner,
+               main_company: main_company,
+               plan: Plan.find_by_term(999))
+
+client.users << owner
+client.companies << main_company
 
 EmailTemplate.create!(
     [{name: 'Платеж получен', group: 'Счета', body: '<div>Уважаемый клиент,</div><div><br></div><div>Мы получили Ваш платеж
@@ -28,3 +53,5 @@ EmailTemplate.create!(
      {name: 'Оповищение клиенту', group: 'Заявки', body: ''},
      {name: 'Ответ', group: 'Заявки', body: ''},
      {name: 'Закрытие', group: 'Заявки', body: ''}])
+
+client.copy_email_templates!

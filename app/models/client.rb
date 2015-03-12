@@ -11,7 +11,9 @@ class Client < ActiveRecord::Base
   belongs_to :plan
 
   def copy_email_templates!
-    self.email_templates = EmailTemplate.templates.dup
+    EmailTemplate.templates.each do |email|
+      email_templates.create email.attributes.except('id', 'created_at', 'updated_at')
+    end
   end
 
 end

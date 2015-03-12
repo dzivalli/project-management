@@ -5,9 +5,9 @@
     %ul.nav.nav-tabs.bordered
       - @tabs.each do |tab|
         %li{class: ('active' if tab.id == @email_template.id)}
-          = link_to tab.name, email_template_path(tab.id)
+          = link_to tab.name, default_email_path(tab.id)
     .tab-content
-      = form_for @email_template, role: 'form' do |f|
+      = form_for @email_template, url: default_email_path(@email_template), role: 'form' do |f|
         .form-group
           = f.text_area :body, class: 'form-control wysihtml5'
         = f.submit 'Сохранить', class: 'btn btn-success'

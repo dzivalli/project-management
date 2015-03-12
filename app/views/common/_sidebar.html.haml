@@ -92,7 +92,7 @@
           %i.entypo-flashlight
           %span.title root меню
 
-        %ul{class: ('visible' if %w(clients plans permissions).include?(controller_name))}
+        %ul{class: ('visible' if %w(clients plans default_emails).include?(controller_name))}
           %li{class: ('active' if controller_name == 'clients')}
             = link_to clients_path do
               %span.title Глобальные клиенты
@@ -101,6 +101,6 @@
             = link_to plans_path do
               %span.title Тарифы
 
-          %li{class: ('active' if controller_name == 'permissions')}
+          %li{class: ('active' if controller_name == 'default_emails')}
             = link_to default_emails_path do
               %span.title email шаблоны по-умолчанию

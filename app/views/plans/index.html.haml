@@ -14,9 +14,7 @@
   %tbody
     - @plans.each do |plan|
       %tr
-        %td
-          = link_to plan_path(plan) do
-            %strong.text-info= plan.name
+        %td= plan.name
         %td= plan.cost
         %td= plan.term
         %td.m-r

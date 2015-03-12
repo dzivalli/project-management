@@ -5,7 +5,7 @@ class DefaultEmailsController < ApplicationController
     @groups = EmailTemplate.groups.keys
     @tabs = EmailTemplate.for_client_by_group(nil, group).select(:id, :name)
     @email_template = EmailTemplate.for_client_by_group(nil, group).first
-    render 'email_templates/show'
+    render 'show'
   end
 
   def show
@@ -13,7 +13,6 @@ class DefaultEmailsController < ApplicationController
     @group = @email_template.group
     @groups = EmailTemplate.groups.keys
     @tabs = EmailTemplate.for_client_by_group(nil, EmailTemplate.groups[@group]).select(:id, :name)
-    render 'email_templates/show'
   end
 
   def update

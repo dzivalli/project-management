@@ -40,8 +40,8 @@ class ApplicationController < ActionController::Base
   def check_client_plan!
     if current_user
       term = client.plan.term.months.to_i
-      paid_on = client.paid_on.to_time
-      if (client.plan.term != '999') && ((Time.now - paid_on) > term)
+      paid_on = client.paid_on || 5.years.ago
+      if (client.plan.term != '999') && ((Time.now - paid_on.to_time) > term)
         redirect_to unpaid_path
       end
     end
