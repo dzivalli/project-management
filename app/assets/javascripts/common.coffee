@@ -79,8 +79,9 @@ init = ->
       if id
         rulesFor = id.substring(id.indexOf('_') + 1, id.length)
       modal.find('form').validate(generateRules(rulesFor))
-      modal.find('select').select2
-        minimumResultsForSearch: -1
+      if modal.find('select')
+        modal.find('select').select2
+          minimumResultsForSearch: -1
       bindDatepicker()
       bindBootstrapSwitch()
       bindSlider()

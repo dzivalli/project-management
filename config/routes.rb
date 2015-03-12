@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     resources :users, only: [:new] do
       get 'primary', on: :member
     end
+    get 'bank', on: :member
   end
 
   resources :profile, only: [:index, :update]

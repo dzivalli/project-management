@@ -1,4 +1,6 @@
 class CompaniesController < ApplicationController
+  include Companible
+
   def index
     @companies = Company.customer_companies(client)
   end
@@ -42,10 +44,9 @@ class CompaniesController < ApplicationController
     end
   end
 
-  private
-
-  def company_params
-    params.require(:company).permit(:name, :email, :address, :phone,
-                                    :website, :city)
+  def bank
+    @company = Company.customer_companies(client).find params[:id]
+    @title = 'Банковский реквизиты'
+    render layout: 'modal'
   end
 end

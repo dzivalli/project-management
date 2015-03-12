@@ -2,11 +2,13 @@
   = render 'menu'
   .tab-content
     = form_for @company, url: settings_update_path, html: { class: 'form-horizontal form-groups-bordered' } do |f|
-      .panel.panel-primary
+      .panel.panel-default
         .panel-heading
           .panel-title Общие настройки
         .panel-body
           = render partial: 'form', locals: {f: f}
+          %hr
+          = render partial: 'companies/bank_details', locals: {f: f}
       .form-group.default-padding
         = button_tag 'Сохранить', class: 'btn btn-success'
 

@@ -1,4 +1,6 @@
 class SettingsController < ApplicationController
+  include Companible
+
   def general
     @company = client.main_company
   end
@@ -10,15 +12,8 @@ class SettingsController < ApplicationController
   def update
     if params.has_key? :company
        renew do
-         client.main_company.update(permitted(params, :company))
+         client.main_company.update(company_params)
        end
     end
-  end
-
-  private
-
-  def permitted(params, element)
-    params.require(element).permit(:name, :email, :address, :phone,
-                                   :website, :city)
   end
 end

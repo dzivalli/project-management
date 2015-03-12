@@ -1,7 +1,12 @@
 %h3
   = "Детали - #{@company.name}"
+
   = link_to edit_company_path(@company), class: 'btn btn-blue btn-icon icon-left pull-right get-modal' do
     Изменить
+    %i.entypo-pencil
+
+  = link_to bank_company_path(@company), class: 'btn btn-blue btn-icon icon-left pull-right m-r get-modal' do
+    Банковские реквизиты
     %i.entypo-pencil
 %br
 .panel.panel-default

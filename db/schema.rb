@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150311120102) do
+ActiveRecord::Schema.define(version: 20150312175237) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,12 @@ ActiveRecord::Schema.define(version: 20150311120102) do
     t.integer  "client_id"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+    t.string   "kpp"
+    t.string   "inn"
+    t.string   "bank_title"
+    t.string   "bik"
+    t.string   "schet"
+    t.string   "kor_schet"
   end
 
   create_table "email_templates", force: :cascade do |t|
