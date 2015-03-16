@@ -8,9 +8,12 @@ class Ability
       if user.root?
         can :manage, :all
       elsif  user.admin?
-        cannot :manage, Client
         can :manage, :all
+        cannot :index, Client
       elsif user.customer?
+        can :read, Project
+        can :manage, Ticket
+        can :manage, Message
         can do |action, klass, project|
           action = action.to_s
           # kind of alias, 'show' and 'index' are 'read'
@@ -22,6 +25,9 @@ class Ability
           end
         end
       elsif user.staff?
+        can :read, Project
+        can :manage, Ticket
+        can :manage, Message
         can do |action, klass, obj|
           Permission.where(user: user, action: action, subject_class: klass.name.downcase).any?
         end

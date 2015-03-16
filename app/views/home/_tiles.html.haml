@@ -1,13 +1,13 @@
 .col-sm-3
   = link_to projects_path do
-    .tile-stats.tile-aqua
+    .tile-stats.tile-primary
       .icon
         %i.entypo-cup
       .num= @projects.count
       %h3= Russian::pluralize(@projects.count, 'Проект', 'Проекта', 'Проектов')
 .col-sm-3
   = link_to messages_path do
-    .tile-stats.tile-aqua
+    .tile-stats.tile-red
       .icon
         %i.entypo-mail
       .num= @message_count
@@ -15,7 +15,7 @@
 - if current_user.admin?
   .col-sm-3
     = link_to invoices_path do
-      .tile-stats.tile-aqua
+      .tile-stats.tile-blue
         .icon
           %i.entypo-credit-card
         .num= @invoice_count
@@ -29,7 +29,7 @@
       %h3= Russian::pluralize(@tickets.count, 'Заявка', 'Заявки', 'Заявок')
 - if current_user.staff? || current_user.customer?
   .col-sm-3
-    .tile-stats.tile-aqua
+    .tile-stats.tile-blue
       .icon
         %i.entypo-calendar
       .num 0

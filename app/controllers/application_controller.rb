@@ -5,6 +5,9 @@ class ApplicationController < ActionController::Base
 
   before_action :authenticate_user!, except: [:sessions]
   before_action :check_client_plan!, except: [:unpaid]
+  before_action :authorize_resource, except: [:unpaid]
+
+  # SKIP_CONTROLLERS = %w(Session Home)
 
   private
 
@@ -45,5 +48,12 @@ class ApplicationController < ActionController::Base
         redirect_to unpaid_path
       end
     end
+  end
+
+  def authorize_resource
+    action = action_name.to_sym
+    klass = controller_name.singularize.capitalize.safe_constantize
+
+    authorize! action, klass if klass
   end
 end

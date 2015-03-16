@@ -22,8 +22,8 @@
             %small.text-muted вы владелец
           - else
             = c.main_company.name
-        %td= c.owner.full_name
-        %td= c.created_at
+        %td= "#{c.owner.full_name} (#{c.owner.email})"
+        %td= c.created_at.strftime("%d-%m-%Y")
         %td= c.users.count - 1
         %td= c.companies.count - 1
         %td= c.plan.name

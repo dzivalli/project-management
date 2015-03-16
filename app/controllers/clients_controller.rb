@@ -1,5 +1,6 @@
 class ClientsController < ApplicationController
   skip_before_action :authenticate_user!, except: [:index, :show]
+  skip_before_action :authorize_resource, except: [:index, :show]
 
   def index
     @clients = Client.includes(:companies).all
