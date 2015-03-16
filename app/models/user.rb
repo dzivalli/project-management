@@ -26,11 +26,11 @@ class User < ActiveRecord::Base
   validates_length_of :full_name, :email, maximum: 255
   validates_uniqueness_of :email
 #   TODO add email regex
-#    TODO delete login field at the end
   # TODO make hook after delete to check if user primary contact
 
 
   scope :customer_users, -> (client) { where(client: client).where.not(id: client.owner.id) }
+  scope :customer_staff, -> (client) { where(client: client, role: Role.where(name: %w(staff admin))) }
 
 
   def ability
@@ -70,6 +70,12 @@ class User < ActiveRecord::Base
 
   def root?
     role_id == Role.unscoped.find_by_name('root').id
+  end
+
+  def prepare
+    generate_password!
+    generate_token!
+    admin!
   end
 
   private

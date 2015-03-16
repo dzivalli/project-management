@@ -1,6 +1,6 @@
 class TimeEntriesController < ApplicationController
   def index
-    @project = Project.client_projects(client).find params[:project_id]
+    @project = Project.client_projects(client, current_user).find params[:project_id]
     @time_entries = TimeEntry.completed(@project)
   end
 
@@ -59,7 +59,7 @@ class TimeEntriesController < ApplicationController
   private
 
   def client_project?
-    Project.client_projects(client).ids.include?(params[:project_id].to_i)
+    Project.client_projects(client, current_user).ids.include?(params[:project_id].to_i)
   end
 
   def time_entry_params

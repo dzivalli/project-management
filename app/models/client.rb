@@ -20,4 +20,11 @@ class Client < ActiveRecord::Base
     update(plan: Plan.trial, paid_on: Time.now)
   end
 
+  def after_registration(client)
+    owner.update(confirmed_at: Time.now, company: client.main_company)
+    owner.admin!
+    copy_email_templates!
+    Notifications.client_notice(self, 'Завершение регистрации').deliver_later
+  end
+
 end

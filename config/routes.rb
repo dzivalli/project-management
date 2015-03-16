@@ -25,11 +25,14 @@ Rails.application.routes.draw do
 
   resources :messages
   resources :tickets do
-    resources :ticket_replies
+    resources :ticket_replies, only: :create
   end
 
   resources :templates, only: [:index]
-  resources :task_templates, :milestone_templates, :item_templates, :email_templates
+  resources :task_templates,
+            :milestone_templates,
+            :item_templates,
+            :email_templates
 
   resources :payments, except: [:new, :create] do
     member do
@@ -40,7 +43,7 @@ Rails.application.routes.draw do
   end
   resources :invoices do
     resources :payments, only: [:new, :create]
-    resources :items
+    resources :items, only: [:new, :create, :destroy]
     member do
       get 'pdf'
       get 'notice'
@@ -49,9 +52,8 @@ Rails.application.routes.draw do
   end
 
   resources :plans
-  resources :default_emails
+  resources :default_emails, only: [:index, :show, :update]
 
-  # TODO constrain all routes
   resources :projects do
     resources :milestones do
       get 'templates', on: :collection
@@ -60,19 +62,15 @@ Rails.application.routes.draw do
       get 'templates', on: :collection
     end
     resources :time_entries
-    resources :attachments
+    resources :attachments, except: [:edit, :update]
     resources :histories, only: [:index]
     resources :team, only: [:index, :new, :create]
     resources :permissions, only: [:new, :create]
     member do
       get 'invoice'
       get 'copy'
-      # get 'permissions'
-      # post 'permissions', action: 'update_permissions'
     end
   end
-
-
 
   #  routes for setting controller
   get 'settings/general'

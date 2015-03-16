@@ -1,5 +1,5 @@
 class Project < ActiveRecord::Base
-  include Progressable
+  include Progressable, Noticable
 
   belongs_to :company
   has_many :milestones, dependent: :destroy

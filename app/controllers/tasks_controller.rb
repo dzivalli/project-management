@@ -24,7 +24,7 @@ class TasksController < ApplicationController
       Task.new task_params.merge(owner: current_user)
     end
     store do
-      (task.users = User.find(users_params)) && find_project.tasks << task
+      (task.users = User.find(users_params)) && (find_project.tasks << task) && task.notice!(client)
     end
   end
 
@@ -39,7 +39,7 @@ class TasksController < ApplicationController
   def update
     task = find_project.tasks.find params[:id]
     renew do
-      (task.users = User.find(users_params)) && task.update(task_params)
+      (task.users = User.find(users_params)) && task.update(task_params) && task.notice!(client)
     end
   end
 

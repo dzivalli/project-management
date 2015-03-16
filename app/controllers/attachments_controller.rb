@@ -14,6 +14,9 @@ class AttachmentsController < ApplicationController
   def create
     attachment = Attachment.new attachment_params.merge(user: current_user)
     store do
+      Notifications.project_notice(attachment.file_identifier,
+                                   current_user,
+                                   'Добавление файла').deliver_later
       project.attachments << attachment
     end
   end

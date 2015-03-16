@@ -8,7 +8,6 @@ class ClientsController < ApplicationController
   end
 
   def show
-
   end
 
   def new
@@ -22,11 +21,9 @@ class ClientsController < ApplicationController
     else
       client = Client.new
       owner = client.build_owner(owner_params.merge!(client: client))
-      owner.generate_password!
-           .generate_token!
-           .admin!
+      owner.prepare
       if client.save
-        Notifications.signup(client).deliver_later
+        Notifications.client_notice(client, 'Регистрация').deliver_later
         client.set_trial_plan!
         redirect_to new_user_session_path, notice: 'Письмо было успешно выслано'
       else
@@ -47,9 +44,7 @@ class ClientsController < ApplicationController
     client = Client.find params[:id]
     client.build_main_company(company_params.merge!(client: client))
     if client.save && client.owner.update(owner_params)
-      client.owner.update(confirmed_at: Time.now, company: client.main_company)
-      client.owner.admin!
-      client.copy_email_templates!
+      client.after_registration(client)
       redirect_to root_path
     else
       render 'edit', alert: 'Произошла ошибка'

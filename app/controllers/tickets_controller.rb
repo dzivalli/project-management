@@ -13,7 +13,7 @@ class TicketsController < ApplicationController
     ticket = Ticket.new ticket_params.merge(user: current_user, status: 'новая',
                                             code: Ticket.generate_code)
     store do
-      ticket.save
+      ticket.save && ticket.notice!(client)
     end
   end
 

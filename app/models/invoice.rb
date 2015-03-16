@@ -80,12 +80,12 @@ class Invoice < ActiveRecord::Base
   def send_email!(type)
     case type
       when 'invoiced'
-        if Notifications.notice_invoice(self, 'Выставление счета').deliver_now
+        if Notifications.notice_invoice(self, 'Выставление счета').deliver_later
           notice = 'Письмо отправленно успешно, счет выставлен'
           invoiced!
         end
       when 'remainder'
-        if Notifications.notice_invoice(self, 'Повторная отправка').deliver_now
+        if Notifications.notice_invoice(self, 'Повторная отправка').deliver_later
           notice = 'Повторное письмо отправленно успешно'
         end
     end

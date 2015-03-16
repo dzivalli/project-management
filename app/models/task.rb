@@ -1,5 +1,5 @@
 class Task < ActiveRecord::Base
-  include Progressable
+  include Progressable, Noticable
 
   belongs_to :project
   belongs_to :milestone

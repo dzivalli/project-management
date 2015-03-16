@@ -2,7 +2,6 @@ class ProjectsController < ApplicationController
   include Projectable
 
   def index
-    # TODO check by role
     @projects = Project.client_projects(client, current_user)
   end
 
@@ -24,7 +23,7 @@ class ProjectsController < ApplicationController
   def create
     project = Project.new project_params
     store do
-      (project.users = client.users.find(users_params)) && project.save
+      (project.users = client.users.find(users_params)) && project.save && project.notice!(client)
     end
   end
 
@@ -39,7 +38,7 @@ class ProjectsController < ApplicationController
   def update
     project = find_project
     renew do
-      (project.users = client.users.find(users_params)) && project.update(project_params)
+      (project.users = client.users.find(users_params)) && project.update(project_params) && project.notice!(client)
     end
   end
 

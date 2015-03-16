@@ -14,5 +14,18 @@ class Ticket < ActiveRecord::Base
     code
   end
 
+  def notice!(client)
+    User.customer_staff(client).each do |u|
+      Notifications.notice(name, u.email, 'Новая заявка', client).deliver_later
+    end
+    Notifications.notice(name, user.email, 'Оповищение клиенту', client).deliver_later
+    true
+  end
+
+  def reply_notice!(client)
+    Notifications.notice(name, user.email, 'Ответ на заявку', client).deliver_later
+    true
+  end
+
 end
 

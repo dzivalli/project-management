@@ -2,11 +2,14 @@ class Notifications < ApplicationMailer
   default from: 'email-tests@yandex.ru'
   layout false
 
-  def signup(client)
-    @client = client
+  def client_notice(client, template)
+    body = EmailTemplate.client_notices.find_by_name(template).body
+    body.sub!('{{URL}}', edit_client_url(client, token: client.owner.confirmation_token))
 
     mail to: client.owner.email,
-         subject: 'Регистрация'
+         subject: template,
+         body: body,
+         content_type: 'text/html'
   end
 
   def notice_invoice(invoice, template)
@@ -17,6 +20,16 @@ class Notifications < ApplicationMailer
     body.sub!('{{SIGN}}', invoice.company.name)
 
     mail to: invoice.company.email,
+         subject: template,
+         body: body,
+         content_type: 'text/html'
+  end
+
+  def notice(name, email, template, client)
+    body = EmailTemplate.for_client(client).find_by_name(template).body
+    body.sub!('{{NAME}}', name)
+
+    mail to: email,
          subject: template,
          body: body,
          content_type: 'text/html'
