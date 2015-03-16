@@ -53,8 +53,9 @@ class InvoicesController < ApplicationController
   end
 
   def pdf
-    @invoice = Invoice.client_invoices(client).find params[:id]
-    pdf = render_to_string pdf: 'file.pdf', template: 'invoices/pdf.html.erb'
+    @invoice = Invoice.includes(:company).client_invoices(client).find params[:id]
+    @main_company = client.main_company
+    pdf = render_to_string pdf: 'file.pdf', template: 'invoices/pdf.html.haml'
     send_data pdf, filename: "#{@invoice.reference_no}.pdf"
   end
 

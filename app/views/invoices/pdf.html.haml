@@ -1,0 +1,75 @@
+%meta{:content => "text/html; charset=utf-8", "http-equiv" => "content-type"}/
+%div{:style => "font-size:large"}
+  %strong= @invoice.company.name
+%div{:style => "font-size:large"}
+  %strong
+    Юридический адрес: #{"#{@main_company.city} #{@main_company.address}"}
+%div{:style => "font-size:large"}
+  %strong
+    Фактический адрес: #{"#{@main_company.city} #{@main_company.address}"}
+%p
+  %span{:style => "font-size:large"}
+    %br
+      %br/
+%div{:style => "text-align:center;font-size:large"}
+  %strong Платежное поручение
+%p
+  %span{:style => "font-size:large"}
+    %br/
+%table{:cellpadding => "0", :cellspacing => "0", :style => "border-collapse:collapse;width:700px;border:0px solid #000000;font-size:large"}
+  %tbody
+    %tr
+      %td{:style => "padding:0px 5px;width:150px;border-style:solid none solid solid;border-top-color:#000000;border-bottom-color:#000000;border-left-color:#000000;border-top-width:1px;border-bottom-width:1px;border-left-width:1px;text-align:left"}
+        ИНН
+        = @main_company.inn
+      %td{:style => "padding:0px 5px;width:150px;border-style:solid none solid solid;border-top-color:#000000;border-bottom-color:#000000;border-left-color:#000000;border-top-width:1px;border-bottom-width:1px;border-left-width:1px;text-align:left"}
+        КПП
+        = @main_company.kpp
+      %td{:style => "padding:0px 5px;width:70px;border-style:solid none none solid;border-top-color:#000000;border-left-color:#000000;border-top-width:1px;border-left-width:1px;text-align:left"}
+      %td{:style => "padding:0px 5px;border-style:solid solid none;border-top-color:#000000;border-right-color:#000000;border-left-color:#000000;border-top-width:1px;border-right-width:1px;border-left-width:1px;text-align:left"}
+    %tr
+      %td{:colspan => "2", :style => "padding:0px 5px;border-style:solid none none solid;border-top-color:#000000;border-left-color:#000000;border-top-width:1px;border-left-width:1px;text-align:left"}
+        Получатель
+      %td{:style => "padding:0px 5px;border-style:solid none none solid;border-top-color:#000000;border-left-color:#000000;border-top-width:1px;border-left-width:1px;text-align:left"}
+      %td{:style => "padding:0px 5px;border-style:solid solid none;border-top-color:#000000;border-right-color:#000000;border-left-color:#000000;border-top-width:1px;border-right-width:1px;border-left-width:1px;text-align:left"}
+    %tr
+      %td{:colspan => "2", :style => "padding:0px 5px;border-style:solid none none solid;border-top-color:#000000;border-left-color:#000000;border-top-width:1px;border-left-width:1px;text-align:left"}
+        = @main_company.name
+      %td{:style => "padding:0px 5px;border-style:solid none none solid;border-top-color:#000000;border-left-color:#000000;border-top-width:1px;border-left-width:1px;text-align:center"}
+        Сч. №
+      %td{:style => "padding:0px 5px;border-style:solid solid none;border-top-color:#000000;border-right-color:#000000;border-left-color:#000000;border-top-width:1px;border-right-width:1px;border-left-width:1px;text-align:left"}
+        = @invoice.company.schet
+    %tr
+      %td{:colspan => "2", :style => "padding:0px 5px;border-style:solid none none solid;border-top-color:#000000;border-left-color:#000000;border-top-width:1px;border-left-width:1px;text-align:left"}
+        Банк получателя
+      %td{:style => "padding:0px 5px;border-style:solid none solid solid;border-top-color:#000000;border-bottom-color:#000000;border-left-color:#000000;border-top-width:1px;border-bottom-width:1px;border-left-width:1px;text-align:center"}
+        БИК
+      %td{:style => "padding:0px 5px;border-style:solid solid none;border-top-color:#000000;border-right-color:#000000;border-left-color:#000000;border-top-width:1px;border-right-width:1px;border-left-width:1px;text-align:left"}
+        = @main_company.bik
+    %tr
+      %td{:colspan => "2", :style => "padding:0px 5px;border-style:solid none solid solid;border-top-color:#000000;border-bottom-color:#000000;border-left-color:#000000;border-top-width:1px;border-bottom-width:1px;border-left-width:1px;text-align:left"}
+        = @main_company.bank_title
+      %td{:style => "padding:0px 5px;border-style:solid none solid solid;border-top-color:#000000;border-bottom-color:#000000;border-left-color:#000000;border-top-width:1px;border-bottom-width:1px;border-left-width:1px;text-align:center"}
+        Сч. №
+      %td{:style => "padding:0px 5px;border:1px solid #000000;text-align:left"}
+        = @main_company.kor_schet
+%br
+  %div{:style => "text-align:center;font-size:22px"}
+    %strong= "СЧЕТ № ??? от #{time_now}"
+  %div{:style => "text-align:center;font-size:22px"}
+    %strong
+      %br/
+  %div{:style => "font-size:large"}
+    %span{:style => "font-size:large"}>
+      %strong Плательщик:
+      = "#{@invoice.company.name}, #{@invoice.company.city}, #{@invoice.company.address}"
+  %div{:style => "font-size:large"}
+  %p
+    %strong{:style => "font-size:large"} Всего:
+    %span{:style => "font-size:large"}= "#{@invoice.sub_total}. Без НДС"
+  %div{:style => "font-size:large"}
+    %br/
+  %div{:style => "font-size:large"} Руководитель предприятия ___________
+  %div{:style => "font-size:large"} Главный бухгалтер___________
+  %div{:style => "font-size:large"}
+    %br/
