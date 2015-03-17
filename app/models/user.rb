@@ -52,24 +52,39 @@ class User < ActiveRecord::Base
   end
 
   def customer?
-    role_id == Role.find_by_name('customer').id
+    role == Role.customer
   end
 
   def admin?
-    (role_id == Role.find_by_name('admin').id) || root?
-  end
-
-  def admin!
-    self.update(role: Role.find_by_name('admin'))
-    self
+    role == Role.admin || root?
   end
 
   def staff?
-    role_id == Role.find_by_name('staff').id
+    role == Role.staff
   end
 
   def root?
-    role_id == Role.unscoped.find_by_name('root').id
+    role == Role.root
+  end
+
+  def admin!
+    update(role: Role.admin)
+    self
+  end
+
+  def root!
+    update(role: Role.root)
+    self
+  end
+
+  def staff!
+    update(role: Role.staff)
+    self
+  end
+
+  def customer!
+    update(role: Role.customer)
+    self
   end
 
   def prepare

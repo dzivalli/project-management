@@ -47,10 +47,7 @@
       %ul.list-unstyled
         %li
           Подитог:
-          %strong= @invoice.sub_total
-        %li
-          Налог:
-          %strong= "#{@invoice.tax}%"
+          %strong= @invoice.total
         %li
           Оплачено:
           %strong= @invoice.paid

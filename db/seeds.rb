@@ -22,7 +22,7 @@ owner = User.create!(full_name: 'root',
                      password: '54321',
                      password_confirmation: '54321',
                      company: main_company,
-                     role: Role.unscoped.find_by_name('root'))
+                     role: Role.root)
 
 client = Client.create!(owner: owner,
                main_company: main_company,

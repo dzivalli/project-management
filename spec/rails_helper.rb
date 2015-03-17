@@ -21,18 +21,33 @@ ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
 
-  # clean test database
+  #  include factory girl
+  config.include FactoryGirl::Syntax::Methods
+  config.include Devise::TestHelpers, type: :controller
+  config.include FeatureHelpers
+  config.extend ControllerMacros, :type => :controller
+
+  Capybara.javascript_driver = :webkit
+
   config.before(:suite) do
-    DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with(:truncation)
   end
 
-  #  include factory girl
-  config.include FactoryGirl::Syntax::Methods
+  config.before(:each) do
+    DatabaseCleaner.strategy = :transaction
+  end
 
-  # include devise test helpers
-  config.include Devise::TestHelpers, type: :controller
-  config.extend ControllerMacros, :type => :controller
+  config.before(:each, js: true) do
+    DatabaseCleaner.strategy = :truncation
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
+
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
 
   #  include application helper
   config.include ApplicationHelper

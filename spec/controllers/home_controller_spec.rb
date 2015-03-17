@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe HomeController, :type => :controller do
 
   describe 'login as admin' do
-    login_admin
+    login
 
     describe "GET index" do
       it "returns http success" do

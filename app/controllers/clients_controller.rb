@@ -45,7 +45,7 @@ class ClientsController < ApplicationController
     client.build_main_company(company_params.merge!(client: client))
     if client.save && client.owner.update(owner_params)
       client.after_registration(client)
-      redirect_to root_path
+      redirect_to new_user_session_path
     else
       render 'edit', alert: 'Произошла ошибка'
     end

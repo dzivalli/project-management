@@ -2,10 +2,11 @@
 
 FactoryGirl.define do
   factory :company do
-    name "MyString"
-    email "email@ru.ru"
+    sequence(:name) { |n| "company_#{n}"}
+    sequence(:email) { |n| "company_email_#{n}@ru.ru"}
     address "MyString"
     city "MyString"
     website "MyString"
+    client nil
   end
 end

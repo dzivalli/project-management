@@ -4,16 +4,17 @@ FactoryGirl.define do
   factory :user do
     password '12345'
     password_confirmation '12345'
-    email { "#{Devise.friendly_token.first(5)}@email.ru" }
+    sequence(:email) { |n| "user_#{n}}@email.ru" }
     full_name 'name surname'
+    sequence(:confirmation_token) { |n| "token#{n}" }
 
     factory :admin do
       association :role, factory: :admin_role
     end
 
-    # factory :client do
-    #   association :role, factory: :client_role
-    # end
+    factory :root do
+      association :role, factory: :root_role
+    end
 
     factory :staff do
       association :role, factory: :staff_role

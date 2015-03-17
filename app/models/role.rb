@@ -1,11 +1,13 @@
 class Role < ActiveRecord::Base
-  default_scope { where.not(name: 'root') }
 
   has_many :users
 
   def by_client
-    abort client
     joins(:users).where(users: {id: client.users.ids})
   end
 
+  scope :admin, -> { find_by_name('admin') }
+  scope :root, -> { find_by_name('root') }
+  scope :staff, -> { find_by_name('staff') }
+  scope :customer, -> { find_by_name('customer') }
 end

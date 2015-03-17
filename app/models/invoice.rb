@@ -17,9 +17,7 @@ class Invoice < ActiveRecord::Base
 
   def self.from_project(params)
     company = Project.find(params[:project]).company
-    # TODO make default tax for company and due date
-    invoice = Invoice.new tax: 20,
-                          company: company,
+    invoice = Invoice.new company: company,
                           notes: "Создан из проекта ##{params[:project]}",
                           status: 'черновик'
     invoice.generate_reference!
@@ -36,13 +34,8 @@ class Invoice < ActiveRecord::Base
     self.reference_no = "INV#{'0' * (5 - number)}#{last_id + 1}"
   end
 
-  def sub_total
-    items.inject(0) { |sum, item| sum + item.sum }
-  end
-
   def total
-    sum = sub_total.to_f
-    (sum / 100 * tax) + sum
+    items.inject(0) { |sum, item| sum + item.sum }
   end
 
   def amount_due

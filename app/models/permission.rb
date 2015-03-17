@@ -3,7 +3,7 @@ class Permission < ActiveRecord::Base
   belongs_to :company
   belongs_to :client
 
-  # SUBJECT_CLASSES = %w(milestone task project)
+  SUBJECT_CLASSES = %w(milestone task project)
   # ACTIONS = %w(team)
 
 
