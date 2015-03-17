@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150312175237) do
+ActiveRecord::Schema.define(version: 20150316152142) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -98,9 +98,9 @@ ActiveRecord::Schema.define(version: 20150312175237) do
   create_table "item_templates", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
-    t.integer  "cost"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.integer  "cost",        default: 0
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
     t.integer  "client_id"
   end
 
@@ -109,11 +109,11 @@ ActiveRecord::Schema.define(version: 20150312175237) do
   create_table "items", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
-    t.integer  "cost"
-    t.integer  "quantity"
+    t.integer  "cost",        default: 0
+    t.integer  "quantity",    default: 0
     t.integer  "invoice_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   add_index "items", ["invoice_id"], name: "index_items_on_invoice_id", using: :btree
@@ -191,14 +191,14 @@ ActiveRecord::Schema.define(version: 20150312175237) do
 
   create_table "plans", force: :cascade do |t|
     t.string   "name"
-    t.integer  "term"
+    t.integer  "term",       default: 0
     t.float    "cost"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "projects", force: :cascade do |t|
-    t.string   "name",            null: false
+    t.string   "name",                        null: false
     t.text     "description"
     t.date     "start_date"
     t.date     "due_date"
@@ -208,10 +208,10 @@ ActiveRecord::Schema.define(version: 20150312175237) do
     t.string   "status"
     t.boolean  "deleted"
     t.text     "notes"
-    t.integer  "estimated_hours"
+    t.integer  "estimated_hours", default: 0
     t.integer  "company_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   create_table "projects_users", id: false, force: :cascade do |t|
@@ -240,10 +240,10 @@ ActiveRecord::Schema.define(version: 20150312175237) do
   create_table "task_templates", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
-    t.integer  "estimated_hours"
+    t.integer  "estimated_hours",       default: 0
     t.boolean  "visible"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
     t.integer  "milestone_template_id"
     t.integer  "client_id"
   end
@@ -254,15 +254,15 @@ ActiveRecord::Schema.define(version: 20150312175237) do
   create_table "tasks", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
-    t.integer  "estimated_hours"
+    t.integer  "estimated_hours", default: 0
     t.date     "due_date"
     t.integer  "project_id"
     t.integer  "milestone_id"
     t.boolean  "visible"
     t.integer  "owner_id"
     t.boolean  "auto_progress"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   add_index "tasks", ["milestone_id"], name: "index_tasks_on_milestone_id", using: :btree

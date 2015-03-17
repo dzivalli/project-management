@@ -53,6 +53,7 @@ Rails.application.routes.draw do
 
   resources :plans
   resources :default_emails, only: [:index, :show, :update]
+  resources :time_entries, only: [:new, :update]
 
   resources :projects do
     resources :milestones do

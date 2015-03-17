@@ -72,4 +72,12 @@ module ApplicationHelper
       p[0] == action && p[1] == obj
     end
   end
+
+  def active_task
+    Task.all_active(current_user)
+  end
+
+  def user_tasks
+    Task.for_user(current_user)
+  end
 end

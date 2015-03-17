@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   before_action :check_client_plan!, except: [:unpaid]
   before_action :authorize_resource, except: [:unpaid]
 
-  # SKIP_CONTROLLERS = %w(Session Home)
+  SKIP_CONTROLLERS = %w(Session Home)
 
   private
 
@@ -52,8 +52,14 @@ class ApplicationController < ActionController::Base
 
   def authorize_resource
     action = action_name.to_sym
-    klass = controller_name.singularize.capitalize.safe_constantize
-
-    authorize! action, klass if klass
+    klass = controller_name.singularize
+    klass = if klass.scan('_').any?
+              klass.split('_').each do |k|
+                k.capitalize
+              end.join
+            else
+              klass.capitalize
+            end
+    authorize! action, klass.safe_constantize if klass && !SKIP_CONTROLLERS.include?(klass)
   end
 end

@@ -6,8 +6,9 @@ class TimeEntriesController < ApplicationController
 
   def new
     if params[:task_id].present?
-      te = TimeEntry.new(task: Task.find(params[:task_id]), user: current_user,
-                         status: 'active', project_id: params[:project_id])
+      task = Task.find(params[:task_id])
+      te = TimeEntry.new(task: task, user: current_user,
+                         status: 'active', project: task.project)
       if te.save
         redirect_to :back, notice: 'Таймер запущен успешно'
       end

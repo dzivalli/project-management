@@ -11,6 +11,9 @@ class Task < ActiveRecord::Base
 
   has_paper_trail
 
+  scope :all_active, -> (user) { joins(:time_entries).joins(:users).where(users: {id: user}, time_entries: { status: 'active' }) }
+  scope :for_user, -> (user) { joins(:users).where(users: {id: user}) }
+
   def active(user)
     TimeEntry.where(user: user, task: self, status: 'active').ids
   end
