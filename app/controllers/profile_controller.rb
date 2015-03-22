@@ -5,7 +5,7 @@ class ProfileController < ApplicationController
 
   def update
     renew do
-      current_user.avatar.update(file: user_params[:avatar]) if user_params.key?(:avatar)
+      current_user.update(avatar: user_params[:avatar]) if user_params.key?(:avatar)
       current_user.update user_params.except(:avatar)
     end
   end

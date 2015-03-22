@@ -3,7 +3,7 @@
     %ul.user-info.pull-left.pull-none-xsm
       %li.profile-info.dropdown
         = link_to '#', class: 'dropdown-toggle', data: {toggle: 'dropdown'} do
-          = image_tag current_user.avatar.file.thumb.url, width: 44, class: 'img-circle'
+          = image_tag current_user.avatar.thumb.url, width: 44, class: 'img-circle'
           = current_user.full_name
         %ul.dropdown-menu
           %li.caret

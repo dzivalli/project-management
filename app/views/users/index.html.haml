@@ -25,5 +25,5 @@
         %td= user.company.name
         %td= user.role.name
         %td= convert_time(user.created_at)
-        %td= image_tag user.avatar.file.thumb.url, class: 'img-circle', width: 44
+        %td= image_tag user.avatar.thumb.url, class: 'img-circle', width: 44
         %td.m-r= render partial: 'controls', locals: {user: user}

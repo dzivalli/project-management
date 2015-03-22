@@ -5,7 +5,7 @@
     .col-sm-9
       .fileinput.fileinput-new{"data-provides" => "fileinput"}
         .fileinput-new.thumbnail{"data-trigger" => "fileinput", :style => "width: 200px; height: 200;"}
-          = image_tag @user.avatar.file.url
+          = image_tag @user.avatar.url
         .fileinput-preview.fileinput-exists.thumbnail{:style => "max-width: 200px; max-height: 200px"}
         %div
           %span.btn.btn-white.btn-file

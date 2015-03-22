@@ -15,7 +15,7 @@
         %tbody
           - @project.users.each do |member|
             %tr
-              %td= image_tag member.avatar.file.thumb.url, class: 'img-circle', width: 44
+              %td= image_tag member.avatar.thumb.url, class: 'img-circle', width: 44
               %td= member.email
               %td= member.full_name
               %td= member.phone

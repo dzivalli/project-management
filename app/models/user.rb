@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   has_many :tickets
   has_many :task_templates
 
-  belongs_to :avatar, class_name: 'Attachment'
+  mount_uploader :avatar, AvatarUploader
 
   has_and_belongs_to_many :projects
   has_and_belongs_to_many :tasks

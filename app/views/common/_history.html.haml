@@ -7,7 +7,7 @@
             %span= version.created_at.strftime('%R')
             %span= time_ago_in_words(version.created_at)
           .cbp_tmicon
-            = image_tag current_user.avatar.file.thumb.url, class: 'img-circle', width: 44
+            = image_tag current_user.avatar.thumb.url, class: 'img-circle', width: 44
             -#%i.entypo-user
           .cbp_tmlabel
             %h2= name_for_versions(version.whodunnit)
