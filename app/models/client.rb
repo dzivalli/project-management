@@ -27,4 +27,7 @@ class Client < ActiveRecord::Base
     Notifications.client_notice(self, 'Завершение регистрации').deliver_later
   end
 
+  def left
+    (Date.today - paid_on).to_i
+  end
 end

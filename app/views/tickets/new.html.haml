@@ -7,7 +7,7 @@
   .form-group
     = f.label 'Проект', nil, class: 'col-sm-4 control-label'
     .col-sm-5
-      = f.select :project_id, @projects, class: 'form-control', include_blank: true
+      = f.collection_select :project_id, @projects, :id, :name, class: 'form-control', include_blank: true
 
   .form-group
     = f.label 'Приоритет', nil, class: 'col-sm-4 control-label'

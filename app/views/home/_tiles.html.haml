@@ -1,6 +1,6 @@
 .col-sm-3
   = link_to projects_path do
-    .tile-stats.tile-green
+    .tile-stats.tile-blue
       .icon
         %i.entypo-cup
       .num= @projects.count
@@ -15,7 +15,7 @@
 - if current_user.admin?
   .col-sm-3
     = link_to invoices_path do
-      .tile-stats.tile-blue
+      .tile-stats.tile-green
         .icon
           %i.entypo-credit-card
         .num= @invoice_count

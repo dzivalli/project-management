@@ -11,18 +11,16 @@
             = link_to profile_index_path do
               %i.entypo-user
               Профиль
-
-  .col-md-6.col-sm-4.clearfix.hidden-xs
-    %ul.list-inline.links-list.pull-right
-      %li.notifications.dropdown.language-selector
+      %li.pm-btn-group
+        = render 'common/button'
+      %li.notifications.dropdown
         = link_to '#', class: 'dropdown-toggle', data: {toggle: 'dropdown', hover: 'dropdown', 'close-others' => true} do
-          Задачи:
           %i.entypo-list
             - if active_task.any?
               %span.badge.badge-secondary= active_task.count
             - else
-              %span.badge.badge-success= user_tasks.count
-        %ul.dropdown-menu.pull-right
+              %span.badge.badge-warning= user_tasks.count
+        %ul.dropdown-menu
           %li.top
             - if user_tasks.any?
               %p Клик по задаче запускает таймер
@@ -51,6 +49,17 @@
                             %span.desc= task.name
                             %span.percent= "#{task.progress}%"
                           = render partial: 'common/bar', locals: {progress: task.progress}
+
+
+
+  .col-md-6.col-sm-4.clearfix.hidden-xs
+    %ul.list-inline.links-list.pull-right
+      %li= render 'common/plan'
+      %li
+        - unless current_user.client.plan.unlimited?
+          = link_to '#', class: 'btn btn-default btn-icon' do
+            Продлить
+            %i.entypo-credit-card
       %li.sep
       %li
         = link_to destroy_user_session_path, method: :delete do

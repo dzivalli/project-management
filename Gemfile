@@ -13,6 +13,7 @@ gem 'wicked_pdf'
 gem 'rails_12factor', group: :production
 gem 'rmagick'
 gem 'letter_opener', group: :development
+gem 'data-confirm-modal', github: 'ifad/data-confirm-modal'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

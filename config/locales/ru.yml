@@ -15,3 +15,8 @@ ru:
   time:
     formats:
       default: "%d-%m-%Y %H:%M"
+
+  admin: "Администратор"
+  customer: "Заказчик"
+  staff: "Сотрудник"
+  root: "Глобальный администратор"

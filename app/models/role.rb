@@ -6,6 +6,7 @@ class Role < ActiveRecord::Base
     joins(:users).where(users: {id: client.users.ids})
   end
 
+  scope :without_root, -> { where.not(name: 'root')}
   scope :admin, -> { find_by_name('admin') }
   scope :root, -> { find_by_name('root') }
   scope :staff, -> { find_by_name('staff') }

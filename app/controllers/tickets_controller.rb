@@ -56,6 +56,6 @@ class TicketsController < ApplicationController
   end
 
   def load_projects
-    @projects = Project.client_projects(client, current_user).pluck(:name, :id)
+    @projects = Project.client_projects(client, current_user)
   end
 end

@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     @selected = params[:company_id] if params.has_key?(:company_id)
 
     @user = User.new
-    @roles = Role.all
+    @roles = Role.without_root
     @companies = client.companies.all
     @title = 'Новый пользователь'
     render layout: 'modal'
@@ -22,7 +22,7 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.customer_users(client).find_by_id params[:id]
-    @roles = Role.all
+    @roles = Role.without_root
     @companies = client.companies
     @title = 'Изменить данные'
     render 'new', layout: 'modal'

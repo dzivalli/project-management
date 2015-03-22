@@ -1,0 +1,7 @@
+- if current_user.client.plan.unlimited?
+  У Вас безлимитный план
+- elsif current_user.client.plan.trial?
+  = "Тестовый период закончится через #{current_user.client.left} дней"
+- elsif current_user.client.plan.paid?
+  = "Осталось дней: #{current_user.client.left} дней"
+

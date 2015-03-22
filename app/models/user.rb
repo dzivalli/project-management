@@ -4,8 +4,6 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :recoverable, :rememberable,
          :trackable, :validatable
 
-  after_create :create_avatar!
-
   delegate :can?, :cannot?, to: :ability
 
   belongs_to :company
@@ -93,10 +91,4 @@ class User < ActiveRecord::Base
     admin!
   end
 
-  private
-
-  def create_avatar!
-    self.create_avatar
-    self.save
-  end
 end

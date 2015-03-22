@@ -1,9 +1,9 @@
 #  init seed database
 
-Role.create!([{name: 'staff'},
-              {name: 'customer'},
-              {name: 'admin'},
-              {name: 'root'}])
+Role.create!([{name: 'staff', translation: 'Сотрудник'},
+              {name: 'customer', translation: 'Заказчик'},
+              {name: 'admin', translation: 'Администратор'},
+              {name: 'root', translation: 'Глобальный администратор'}])
 
 PaymentMethod.create!([{name: 'Онлайн'},
                        {name: 'Наличные'},

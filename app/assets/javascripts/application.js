@@ -38,6 +38,7 @@
 //= require neon/bootstrap-wysihtml5
 //= require neon/fileinput
 
+//= require data-confirm-modal
 
 // common settings and functions
 //= require common
