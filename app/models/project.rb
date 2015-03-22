@@ -4,6 +4,7 @@ class Project < ActiveRecord::Base
   belongs_to :company
   has_many :milestones, dependent: :destroy
   has_many :tasks, dependent: :destroy
+  has_many :tickets, dependent: :destroy
   has_many :time_entries, dependent: :destroy
   # TODO delete permissions after destroy
   has_many :permissions

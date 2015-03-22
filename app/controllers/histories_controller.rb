@@ -6,5 +6,6 @@ class HistoriesController < ApplicationController
     milestones = PaperTrail::Version.where(item_type: 'Milestone', item_id: @project.milestones.ids).to_a
     tasks = PaperTrail::Version.where(item_type: 'Task', item_id: @project.tasks.ids).to_a
     @versions = projects + milestones + tasks
+    @versions.reverse!
   end
 end

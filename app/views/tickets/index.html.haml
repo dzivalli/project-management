@@ -9,6 +9,7 @@
     %tr
       %th Код заявки
       %th Тема
+      %th Проект
       %th Создатель
       %th Приоритет
       %th Статус
@@ -19,8 +20,14 @@
         %td
           .label.label-info= ticket.code
         %td
-          %strong= link_to ticket.subject, ticket_path(ticket), class: 'text-info'
+          %strong= link_to truncate(ticket.subject, length: 20), ticket_path(ticket), class: 'text-info'
+        %td= "#{ticket.project.name} - #{ticket.project.company.name}" if ticket.project
         %td= ticket.user.full_name
         %td= ticket.priority
         %td= status(ticket.status, 'label')
         %td.m-r
+          = link_to edit_ticket_path(ticket), type: 'button', class: 'btn btn-default btn-xs get-modal', data: { toggle: 'tooltip', placement: 'top', 'original-title' => 'Изменить' } do
+            %i.entypo-tools
+          = link_to ticket_path(ticket), type: 'button', class: 'btn btn-default btn-xs', method: :delete, data: { confirm: 'Вы уверены?', toggle: 'tooltip', placement: 'top', 'original-title' => 'Удалить' } do
+            %i.entypo-trash
+

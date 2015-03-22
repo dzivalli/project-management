@@ -3,10 +3,17 @@
     = f.label 'Тема', nil, class: 'col-sm-4 control-label'
     .col-sm-5
       = f.text_field :subject, class: 'form-control'
+
+  .form-group
+    = f.label 'Проект', nil, class: 'col-sm-4 control-label'
+    .col-sm-5
+      = f.select :project_id, @projects, class: 'form-control', include_blank: true
+
   .form-group
     = f.label 'Приоритет', nil, class: 'col-sm-4 control-label'
     .col-sm-5
       = f.select :priority, Ticket.priorities, selected: Ticket.priorities[@ticket.priority], class: 'form-control'
+
   .form-group
     = f.label 'Текст', nil, class: 'col-sm-4 control-label'
     .col-sm-5

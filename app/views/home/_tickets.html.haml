@@ -6,8 +6,8 @@
     %ul.list-group
       - @tickets.last(10).each do |ticket|
         = link_to ticket_path(ticket), class: 'list-group-item' do
-          %strong= ticket.code
-          -
+          %strong= truncate(ticket.subject, length: 20)
+          &#45;
           = ticket.priority
           .pull-right= status(ticket.status, 'badge')
 

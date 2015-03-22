@@ -7,12 +7,14 @@
       %thead
         %tr
           %th Название
+          %th Компания
           %th Прогресс
           %th Параметры
       %tbody
         - @projects.last(10).each do |project|
           %tr
             %td= project.name
+            %td= project.company.name
             %td= render partial: 'common/bar', locals: {progress: project.progress}
             %td
               = link_to project_path(project), class: 'btn btn-default btn-icon btn-xs icon-left' do

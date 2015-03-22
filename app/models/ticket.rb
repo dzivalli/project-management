@@ -1,5 +1,6 @@
 class Ticket < ActiveRecord::Base
   belongs_to :user
+  belongs_to :project
   has_many :ticket_replies
 
   enum priority: %w(низкий средний высокий)
@@ -16,9 +17,9 @@ class Ticket < ActiveRecord::Base
 
   def notice!(client)
     User.customer_staff(client).each do |u|
-      Notifications.notice(name, u.email, 'Новая заявка', client).deliver_later
+      Notifications.notice(subject, u.email, 'Новая заявка', client).deliver_later
     end
-    Notifications.notice(name, user.email, 'Оповищение клиенту', client).deliver_later
+    Notifications.notice(subject, user.email, 'Оповищение клиенту', client).deliver_later
     true
   end
 
