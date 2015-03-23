@@ -1,0 +1,29 @@
+- content_for :login do
+  .login-container
+    .login-header.login-caret
+      .login-content
+        = link_to root_path, class: 'logo' do
+          = image_tag 'logo.png', width: 150
+        %p.description Смените Ваш пароль
+    .login-form
+      .login-content
+        = form_for resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: 'form_register validate'} do |f|
+          = f.hidden_field :reset_password_token
+          .form-group
+            .input-group
+              .input-group-addon
+                %i.entypo-key
+              =f.password_field :password, placeholder: 'Пароль', class: 'form-control', data: {validate: 'required'}
+          .form-group
+            .input-group
+              .input-group-addon
+                %i.entypo-key
+              =f.password_field :password_confirmation, placeholder: 'Подтверждение пароля', class: 'form-control', data: {validate: 'required'}
+          .form-group
+            = button_tag class: 'btn btn-success btn-block btn-login' do
+              %i.entypo-right-open-mini
+              Сменить
+        .login-bottom-links
+          = link_to new_user_session_path do
+            %i.entypo-lock
+            Вернуться на страницу ввода логина и пароля

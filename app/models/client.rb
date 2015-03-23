@@ -23,11 +23,13 @@ class Client < ActiveRecord::Base
   def after_registration(client)
     owner.update(confirmed_at: Time.now, company: client.main_company)
     owner.admin!
+    owner.touch(:confirmed_at)
     copy_email_templates!
     Notifications.client_notice(self, 'Завершение регистрации').deliver_later
   end
 
   def left
-    (Date.today - paid_on).to_i
+    term = plan.term.months
+    (Date.today + term - paid_on).to_i
   end
 end

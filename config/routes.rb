@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root 'home#index'
   get 'unpaid', controller: 'home'
 
-  devise_for :users, skip: [:passwords]
+  devise_for :users
 
   resources :clients
 

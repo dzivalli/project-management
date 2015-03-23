@@ -34,7 +34,7 @@ class ClientsController < ApplicationController
 
   def edit
     @client = Client.find params[:id]
-    if !@client.owner || (@client.owner.confirmation_token != params[:token])
+    if @client.owner.confirmed? || !@client.owner || (@client.owner.confirmation_token != params[:token])
       not_found
     end
     @client.build_main_company
@@ -43,7 +43,7 @@ class ClientsController < ApplicationController
   def update
     client = Client.find params[:id]
     client.build_main_company(company_params.merge!(client: client))
-    if client.save && client.owner.update(owner_params)
+    if !client.owner.confirmed? && client.save && client.owner.update(owner_params)
       client.after_registration(client)
       redirect_to new_user_session_path
     else

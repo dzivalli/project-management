@@ -6,7 +6,7 @@
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = javascript_include_tag 'login' if controller_name == 'sessions'
     = csrf_meta_tags
-  %body.page-body{ class: ('login-page login-form-fall' if %w(clients sessions).include?(controller_name) && action_name != 'edit') }
+  %body.page-body{ class: ('login-page login-form-fall' if %w(clients sessions passwords).include?(controller_name) && !(action_name == 'edit' && controller_name == 'clients')) }
     - if content_for? :login
       = yield :login
       = render 'common/flash'
