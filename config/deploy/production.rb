@@ -5,6 +5,8 @@
 # property set.  Don't declare `role :all`, it's a meta role.
 
 role :app, %w{vps-1071027.vpshome.pro}
+role :web, %w{vps-1071027.vpshome.pro}
+role :db, %w{vps-1071027.vpshome.pro}
 
 
 # Extended Server Syntax

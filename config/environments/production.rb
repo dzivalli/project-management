@@ -22,7 +22,7 @@ Rails.application.configure do
 
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.
-  config.serve_static_files = ENV['RAILS_SERVE_STATIC_FILES'].present?
+  config.serve_static_files = true
 
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = :uglifier
@@ -37,7 +37,7 @@ Rails.application.configure do
 
   # compile assets from fonts folder for heroku deployment
   config.assets.paths << "#{Rails.root}/vendor/assets/fonts"
-  config.assets.precompile << /\.(?:svg|eot|woff|ttf|gif|js)$/
+  config.assets.precompile << /\.(?:svg|eot|woff|ttf|gif|js|css)$/
 
   # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb
 
