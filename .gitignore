@@ -16,3 +16,5 @@
 
 /.idea
 /vendor/tpl
+
+/config/database.yml
