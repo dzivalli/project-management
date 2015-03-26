@@ -29,8 +29,9 @@
       %h3= Russian::pluralize(@tickets.count, 'Заявка', 'Заявки', 'Заявок')
 - if current_user.staff? || current_user.customer?
   .col-sm-3
-    .tile-stats.tile-blue
-      .icon
-        %i.entypo-calendar
-      .num 0
-      %h3 Задач
+    = link_to projects_path do
+      .tile-stats.tile-blue
+        .icon
+          %i.entypo-calendar
+        .num= @tasks.count
+        %h3= Russian::pluralize(@tasks.count, 'Задача', 'Задачи', 'Задач')

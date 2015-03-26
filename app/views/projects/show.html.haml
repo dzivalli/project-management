@@ -39,8 +39,10 @@
     .col-lg-6
       = render 'tasks'
     .col-lg-6
-      = render 'files'
-  .row
-    .col-lg-6
       = render partial: 'common/tickets', locals: {tickets: @project.tickets}
+  - if can? :read, Attachment
+    .row
+      .col-lg-6
+        = render 'files'
+
 

@@ -3,7 +3,7 @@ class TicketsController < ApplicationController
   before_action :load_projects, only: [:new, :edit]
 
   def index
-    @tickets = Ticket.includes(:project).client_tickets(client)
+    @tickets = Ticket.includes(:project).client_tickets(client).for_user(current_user)
   end
 
   def new

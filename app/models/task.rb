@@ -19,4 +19,12 @@ class Task < ActiveRecord::Base
   def active(user)
     TimeEntry.where(user: user, task: self, status: 'active').ids
   end
+
+  def self.assigned_to(user)
+    if user.root?
+      all
+    else
+      for_user(user)
+    end
+  end
 end

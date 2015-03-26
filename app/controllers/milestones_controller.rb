@@ -4,7 +4,8 @@ class MilestonesController < ApplicationController
   layout 'modal', only: [:new, :edit, :templates]
 
   def index
-    @project = find_project { includes(:milestones) }
+    @project = find_project
+    @milestones = @project.milestones.for_user(current_user)
   end
 
   def new

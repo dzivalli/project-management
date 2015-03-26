@@ -8,6 +8,15 @@ class Milestone < ActiveRecord::Base
 
   has_paper_trail
 
+  def self.for_user(user)
+    if user.root?
+      all
+    else
+      joins(:tasks).merge(Task.for_user(user))
+    end
+
+  end
+
   def estimated_hours
     tasks.inject(0) { |sum, task| sum + task.estimated_hours }
   end

@@ -1,8 +1,8 @@
 - content_for :project do
   .panel.panel-primary
     .panel-heading
-      .panel-title
-        - if can? :new, Milestone
+      - if can? :new, Milestone
+        .panel-title
           = link_to 'Добавить', new_project_milestone_path(@project), class: 'btn btn-default get-modal'
           = link_to 'Из шаблона', templates_project_milestones_path(@project), class: 'btn btn-default get-modal'
     .panel-body.with-table
@@ -15,7 +15,7 @@
             %th Прогресс
             %th Параметры
         %tbody
-          - @project.milestones.each do |milestone|
+          - @milestones.each do |milestone|
             %tr
               %td
                 = link_to project_milestone_path(@project, milestone) do

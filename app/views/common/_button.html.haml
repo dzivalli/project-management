@@ -3,11 +3,17 @@
     Добавить
     %span.caret
   %ul.dropdown-menu.dropdown-green{role: 'menu'}
+    - if can? :new, Company
+      %li
+        = link_to new_company_path, class: 'get-modal' do
+          Клиента
+          %i.entypo-users.pull-right
+    - if can? :new, Project
+      %li
+        = link_to new_project_path, class: 'get-modal' do
+          Проект
+          %i.entypo-cup.pull-right
     %li
-      = link_to new_company_path, class: 'get-modal' do
-        Клиента
-        %i.entypo-users.pull-right
-    %li
-      = link_to new_project_path, class: 'get-modal' do
-        Проект
-        %i.entypo-cup.pull-right
+      = link_to new_ticket_path, class: 'get-modal' do
+        Заявка
+        %i.entypo-ticket.pull-right

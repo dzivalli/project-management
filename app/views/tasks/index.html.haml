@@ -1,8 +1,9 @@
 - content_for :project do
   .panel.panel-primary
     .panel-heading
-      .panel-title
-        = link_to 'Добавить', new_project_task_path(@project), class: 'btn btn-default get-modal'
-        = link_to 'Из шаблона', templates_project_tasks_path(@project), class: 'btn btn-default get-modal'
+      - if can? :new, Task
+        .panel-title
+          = link_to 'Добавить', new_project_task_path(@project), class: 'btn btn-default get-modal'
+          = link_to 'Из шаблона', templates_project_tasks_path(@project), class: 'btn btn-default get-modal'
     .panel-body.with-table
-      = render partial: 'tasks', locals: {tasks: @project.tasks}
+      = render partial: 'tasks', locals: {tasks: @tasks}

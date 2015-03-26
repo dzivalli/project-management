@@ -8,6 +8,13 @@ class Ticket < ActiveRecord::Base
 
   scope :client_tickets, -> (client) { where(user_id: client.users.ids) }
 
+  def self.for_user(user)
+    if user.root?
+      all
+    else
+      where(user: user)
+    end
+  end
   def self.generate_code
     begin
       code = Array.new(8){rand(36).to_s(36)}.join.upcase

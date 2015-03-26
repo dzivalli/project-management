@@ -6,6 +6,7 @@ class HomeController < ApplicationController
     @invoice_count = Invoice.client_invoices(client).count
     @tickets = Ticket.client_tickets(client)
     @payments = Payment.client_payments(client)
+    @tasks = Task.for_user(current_user) unless current_user.root?
   end
 
   def unpaid

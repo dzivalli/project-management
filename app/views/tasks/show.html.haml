@@ -1,9 +1,10 @@
 - content_for :project do
   .panel.panel-primary
     .panel-heading
-      .panel-title
-        = link_to 'Изменить', edit_project_task_path(@task.project, @task), class: 'btn btn-default get-modal'
-        = link_to 'Удалить', project_task_path(@task.project, @task), class: 'btn btn-default', method: :delete
+      - if can? :edit, Task
+        .panel-title
+          = link_to 'Изменить', edit_project_task_path(@task.project, @task), class: 'btn btn-default get-modal'
+          = link_to 'Удалить', project_task_path(@task.project, @task), class: 'btn btn-default', method: :delete
     .panel-body
       .row
         .col-lg-6

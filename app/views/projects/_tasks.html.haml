@@ -9,7 +9,7 @@
           %th Прогресс
           %th Пользователь
       %tbody
-        - @project.tasks.each do |task|
+        - @tasks.each do |task|
           %tr
             %td
               = link_to project_task_path(@project, task) do

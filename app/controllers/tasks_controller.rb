@@ -4,7 +4,8 @@ class TasksController < ApplicationController
   layout 'modal', only: [:new, :edit, :templates]
 
   def index
-    @project = find_project { includes(:tasks) }
+    @project = find_project
+    @tasks = @project.tasks.assigned_to(current_user)
   end
 
   def new

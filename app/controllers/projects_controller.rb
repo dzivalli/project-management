@@ -6,8 +6,9 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    @project = find_project { includes(:attachments, :tickets, :tasks) }
+    @project = find_project { includes(:attachments, :tickets) }
     @logged_time = TimeEntry.logged_time_for(@project)
+    @tasks = @project.tasks.assigned_to(current_user)
   end
 
   def new
