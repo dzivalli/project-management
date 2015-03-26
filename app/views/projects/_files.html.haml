@@ -12,5 +12,5 @@
           %tr
             %td
               = link_to attachment.file.url do
-                %strong.text-info= attachment.file_identifier
+                %strong.text-info= truncate attachment.file_identifier
             %td= attachment.user.full_name

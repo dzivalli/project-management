@@ -32,4 +32,20 @@ class Client < ActiveRecord::Base
     term = plan.term.months
     (Date.today + term - paid_on).to_i
   end
+
+  def main_company_name
+    if main_company
+      main_company.name
+    else
+      'Ожидается регистрация компании'
+    end
+  end
+
+  def users_count
+    users.count > 0 ? users.count - 1 : 0
+  end
+
+  def companies_count
+    companies.count > 0 ? users.count - 1 : 0
+  end
 end
