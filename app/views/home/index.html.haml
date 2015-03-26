@@ -14,7 +14,7 @@
     .col-md-8
       = render 'common/history'
     .col-md-4
-      = render 'tickets'
+      = render partial: 'common/tickets', locals: {tickets: @tickets}
   - elsif current_user.staff? || current_user.customer?
     .col-md-8
       = render 'tickets'

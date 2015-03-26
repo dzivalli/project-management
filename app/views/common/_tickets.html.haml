@@ -4,7 +4,7 @@
       Последние заявки
   .panel-body
     %ul.list-group
-      - @tickets.last(10).each do |ticket|
+      - tickets.last(10).each do |ticket|
         = link_to ticket_path(ticket), class: 'list-group-item' do
           %strong= truncate(ticket.subject, length: 20)
           &#45;

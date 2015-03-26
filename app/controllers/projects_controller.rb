@@ -6,7 +6,7 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    @project = find_project { includes(:attachments) }
+    @project = find_project { includes(:attachments, :tickets, :tasks) }
     @logged_time = TimeEntry.logged_time_for(@project)
   end
 

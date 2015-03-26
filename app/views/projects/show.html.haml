@@ -41,9 +41,6 @@
     .col-lg-6
       = render 'files'
   .row
-    .col-lg-offset-6.col-lg-6
-      .panel.panel-primary
-        .panel-heading
-          .panel-title Последние баги
-        .panel-body
+    .col-lg-6
+      = render partial: 'common/tickets', locals: {tickets: @project.tickets}
 
