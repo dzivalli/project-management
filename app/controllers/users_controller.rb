@@ -4,11 +4,14 @@ class UsersController < ApplicationController
   end
 
   def new
-    @selected = params[:company_id] if params.has_key?(:company_id)
-
+    if params.has_key?(:company_id)
+      @roles = [Role.customer]
+      @companies = [Company.find(params[:company_id])]
+    else
+      @roles = Role.without_root
+      @companies = client.companies.all
+    end
     @user = User.new
-    @roles = Role.without_root
-    @companies = client.companies.all
     @title = 'Новый пользователь'
     render layout: 'modal'
   end

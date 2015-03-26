@@ -9,6 +9,8 @@ class Task < ActiveRecord::Base
 
   has_many :time_entries, dependent: :destroy
 
+  validates :milestone_id, presence: true
+
   has_paper_trail
 
   scope :all_active, -> (user) { joins(:time_entries).joins(:users).where(users: {id: user}, time_entries: { status: 'active' }) }
