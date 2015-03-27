@@ -1,7 +1,5 @@
 class MilestonesController < ApplicationController
   include Projectable
-  # load_and_authorize_resource
-  layout 'modal', only: [:new, :edit, :templates]
 
   def index
     @project = find_project

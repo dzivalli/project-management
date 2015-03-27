@@ -9,7 +9,6 @@ class AttachmentsController < ApplicationController
     @project = find_project
     @attachment = Attachment.new
     @title = 'Загрузка файла'
-    render layout: 'modal'
   end
 
   def create

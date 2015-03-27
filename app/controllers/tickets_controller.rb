@@ -21,12 +21,12 @@ class TicketsController < ApplicationController
 
   def edit
     @title = 'Изменить данные'
-    @ticket = Ticket.client_tickets(client).find params[:id]
+    @ticket = Ticket.client_tickets(client).for_user(current_user).find params[:id]
     render 'new'
   end
 
   def update
-    ticket = Ticket.client_tickets(client).find params[:id]
+    ticket = Ticket.client_tickets(client).for_user(current_user).find params[:id]
     renew do
       ticket.update ticket_params
     end
@@ -34,8 +34,8 @@ class TicketsController < ApplicationController
   end
 
   def show
-    @tickets = Ticket.client_tickets(client)
-    @ticket = Ticket.includes(:ticket_replies).client_tickets(client).find params[:id]
+    @tickets = Ticket.client_tickets(client).for_user(current_user)
+    @ticket = Ticket.includes(:ticket_replies).client_tickets(client).for_user(current_user).find params[:id]
     @ticket_reply = TicketReply.new
   end
 

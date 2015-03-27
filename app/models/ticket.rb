@@ -31,7 +31,7 @@ class Ticket < ActiveRecord::Base
   end
 
   def reply_notice!(client)
-    Notifications.notice(name, user.email, 'Ответ на заявку', client).deliver_later
+    Notifications.notice(subject, user.email, 'Ответ на заявку', client).deliver_later
     true
   end
 

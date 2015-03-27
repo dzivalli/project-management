@@ -22,7 +22,7 @@ class Project < ActiveRecord::Base
   validates :progress, numericality: true
 
   def self.client_projects(client, user)
-    if user.admin? || user.root? || user.can?(:read, Project)
+    if user.admin? || user.root?
       Project.where(company: client.companies)
     elsif user.staff?
       Project.joins(:users).where(company: client.companies, users: {id: user.id})

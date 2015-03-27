@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   before_action :check_client_plan!, except: [:unpaid]
   before_action :authorize_resource, except: [:unpaid]
 
-  SKIP_CONTROLLERS = %w(Session Home Password Profile timeentry)
+  SKIP_CONTROLLERS = %w(Session Home Password Profile timeentry ticketreply)
 
   private
 

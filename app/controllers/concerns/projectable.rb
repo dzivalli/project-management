@@ -1,6 +1,10 @@
 module Projectable
   extend ActiveSupport::Concern
 
+  included do
+    layout 'modal', only: [:new, :edit, :templates, :invoice, :copy]
+  end
+
   private
 
   def find_project(&block)

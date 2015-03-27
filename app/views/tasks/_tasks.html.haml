@@ -16,8 +16,9 @@
         %td= task.due_date
         %td= render partial: 'common/bar', locals: {progress: task.progress}
         %td
-          = link_to edit_project_task_path(@project, task), type: 'button', class: 'btn btn-default btn-xs get-modal' do
-            %i.entypo-tools
+          - if can? :edit, Task
+            = link_to edit_project_task_path(@project, task), type: 'button', class: 'btn btn-default btn-xs get-modal' do
+              %i.entypo-tools
           - if task.active(current_user).any?
             = link_to project_time_entry_path(id: task.active(current_user).first), type: 'button', method: :put, class: 'btn btn-danger btn-xs' do
               %i.entypo-stop

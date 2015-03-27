@@ -8,7 +8,6 @@ class TeamController < ApplicationController
   def new
     @project = find_project
     @users = User.customer_users(client)
-    render layout: 'modal'
   end
 
   def create

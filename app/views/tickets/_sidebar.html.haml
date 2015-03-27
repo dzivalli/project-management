@@ -5,7 +5,7 @@
   .list-group
     - @tickets.each do |ticket|
       =link_to ticket_path(ticket), class: (@ticket.id == ticket.id ? 'list-group-item active' : 'list-group-item') do
-        %strong= ticket.code
+        %strong= truncate ticket.subject, length: 20
         .pull-right= status(ticket.status, 'label')
         %br
         %small= "#{ticket.user.full_name} | #{Russian::strftime(ticket.created_at, '%d %b %Y')}"

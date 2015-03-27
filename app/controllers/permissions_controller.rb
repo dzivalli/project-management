@@ -1,6 +1,8 @@
 class PermissionsController < ApplicationController
   include Projectable
 
+  layout 'application'
+
   def index
     @users = User.customer_users(client)
     render 'users/index'

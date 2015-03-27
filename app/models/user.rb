@@ -50,19 +50,19 @@ class User < ActiveRecord::Base
   end
 
   def customer?
-    role == Role.customer
+    role_id == Role.customer.id
   end
 
   def admin?
-    role == Role.admin || root?
+    (role_id == Role.admin.id) || root?
   end
 
   def staff?
-    role == Role.staff
+    role_id == Role.staff.id
   end
 
   def root?
-    role == Role.root
+    role_id == Role.root.id
   end
 
   def admin!
