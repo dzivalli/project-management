@@ -17,7 +17,7 @@
                     %span= msg.created_at.strftime('%R')
                     %span= msg.created_at.strftime('%d %B')
                   .timeline-icon
-                    %i.entypo-user
+                    = image_tag msg.user.avatar.thumb.url, class: 'img-circle', width: 44
                   .timeline-label
                     %h2= msg.user.full_name
                     %p= msg.message

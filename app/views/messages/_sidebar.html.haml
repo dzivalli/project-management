@@ -7,5 +7,8 @@
   %ul.mail-menu
     - @recipients.each do |recipient|
       %li{class: ('active' if recipient.id == params[:id].to_i)}
-        = link_to recipient.full_name, message_path(recipient.id), class: 'active'
+        = link_to  message_path(recipient.id), class: 'active' do
+          = recipient.full_name
+          - if new_messages_by_dialog_count(recipient.id) > 0
+            %span.pull-right.badge.badge-secondary= new_messages_by_dialog_count recipient.id
 

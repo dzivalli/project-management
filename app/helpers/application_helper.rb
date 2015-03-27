@@ -80,4 +80,12 @@ module ApplicationHelper
   def user_tasks
     Task.for_user(current_user)
   end
+
+  def new_message_count
+    Message.my_unread(current_user.id).count
+  end
+
+  def new_messages_by_dialog_count(recipient_id)
+    Message.by_user_and_recipient(current_user.id, recipient_id).my_unread(current_user.id).count
+  end
 end

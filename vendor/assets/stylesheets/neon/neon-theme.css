@@ -6260,8 +6260,8 @@ fieldset[disabled] .calendar-env .calendar-body .fc-content .fc-view table tbody
   background: #fff;
   color: #737881;
   display: block;
-  width: 40px;
-  height: 40px;
+  /*width: 40px;*/
+  /*height: 40px;*/
   -webkit-border-radius: 20px;
   -webkit-background-clip: padding-box;
   -moz-border-radius: 20px;

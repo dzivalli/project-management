@@ -9,6 +9,7 @@ class MessagesController < ApplicationController
     @message = Message.new
     @recipients = Message.recipients_for(current_user.id)
     @messages = Message.by_user_and_recipient(current_user.id, params[:id])
+    Message.by_user_and_recipient(current_user.id, params[:id]).read!(current_user.id)
   end
 
   def new
