@@ -15,6 +15,7 @@ gem 'rmagick'
 gem 'letter_opener', group: :development
 gem 'data-confirm-modal', github: 'ifad/data-confirm-modal'
 gem 'puma'
+gem "paranoia", :github => "radar/paranoia", :branch => "rails4"
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

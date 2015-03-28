@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150322102505) do
+ActiveRecord::Schema.define(version: 20150327140235) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,8 +35,10 @@ ActiveRecord::Schema.define(version: 20150322102505) do
     t.datetime "updated_at",      null: false
     t.integer  "plan_id"
     t.date     "paid_on"
+    t.datetime "deleted_at"
   end
 
+  add_index "clients", ["deleted_at"], name: "index_clients_on_deleted_at", using: :btree
   add_index "clients", ["main_company_id", "owner_id"], name: "index_clients_on_main_company_id_and_owner_id", using: :btree
   add_index "clients", ["plan_id"], name: "index_clients_on_plan_id", using: :btree
 
@@ -57,7 +59,10 @@ ActiveRecord::Schema.define(version: 20150322102505) do
     t.string   "bik"
     t.string   "schet"
     t.string   "kor_schet"
+    t.datetime "deleted_at"
   end
+
+  add_index "companies", ["deleted_at"], name: "index_companies_on_deleted_at", using: :btree
 
   create_table "email_templates", force: :cascade do |t|
     t.string   "name"
@@ -85,15 +90,16 @@ ActiveRecord::Schema.define(version: 20150322102505) do
     t.integer  "status"
     t.integer  "archived"
     t.date     "sent_date"
-    t.boolean  "deleted"
     t.boolean  "emailed"
     t.boolean  "visible"
     t.boolean  "viewed"
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
+    t.datetime "deleted_at"
   end
 
   add_index "invoices", ["company_id"], name: "index_invoices_on_company_id", using: :btree
+  add_index "invoices", ["deleted_at"], name: "index_invoices_on_deleted_at", using: :btree
 
   create_table "item_templates", force: :cascade do |t|
     t.string   "name"
@@ -125,10 +131,12 @@ ActiveRecord::Schema.define(version: 20150322102505) do
     t.string   "status"
     t.string   "attached_file"
     t.date     "date_received"
-    t.boolean  "deleted"
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+    t.datetime "deleted_at"
   end
+
+  add_index "messages", ["deleted_at"], name: "index_messages_on_deleted_at", using: :btree
 
   create_table "milestone_templates", force: :cascade do |t|
     t.string   "name"
@@ -148,8 +156,10 @@ ActiveRecord::Schema.define(version: 20150322102505) do
     t.integer  "project_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.datetime "deleted_at"
   end
 
+  add_index "milestones", ["deleted_at"], name: "index_milestones_on_deleted_at", using: :btree
   add_index "milestones", ["project_id"], name: "index_milestones_on_project_id", using: :btree
 
   create_table "payment_methods", force: :cascade do |t|
@@ -164,13 +174,14 @@ ActiveRecord::Schema.define(version: 20150322102505) do
     t.float    "amount"
     t.string   "trans"
     t.date     "payment_date"
-    t.boolean  "deleted"
     t.text     "notes"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+    t.datetime "deleted_at"
   end
 
   add_index "payments", ["company_id"], name: "index_payments_on_company_id", using: :btree
+  add_index "payments", ["deleted_at"], name: "index_payments_on_deleted_at", using: :btree
   add_index "payments", ["invoice_id"], name: "index_payments_on_invoice_id", using: :btree
   add_index "payments", ["payment_method_id"], name: "index_payments_on_payment_method_id", using: :btree
 
@@ -206,13 +217,15 @@ ActiveRecord::Schema.define(version: 20150322102505) do
     t.float    "fixed_rate"
     t.float    "hourly_rate"
     t.string   "status"
-    t.boolean  "deleted"
     t.text     "notes"
     t.integer  "estimated_hours", default: 0
     t.integer  "company_id"
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
+    t.datetime "deleted_at"
   end
+
+  add_index "projects", ["deleted_at"], name: "index_projects_on_deleted_at", using: :btree
 
   create_table "projects_users", id: false, force: :cascade do |t|
     t.integer "project_id", null: false
@@ -283,8 +296,10 @@ ActiveRecord::Schema.define(version: 20150322102505) do
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
   end
 
+  add_index "ticket_replies", ["deleted_at"], name: "index_ticket_replies_on_deleted_at", using: :btree
   add_index "ticket_replies", ["ticket_id"], name: "index_ticket_replies_on_ticket_id", using: :btree
   add_index "ticket_replies", ["user_id"], name: "index_ticket_replies_on_user_id", using: :btree
 
@@ -300,8 +315,10 @@ ActiveRecord::Schema.define(version: 20150322102505) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "project_id"
+    t.datetime "deleted_at"
   end
 
+  add_index "tickets", ["deleted_at"], name: "index_tickets_on_deleted_at", using: :btree
   add_index "tickets", ["project_id"], name: "index_tickets_on_project_id", using: :btree
 
   create_table "time_entries", force: :cascade do |t|
@@ -339,8 +356,10 @@ ActiveRecord::Schema.define(version: 20150322102505) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "avatar"
+    t.datetime "deleted_at"
   end
 
+  add_index "users", ["deleted_at"], name: "index_users_on_deleted_at", using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 

@@ -1,5 +1,7 @@
 class Message < ActiveRecord::Base
-  belongs_to :user
+  belongs_to :user, -> { with_deleted }
+
+  acts_as_paranoid
 
   scope :my, -> (id) { where("? = ANY (recipients) OR user_id = ?", id, id) }
   scope :my_unread, -> (id) { where("? = ANY (recipients) AND status = 'unread'", id ) }

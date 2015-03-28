@@ -6,14 +6,15 @@ class User < ActiveRecord::Base
 
   delegate :can?, :cannot?, to: :ability
 
-  belongs_to :company
+  belongs_to :company, -> { with_deleted }
   belongs_to :role
-  belongs_to :client
+  belongs_to :client, -> { with_deleted }
 
-  has_many :permissions
-  has_many :messages
+  has_many :permissions, dependent: :destroy
+  has_many :messages, dependent: :destroy
   has_many :tickets
   has_many :task_templates
+  has_many :time_entries
 
   mount_uploader :avatar, AvatarUploader
 
@@ -25,6 +26,8 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email
 #   TODO add email regex
   # TODO make hook after delete to check if user primary contact
+
+  acts_as_paranoid
 
 
   scope :customer_users, -> (client) { where(client: client).where.not(id: client.owner.id) }

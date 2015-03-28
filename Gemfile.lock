@@ -5,6 +5,14 @@ GIT
     data-confirm-modal (1.0.1)
       railties (>= 3.0)
 
+GIT
+  remote: git://github.com/radar/paranoia.git
+  revision: df42daa3d95f4a387c7656a23d8f878eddb8cea8
+  branch: rails4
+  specs:
+    paranoia (2.1.1)
+      activerecord (~> 4.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -289,6 +297,7 @@ DEPENDENCIES
   launchy
   letter_opener
   paper_trail (~> 4.0.0.beta)
+  paranoia!
   pg
   puma
   quiet_assets

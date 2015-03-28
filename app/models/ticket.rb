@@ -1,7 +1,9 @@
 class Ticket < ActiveRecord::Base
-  belongs_to :user
-  belongs_to :project
-  has_many :ticket_replies
+  belongs_to :user, -> { with_deleted }
+  belongs_to :project, -> { with_deleted }
+  has_many :ticket_replies, dependent: :destroy
+
+  acts_as_paranoid
 
   enum priority: %w(низкий средний высокий)
   enum status: ['новая' , 'ответ послан' , 'в процессе' , 'закрыта']

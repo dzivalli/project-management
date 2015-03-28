@@ -2,6 +2,7 @@ class TaskTemplate < ActiveRecord::Base
   include Templateble
 
   belongs_to :milestone_template
+  belongs_to :user, -> { with_deleted }
 
   scope :select_fields, -> (id) { select(:name, :estimated_hours, :description, :visible).find(id) }
 

@@ -1,14 +1,16 @@
 class Client < ActiveRecord::Base
   belongs_to :main_company, class_name: 'Company'
   belongs_to :owner, class_name: 'User'
-  has_many :users
-  has_many :companies
-  has_many :task_templates
-  has_many :item_templates
-  has_many :milestone_templates
-  has_many :email_templates
-  has_many :permissions
+  has_many :users, dependent: :destroy
+  has_many :companies, dependent: :destroy
+  has_many :task_templates, dependent: :destroy
+  has_many :item_templates, dependent: :destroy
+  has_many :milestone_templates, dependent: :destroy
+  has_many :email_templates, dependent: :destroy
+  has_many :permissions, dependent: :destroy
   belongs_to :plan
+
+  acts_as_paranoid
 
   def copy_email_templates!
     EmailTemplate.templates.each do |email|
@@ -29,8 +31,8 @@ class Client < ActiveRecord::Base
   end
 
   def left
-    term = plan.term.months
-    (Date.today + term - paid_on).to_i
+    term = plan.term * 30
+    (term - (Date.today - paid_on)).to_i
   end
 
   def main_company_name

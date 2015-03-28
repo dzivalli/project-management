@@ -1,8 +1,10 @@
 class Invoice < ActiveRecord::Base
-  belongs_to :company
+  belongs_to :company, -> { with_deleted }
 
   has_many :items, dependent: :destroy
-  has_many :payments, dependent: :destroy
+  has_many :payments
+
+  acts_as_paranoid
 
   enum status: ['черновик', 'счет выставлен']
 

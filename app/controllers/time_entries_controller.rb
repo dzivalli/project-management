@@ -1,7 +1,7 @@
 class TimeEntriesController < ApplicationController
   def index
     @project = Project.client_projects(client, current_user).find params[:project_id]
-    @time_entries = TimeEntry.completed(@project)
+    @time_entries = TimeEntry.includes(:user).completed(@project)
   end
 
   def new

@@ -7,10 +7,11 @@ class Project < ActiveRecord::Base
   has_many :tickets, dependent: :destroy
   has_many :time_entries, dependent: :destroy
   # TODO delete permissions after destroy
-  has_many :permissions
   has_many :attachments, dependent: :destroy
 
   has_and_belongs_to_many :users
+
+  acts_as_paranoid
 
   has_paper_trail
 

@@ -49,7 +49,13 @@ class ClientsController < ApplicationController
     else
       render 'edit', alert: 'Произошла ошибка'
     end
+  end
 
+  def destroy
+    client = Client.find params[:id]
+    if client.destroy
+      redirect_to :back, notice: 'Глобальный клиент был успешно удален'
+    end
   end
 
   private

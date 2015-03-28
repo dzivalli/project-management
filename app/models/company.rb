@@ -1,11 +1,13 @@
 class Company < ActiveRecord::Base
-  has_many :users
-  has_many :projects
-  has_many :permissions
+  has_many :users, dependent: :destroy
+  has_many :projects, dependent: :destroy
+  has_many :permissions, dependent: :destroy
   has_many :invoices
   has_many :payments
-  belongs_to :client
+  belongs_to :client, -> { with_deleted }
   belongs_to :contact, class_name: 'User'
+
+  acts_as_paranoid
 
   has_paper_trail
 
@@ -14,9 +16,6 @@ class Company < ActiveRecord::Base
   validates_length_of :name, :address, maximum: 255
 
   scope :customer_companies, -> (client) { where(client: client).where.not(id: client.main_company.id) }
-
-  # scope :default, -> { find(Setting.company) }
-  # scope :clients, -> { where.not(id: Setting.company) }
 
   def received_amount
     payments.inject(0) { |sum, payment| sum + payment.amount}

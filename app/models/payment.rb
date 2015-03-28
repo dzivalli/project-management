@@ -1,7 +1,9 @@
 class Payment < ActiveRecord::Base
-  belongs_to :invoice
-  belongs_to :company
+  belongs_to :invoice, -> { with_deleted }
+  belongs_to :company, -> { with_deleted }
   belongs_to :payment_method
+
+  acts_as_paranoid
 
   scope :client_payments, -> (client) { where(company_id: client.companies.ids ) }
 

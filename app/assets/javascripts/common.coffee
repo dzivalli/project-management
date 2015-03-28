@@ -58,6 +58,10 @@ init = ->
     tmp["#{obj}[subject]"] = 'required'
     tmp["#{obj}[body]"] = 'required'
     tmp["#{obj}[cost]"] = 'required'
+    tmp["task[estimated_hours]"] =
+      required: true
+      digits: true
+      min: 1
     tmp["#{obj}[password]"] =
       required: true
       minlength: 5
@@ -68,7 +72,6 @@ init = ->
     tmp["#{obj}[email]"] =
       required: true
       email: true
-    tmp["#{obj}[website]"] = 'url'
     {
       rules: tmp
       errorElement: 'span'

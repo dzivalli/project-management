@@ -1,9 +1,9 @@
 class TimeEntry < ActiveRecord::Base
   include ActionView::Helpers::TextHelper
 
-  belongs_to :project
-  belongs_to :user
-  belongs_to :task
+  belongs_to :project, -> { with_deleted }
+  belongs_to :user, -> { with_deleted }
+  belongs_to :task, -> { with_deleted }
 
   def self.completed(project)
     where(task: project.tasks, status: 'completed')
