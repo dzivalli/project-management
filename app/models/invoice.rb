@@ -111,18 +111,4 @@ class Invoice < ActiveRecord::Base
   def get_hash(*s)
     Digest::MD5.hexdigest(s.join(':'))
   end
-
-  def self.generate_from_plan(plan)
-
-
-    invoice = Invoice.new due_date: Time.now + 1.week,
-                          company: ''
-
-
-
-
-
-    invoice.generate_reference!
-  end
-
 end

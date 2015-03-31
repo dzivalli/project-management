@@ -106,3 +106,7 @@
           %li{class: ('active' if controller_name == 'default_emails')}
             = link_to default_emails_path do
               %span.title email шаблоны по-умолчанию
+
+          %li{class: ('active' if action_name == 'landing')}
+            = link_to new_landing_path do
+              %span.title Редактирование главной страницы

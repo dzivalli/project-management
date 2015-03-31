@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'home#index'
+  root 'setting#index'
   get 'unpaid', controller: 'home'
 
   devise_for :users
@@ -75,6 +75,8 @@ Rails.application.routes.draw do
       get 'copy'
     end
   end
+
+  resources :landings, only: [:index, :new, :create]
 
   #  routes for setting controller
   get 'settings/general'

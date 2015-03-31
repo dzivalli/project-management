@@ -1,0 +1,5 @@
+= form_tag landings_path do
+  .form-group
+    = text_area_tag :body, @body, class: 'form-control wysihtml5'
+  .form-group
+    = submit_tag 'Сохранить', class: 'btn btn-success'

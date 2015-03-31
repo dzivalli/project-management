@@ -57,3 +57,6 @@ EmailTemplate.create!(
      {name: 'Завершение регистрации', group: 'Клиенты', body: 'Ваша компания успешно зарегистрирована'}])
 
 client.copy_email_templates!
+
+Setting.create! key: 'landing', value: ''
+
