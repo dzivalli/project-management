@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'setting#index'
+  root 'home#index'
   get 'unpaid', controller: 'home'
 
   devise_for :users

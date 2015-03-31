@@ -59,4 +59,3 @@ EmailTemplate.create!(
 client.copy_email_templates!
 
 Setting.create! key: 'landing', value: ''
-

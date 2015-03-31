@@ -43,4 +43,4 @@
 // common settings and functions
 //= require common
 
-//= require_tree .
+//= require invoices
