@@ -51,7 +51,7 @@
       %li= render 'common/plan'
       %li
         - unless current_user.client.plan.unlimited?
-          = link_to '#', class: 'btn btn-default btn-icon' do
+          = link_to choose_plans_path, class: 'btn btn-default btn-icon' do
             Продлить
             %i.entypo-credit-card
       %li.sep

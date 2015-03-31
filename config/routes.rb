@@ -51,7 +51,10 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :plans
+  resources :plans do
+    get 'choose', on: :collection
+    get 'generate', on: :collection
+  end
   resources :default_emails, only: [:index, :show, :update]
   resources :time_entries, only: [:new, :update]
 

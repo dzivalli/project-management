@@ -26,7 +26,7 @@
               - if can? :edit, Invoice
                 %li= link_to 'Изменить', edit_invoice_path(@invoice), class: 'get-modal'
               - if can? :destroy, Invoice
-                %li= link_to 'Удалить', invoice_path(@invoice), method: :delete
+                %li= link_to 'Удалить', invoice_path(@invoice), method: :delete, data: { confirm: 'Вы уверены?', toggle: 'tooltip', placement: 'top', 'original-title' => 'Удалить' }
         .panel-title.pull-right
           = link_to pdf_invoice_path(@invoice), class: 'btn btn-default' do
             %i.entypo-newspaper

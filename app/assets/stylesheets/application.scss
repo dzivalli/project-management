@@ -82,3 +82,30 @@ td {
 .btn.get-modal.m-r {
   margin-right: 15px;
 }
+
+.f-l {
+  margin-top: 20px;
+  div {
+    float: left;
+
+  }
+}
+div.top {
+  top: -10px;
+  position: absolute;
+}
+
+div.down {
+  top: 40px;
+  position: absolute;
+}
+
+.big {
+  font-size: 150%;
+  color: black;
+}
+
+.pm-tile {
+  top: -15px;
+  margin-left: 30px;
+}

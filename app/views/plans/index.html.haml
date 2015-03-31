@@ -18,7 +18,8 @@
         %td= plan.cost
         %td= plan.term
         %td.m-r
-          = link_to edit_plan_path(plan), type: 'button', class: 'btn btn-default btn-xs get-modal', data: { toggle: 'tooltip', placement: 'top', 'original-title' => 'Изменить' } do
-            %i.entypo-tools
-          = link_to plan_path(plan), type: 'button', class: 'btn btn-default btn-xs', method: :delete, data: { confirm: 'Вы уверены?', toggle: 'tooltip', placement: 'top', 'original-title' => 'Удалить' } do
-            %i.entypo-trash
+          - unless plan.trial? || plan.unlimited?
+            = link_to edit_plan_path(plan), type: 'button', class: 'btn btn-default btn-xs get-modal', data: { toggle: 'tooltip', placement: 'top', 'original-title' => 'Изменить' } do
+              %i.entypo-tools
+            = link_to plan_path(plan), type: 'button', class: 'btn btn-default btn-xs', method: :delete, data: { confirm: 'Вы уверены?', toggle: 'tooltip', placement: 'top', 'original-title' => 'Удалить' } do
+              %i.entypo-trash

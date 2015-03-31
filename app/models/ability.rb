@@ -16,6 +16,7 @@ class Ability
         can :manage, Message
         can :read, Milestone
         can :read, Task
+        can :manage, Attachment
         can do |action, klass, project|
           action = action.to_s
           # kind of alias, 'show' and 'index' are 'read'
@@ -32,6 +33,7 @@ class Ability
         can :manage, Message
         can :read, Milestone
         can :read, Task
+        can :manage, Attachment
         can do |action, klass, obj|
           # aliases
           action = :add if [:new, :create].include?(action)

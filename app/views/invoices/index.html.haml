@@ -36,7 +36,7 @@
               - if can? :edit, Invoice
                 %li= link_to 'Изменить', edit_invoice_path(invoice), class: 'get-modal'
               - if can? :destroy, Invoice
-                %li= link_to 'Удалить', invoice_path(invoice), method: :delete
+                %li= link_to 'Удалить', invoice_path(invoice), method: :delete, data: { confirm: 'Вы уверены?', toggle: 'tooltip', placement: 'top', 'original-title' => 'Удалить' }
               %li= link_to 'История', '#'
               - if can? :notice, Invoice
                 %li= link_to 'Выслать на почту', notice_invoice_path(invoice, type: 'invoiced')

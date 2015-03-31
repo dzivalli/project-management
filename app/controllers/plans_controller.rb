@@ -37,6 +37,24 @@ class PlansController < ApplicationController
     end
   end
 
+  def choose
+    @plans = Plan.paid
+  end
+
+  def generate
+    plan = Plan.paid[params[:plan].to_i - 1]
+    @invoice = Invoice.new company_id: current_user.company.id,
+                           due_date: Time.now + 1.week,
+                           status: 'черновик'
+    @invoice.items << Item.from_plan!(plan)
+    @invoice.generate_reference!
+    if @invoice.save
+      redirect_to @invoice, notice: 'Счет был успешно высталвен'
+    else
+      redirect_to choose_plans_path, alert: 'Произошла ошибка'
+    end
+  end
+
   private
 
   def plan_params

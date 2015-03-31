@@ -3,7 +3,7 @@ class TimeEntry < ActiveRecord::Base
 
   belongs_to :project, -> { with_deleted }
   belongs_to :user, -> { with_deleted }
-  belongs_to :task, -> { with_deleted }
+  belongs_to :task
 
   def self.completed(project)
     where(task: project.tasks, status: 'completed')

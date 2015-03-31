@@ -1,0 +1,25 @@
+%h3
+  Выберите период оплаты
+%hr
+.row.container
+  - if @plans.count >= 2
+    .col-xs-2
+      .top Колличество месяцев:
+      %br
+      .down Скидка:
+    .col-xs-3
+      .row.f-l
+        - @plans.each_with_index do |plan, i|
+          .div.top.big{style: "left: #{98/(@plans.count - 1)*i}%"}= plan.term
+          .div.down.big{style: "left: #{98/(@plans.count - 1)*i}%"}= "#{plan.discount}%"
+      .row
+        .slider{data: {min: 1, max: (@plans.count), step: 1, value: 1}}
+    .col-sm-4.pm-tile
+      = link_to generate_plans_path(plan: 1) do
+        .tile-stats.tile-green
+          .icon
+            %i.entypo-credit-card
+          - @plans.each_with_index do |plan, i|
+            .num{class: ('hide' unless i == 0), data: {id: i + 1}}= "#{plan.cost} руб."
+  - else
+    Созданно меньше 2 тарифных планов
