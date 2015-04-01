@@ -22,7 +22,7 @@
             %small.text-muted вы владелец
           - else
             = c.main_company_name
-        %td= "#{c.owner.full_name} (#{c.owner.email})"
+        %td= c.owner_info
         %td= c.created_at.strftime("%d-%m-%Y")
         %td= c.users_count
         %td= c.companies_count

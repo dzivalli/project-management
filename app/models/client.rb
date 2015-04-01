@@ -43,6 +43,14 @@ class Client < ActiveRecord::Base
     end
   end
 
+  def owner_info
+    if owner
+      "#{owner.full_name} (#{owner.email})"
+    else
+      'Владелец компании не определен'
+    end
+  end
+
   def users_count
     users.count > 0 ? users.count - 1 : 0
   end
