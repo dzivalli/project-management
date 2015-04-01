@@ -26,7 +26,7 @@
         %td= c.created_at.strftime("%d-%m-%Y")
         %td= c.users_count
         %td= c.companies_count
-        %td= c.plan.name
+        %td= c.plan_info
         %td= c.paid_on
         %td.m-r
           = link_to client_path(c), type: 'button', class: 'btn btn-default btn-xs', method: :delete, data: { confirm: 'Вы уверены?', toggle: 'tooltip', placement: 'top', 'original-title' => 'Удалить' } do

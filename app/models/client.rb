@@ -47,7 +47,15 @@ class Client < ActiveRecord::Base
     if owner
       "#{owner.full_name} (#{owner.email})"
     else
-      'Владелец компании не определен'
+      'Владелец компании не определен или удален'
+    end
+  end
+
+  def plan_info
+    if plan
+      plan.name
+    else
+      'План удален'
     end
   end
 
