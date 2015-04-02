@@ -27,7 +27,7 @@ class Message < ActiveRecord::Base
           id == my_id
         end
       end.flatten.uniq
-      User.find(ids)
+      User.with_deleted.find(ids)
     else
       []
     end

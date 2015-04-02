@@ -16,7 +16,7 @@ class ClientsController < ApplicationController
   end
 
   def create
-    if User.find_by_email(params[:user][:email])
+    if User.with_deleted.find_by_email(params[:user][:email])
       redirect_to :back, alert: 'Пользователь с таким email уже существует'
     else
       client = Client.new

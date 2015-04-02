@@ -24,7 +24,7 @@ var neonLogin = neonLogin || {};
 				
 				password: {
 					required: true
-				},
+				}
 				
 			},
 			
@@ -66,7 +66,7 @@ var neonLogin = neonLogin || {};
 						dataType: 'json',
 						data: {
 							username: $("input#username").val(),
-							password: $("input#password").val(),
+							password: $("input#password").val()
 						},
 						error: function()
 						{
@@ -132,7 +132,7 @@ var neonLogin = neonLogin || {};
 				
 					password: {
 						required: true
-					},
+					}
 					
 				},
 				
@@ -354,7 +354,7 @@ var neonLogin = neonLogin || {};
 			
 			// Create Progress Circle
 			var bg = neonLogin.lockscreen_progress_canvas,
-				ctx = ctx = bg.getContext('2d'),
+				ctx = bg.getContext('2d'),
 				imd = null,
 				circ = Math.PI * 2,
 				quart = Math.PI / 2,

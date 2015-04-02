@@ -80,7 +80,7 @@ class ProjectsController < ApplicationController
   private
 
   def find_users_companies
-    @users = User.customer_staff(client)
+    @users = User.customer_users(client)
     @companies = Company.customer_companies(client)
   end
 end
