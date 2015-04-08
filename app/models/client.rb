@@ -50,7 +50,7 @@ class Client < ActiveRecord::Base
     if owner
       "#{owner.full_name} (#{owner.email})"
     else
-      deleted_owner = User.with_deleted.find(owner_id)
+      deleted_owner = User.with_deleted.find_by(id: owner_id)
       if deleted_owner
         "#{deleted_owner.full_name} (#{deleted_owner.email}) (ПОМЕЧЕН НА УДАЛЕНИЕ)"
       else
