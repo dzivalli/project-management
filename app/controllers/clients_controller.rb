@@ -34,7 +34,7 @@ class ClientsController < ApplicationController
     @client = Client.find params[:id]
 
     if @client.save_stage_2(client_params)
-      redirect_to new_user_session_path
+      redirect_to new_user_session_path, notice: 'Компания успешно зарегистрирована'
     else
       flash[:alert] = @client.errors.full_messages
       render 'edit'
