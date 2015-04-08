@@ -28,7 +28,7 @@ class Project < ActiveRecord::Base
     elsif user.staff?
       Project.joins(:users).where(company: client.companies, users: {id: user.id})
     elsif user.customer?
-      Project.joins(:users).where(company: user.company, users: {id: user.id})
+      Project.where(company: user.company)
     end
   end
 
