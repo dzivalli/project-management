@@ -1,26 +1,25 @@
-- content_for :login do
-  .login-container
-    .login-header.login-caret
-      .login-content
-        = link_to root_path, class: 'logo' do
-          = image_tag 'logo.png', width: 150
-        %p.description Введите Вашу электопочту и мы вышлем ссылку
-        .login-progressbar-indicator
-    .login-progressbar
-      %div
-    .login-form
-      .login-content
-        = form_for resource, as: resource_name, url: password_path(resource_name), html: { class: 'form_register validate' } do |f|
-          .form-group
-            .input-group
-              .input-group-addon
-                %i.entypo-mail
-              =f.text_field :email, placeholder: 'email', class: 'form-control', data: {validate: 'required,email'}
-          .form-group
-            = button_tag class: 'btn btn-info btn-block btn-login' do
-              Отправить
-              %i.entypo-right-open-mini
-        .login-bottom-links
-          = link_to new_user_session_path do
-            %i.entypo-lock
-            Вернуться на страницу ввода логина и паро
+.login-container
+  .login-header.login-caret
+    .login-content
+      = link_to root_path, class: 'logo' do
+        = image_tag 'logo.png', width: 150
+      %p.description Введите Вашу электопочту и мы вышлем ссылку
+      .login-progressbar-indicator
+  .login-progressbar
+    %div
+  .login-form
+    .login-content
+      = form_for resource, as: resource_name, url: password_path(resource_name), html: { class: 'form_register validate' } do |f|
+        .form-group
+          .input-group
+            .input-group-addon
+              %i.entypo-mail
+            =f.text_field :email, placeholder: 'email', class: 'form-control', data: {validate: 'required,email'}
+        .form-group
+          = button_tag class: 'btn btn-info btn-block btn-login' do
+            Отправить
+            %i.entypo-right-open-mini
+      .login-bottom-links
+        = link_to new_user_session_path do
+          %i.entypo-lock
+          Вернуться на страницу ввода логина и паро

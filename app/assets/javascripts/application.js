@@ -37,6 +37,7 @@
 //= require neon/wysihtml5-0.4.0pre.min
 //= require neon/bootstrap-wysihtml5
 //= require neon/fileinput
+//= require neon/neon-login
 
 //= require data-confirm-modal
 

@@ -1,10 +1,10 @@
 class ClientsController < ApplicationController
   skip_before_action :authenticate_user!, except: [:index, :show]
   skip_before_action :authorize_resource, except: [:index, :show]
+  layout 'login', except: :index
 
   def index
-    @clients = Client.includes(:companies).all
-
+    @clients = Client.includes(:companies).with_deleted
   end
 
   def show
@@ -16,55 +16,47 @@ class ClientsController < ApplicationController
   end
 
   def create
-    if User.with_deleted.find_by_email(params[:user][:email])
-      redirect_to :back, alert: 'Пользователь с таким email уже существует'
+    @client = Client.new client_params
+    if @client.save_stage_1
+      redirect_to new_user_session_path, notice: 'Письмо было успешно выслано'
     else
-      client = Client.new
-      owner = client.build_owner(owner_params.merge!(client: client))
-      owner.prepare
-      if client.save
-        Notifications.client_notice(client, 'Регистрация').deliver_later
-        client.set_trial_plan!
-        redirect_to new_user_session_path, notice: 'Письмо было успешно выслано'
-      else
-        redirect_to :back, alert: 'Произошла ошибка'
-      end
+      flash[:alert] = @client.errors.full_messages
+      render 'new'
     end
   end
 
   def edit
     @client = Client.find params[:id]
-    if @client.owner.confirmed? || !@client.owner || (@client.owner.confirmation_token != params[:token])
-      not_found
-    end
-    @client.build_main_company
+    @client.build_main_company if @client.checks?(params[:token])
   end
 
   def update
-    client = Client.find params[:id]
-    client.build_main_company(company_params.merge!(client: client))
-    if !client.owner.confirmed? && client.save && client.owner.update(owner_params)
-      client.after_registration(client)
+    @client = Client.find params[:id]
+
+    if @client.save_stage_2(client_params)
       redirect_to new_user_session_path
     else
-      render 'edit', alert: 'Произошла ошибка'
+      flash[:alert] = @client.errors.full_messages
+      render 'edit'
     end
   end
 
   def destroy
-    client = Client.find params[:id]
-    if client.destroy
+    if params.key?(:destroy)
+      client = Client.with_deleted.find params[:id]
+      client.really_destroy!
       redirect_to :back, notice: 'Глобальный клиент был успешно удален'
+    else
+      client = Client.find params[:id]
+      client.destroy
+      redirect_to :back, notice: 'Глобальный клиент помечен, как удаленный'
     end
   end
 
   private
 
-  def owner_params
-    params.require(:user).permit(:email, :full_name, :password, :password_confirmation)
-  end
-
-  def company_params
-    params.require(:company).permit(:name, :email, :address, :phone, :city, :website)
+  def client_params
+    params.require(:client).permit(main_company_attributes: [:name, :email, :address, :phone, :city, :website],
+                  owner_attributes: [:id, :email, :full_name, :password, :password_confirmation, :phone])
   end
 end

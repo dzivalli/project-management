@@ -1,4 +1,4 @@
-- content_for :wizard do
+.container
   .well.well-sm
     %h4 Пожалуйста, введите данные
   = form_for @client, html: {class: 'form-wizard validate'} do |f|
@@ -15,16 +15,16 @@
           Данные компании
     .tab-content
       #tab2-1.tab-pane.active
-        = fields_for @client.owner do |u|
+        = f.fields_for :owner do |o|
           .row
             .col-md-6
               .form-group
                 %label.control-label{:for => "full_name"} Полное имя
-                = u.text_field :full_name, placeholder: 'Имя и фамилия', class: 'form-control', data: {validate: 'required'}
+                = o.text_field :full_name, placeholder: 'Имя и фамилия', class: 'form-control', data: {validate: 'required'}
             .col-md-6
               .form-group
                 %label.control-label{:for => "phone"} Телефон
-                = u.text_field :phone, class: 'form-control'
+                = o.text_field :phone, class: 'form-control'
           .row
             .col-md-6
               .form-group
@@ -32,43 +32,43 @@
                 .input-group
                   .input-group-addon
                     %i.entypo-key
-                  = u.password_field :password, class: 'form-control', data: {validate: 'required'}
+                  = o.password_field :password, class: 'form-control', data: {validate: 'required'}
             .col-md-6
               .form-group
                 %label.control-label Подтверждение пароля
                 .input-group
                   .input-group-addon
                     %i.entypo-cw
-                  = u.password_field :password_confirmation, class: 'form-control', data: {validate: 'required'}
+                  = o.password_field :password_confirmation, class: 'form-control', data: {validate: 'required'}
       #tab2-2.tab-pane
-        = fields_for @client.main_company do |c|
+        = f.fields_for :main_company do |m|
           .row
             .col-md-6
               .form-group
-                =c.label 'Имя компании', nil, class: 'control-label'
-                =c.text_field :name, class: 'form-control', data: {validate: 'required'}
+                =m.label 'Имя компании', nil, class: 'control-label'
+                =m.text_field :name, class: 'form-control', data: {validate: 'required'}
             .col-md-6
               .form-group
-                =c.label 'Email', nil, class: 'control-label'
-                =c.text_field :email, class: 'form-control', data: {validate: 'required,email'}
+                =m.label 'Email', nil, class: 'control-label'
+                =m.text_field :email, class: 'form-control', data: {validate: 'required,email'}
           .row
             .col-md-12
               .form-group
-                =c.label 'Адрес', nil, class: 'control-label'
-                =c.text_field :address, class: 'form-control', data: {validate: 'required'}
+                =m.label 'Адрес', nil, class: 'control-label'
+                =m.text_field :address, class: 'form-control', data: {validate: 'required'}
           .row
             .col-md-4
               .form-group
-                =c.label 'Город', nil, class: 'control-label'
-                =c.text_field :city, class: 'form-control', data: {validate: 'required'}
+                =m.label 'Город', nil, class: 'control-label'
+                =m.text_field :city, class: 'form-control', data: {validate: 'required'}
             .col-md-4
               .form-group
-                =c.label 'Вебсайт', nil, class: 'control-label'
-                =c.text_field :website, class: 'form-control'
+                =m.label 'Вебсайт', nil, class: 'control-label'
+                =m.text_field :website, class: 'form-control'
             .col-md-4
               .form-group
-                =c.label 'Телефон', nil, class: 'control-label'
-                =c.text_field :phone, class: 'form-control'
+                =m.label 'Телефон', nil, class: 'control-label'
+                =m.text_field :phone, class: 'form-control'
         .form-group
           = f.submit 'Закончить регистрацию', class: 'btn btn-primary'
       %ul.pager.wizard

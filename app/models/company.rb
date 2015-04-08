@@ -2,8 +2,8 @@ class Company < ActiveRecord::Base
   has_many :users, dependent: :destroy
   has_many :projects, dependent: :destroy
   has_many :permissions, dependent: :destroy
-  has_many :invoices
-  has_many :payments
+  has_many :invoices, dependent: :destroy
+  has_many :payments, dependent: :destroy
   belongs_to :client, -> { with_deleted }
   belongs_to :contact, class_name: 'User'
 

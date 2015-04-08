@@ -1,37 +1,36 @@
-- content_for :login do
-  .login-container
-    .login-header.login-caret
-      .login-content
-        = link_to root_path, class: 'logo' do
-          = image_tag 'logo.png', width: 150
-        %p.description Регистрация бесплатна и займет всего лишь пару минут
-        .login-progressbar-indicator
-          %h3 43%
-          %span Вход...
-    .login-progressbar
-      %div
-    .login-form
-      .login-content
-        = form_for @client, role: 'form', class: 'form_register' do
-          = fields_for @client.owner do |u|
-            .form-register-success
-              %i.entypo-check
-              %p Дальнейшие инструкции Вам были высланы на почту
-            .form-group
-              .input-group
-                .input-group-addon
-                  %i.entypo-user-add
-                =u.text_field :full_name, placeholder: 'Имя и фамилия', class: 'form-control'
-            .form-group
-              .input-group
-                .input-group-addon
-                  %i.entypo-mail
-                =u.text_field :email, placeholder: 'email', class: 'form-control'
+.login-container
+  .login-header.login-caret
+    .login-content
+      = link_to root_path, class: 'logo' do
+        = image_tag 'logo.png', width: 150
+      %p.description Регистрация бесплатна и займет всего лишь пару минут
+      .login-progressbar-indicator
+        %h3 43%
+        %span Вход...
+  .login-progressbar
+    %div
+  .login-form
+    .login-content
+      = form_for @client, role: 'form', class: 'form_register' do |f|
+        = f.fields_for :owner do |o|
+          .form-register-success
+            %i.entypo-check
+            %p Дальнейшие инструкции Вам были высланы на почту
           .form-group
-            = button_tag class: 'btn btn-success btn-block btn-login' do
-              %i.entypo-right-open-mini
-              Отправить заявку
-        .login-bottom-links
-          = link_to new_user_session_path do
-            %i.entypo-lock
-            Вернуться на страницу ввода логина и пароля
+            .input-group
+              .input-group-addon
+                %i.entypo-user-add
+              =o.text_field :full_name, placeholder: 'Имя и фамилия', class: 'form-control'
+          .form-group
+            .input-group
+              .input-group-addon
+                %i.entypo-mail
+              =o.text_field :email, placeholder: 'email', class: 'form-control'
+        .form-group
+          = button_tag class: 'btn btn-success btn-block btn-login' do
+            %i.entypo-right-open-mini
+            Отправить заявку
+      .login-bottom-links
+        = link_to new_user_session_path do
+          %i.entypo-lock
+          Вернуться на страницу ввода логина и пароля

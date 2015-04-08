@@ -12,6 +12,9 @@ class Client < ActiveRecord::Base
 
   acts_as_paranoid
 
+  accepts_nested_attributes_for :main_company
+  accepts_nested_attributes_for :owner
+
   def copy_email_templates!
     EmailTemplate.templates.each do |email|
       email_templates.create email.attributes.except('id', 'created_at', 'updated_at')
@@ -22,8 +25,8 @@ class Client < ActiveRecord::Base
     update(plan: Plan.trial, paid_on: Time.now)
   end
 
-  def after_registration(client)
-    owner.update(confirmed_at: Time.now, company: client.main_company)
+  def after_registration
+    owner.update(confirmed_at: Time.now, company: main_company)
     owner.admin!
     owner.touch(:confirmed_at)
     copy_email_templates!
@@ -65,5 +68,34 @@ class Client < ActiveRecord::Base
 
   def companies_count
     companies.count > 0 ? users.count - 1 : 0
+  end
+
+  def save_stage_1
+    owner.prepare
+    if save
+      owner.update client_id: id
+      Notifications.client_notice(self, 'Регистрация').deliver_later
+      set_trial_plan!
+      true
+    else
+      false
+    end
+  end
+
+  def save_stage_2(params)
+    if !owner.confirmed? && update(params)
+      main_company.update client_id: id
+      after_registration
+      true
+    else
+      false
+    end
+  end
+
+  def checks?(token)
+    if owner.confirmed? || !owner || (owner.confirmation_token != token)
+      raise ActionController::RoutingError.new('Not Found')
+    end
+    true
   end
 end

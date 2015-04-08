@@ -21,7 +21,10 @@
               %strong.text-info= c.main_company_name
             %small.text-muted вы владелец
           - else
-            = c.main_company_name
+            - if c.deleted?
+              ПОМЕЧЕНА НА УДАЛЕНИЕ
+            - else
+              = c.main_company_name
         %td= c.owner_info
         %td= c.created_at.strftime("%d-%m-%Y")
         %td= c.users_count
@@ -29,5 +32,7 @@
         %td= c.plan_info
         %td= c.paid_on
         %td.m-r
-          = link_to client_path(c), type: 'button', class: 'btn btn-default btn-xs', method: :delete, data: { confirm: 'Вы уверены?', toggle: 'tooltip', placement: 'top', 'original-title' => 'Удалить' } do
+          = link_to client_path(c), type: 'button', class: 'btn btn-default btn-xs', method: :delete, data: { confirm: 'Вы уверены?', toggle: 'tooltip', placement: 'top', 'original-title' => 'Пометить на удаление' } do
             %i.entypo-trash
+          = link_to client_path(c, destroy: true), type: 'button', class: 'btn btn-red btn-xs popover-secondary', method: :delete, data: { confirm: 'Вы уверены?', toggle: 'tooltip', placement: 'top', 'original-title' => 'Удалить полностью' } do
+            %i.entypo-thumbs-down
