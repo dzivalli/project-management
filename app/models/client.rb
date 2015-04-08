@@ -50,7 +50,12 @@ class Client < ActiveRecord::Base
     if owner
       "#{owner.full_name} (#{owner.email})"
     else
-      'Владелец компании не определен или удален'
+      deleted_owner = User.with_deleted.find(owner_id)
+      if deleted_owner
+        "#{deleted_owner.full_name} (#{deleted_owner.email}) (ПОМЕЧЕН НА УДАЛЕНИЕ)"
+      else
+        'Владелец компании не определен'
+      end
     end
   end
 
