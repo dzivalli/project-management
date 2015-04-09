@@ -19,7 +19,7 @@ class InvoicesController < ApplicationController
                 Invoice.new invoice_params.merge(status: 'черновик')
               end
     if invoice.save
-      redirect_to invoice_path(invoice.id), notice: 'Элемент создан успешно'
+      redirect_to invoice_path(invoice), notice: 'Элемент создан успешно'
     else
       redirect_to :back, alert: 'Произошла ошибка'
     end

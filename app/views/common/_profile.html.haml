@@ -48,12 +48,13 @@
 
   .col-md-6.col-sm-4.clearfix.hidden-xs
     %ul.list-inline.links-list.pull-right
-      %li= render 'common/plan'
-      %li
-        - unless current_user.client.plan.unlimited?
-          = link_to choose_plans_path, class: 'btn btn-default btn-icon' do
-            Продлить
-            %i.entypo-credit-card
+      - if current_user.admin?
+        %li= render 'common/plan'
+        %li
+          - unless current_user.client.plan.unlimited?
+            = link_to choose_plans_path, class: 'btn btn-default btn-icon' do
+              Продлить
+              %i.entypo-credit-card
       %li.sep
       %li
         = link_to destroy_user_session_path, method: :delete do
