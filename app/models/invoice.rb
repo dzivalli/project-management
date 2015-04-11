@@ -12,9 +12,9 @@ class Invoice < ActiveRecord::Base
 
 
   MERCHANT_URL = 'http://test.robokassa.ru/Index.aspx'
-  MERCHANT_LOGIN = 'project-system'
-  MERCHANT_PASS_1 = 'rhjirfrfhnjirf1'
-  MERCHANT_PASS_2 = ''
+  MERCHANT_LOGIN = 'wookoo.ru'
+  MERCHANT_PASS_1 = 'djkhsfsdf88'
+  MERCHANT_PASS_2 = 'esrwaahjl88'
   SERVICES_URL = ''
 
   def self.from_project(params)
@@ -93,22 +93,26 @@ class Invoice < ActiveRecord::Base
     pay_desc['mrh_url']   = MERCHANT_URL
     pay_desc['mrh_login'] = MERCHANT_LOGIN
     pay_desc['mrh_pass1'] = MERCHANT_PASS_1
-    pay_desc['inv_id']    = reference_no
+    pay_desc['inv_id']    = id
     pay_desc['inv_desc']  = notes
     pay_desc['out_summ']  = amount_due.to_s
     pay_desc['shp_item']  = ''
-    pay_desc['in_curr']   = "WMRM"
+    pay_desc['in_curr']   = ""
     pay_desc['culture']   = "ru"
     pay_desc['encoding']  = "utf-8"
     # crc
     pay_desc['crc'] = get_hash(pay_desc['mrh_login'],
                                pay_desc['out_summ'],
                                pay_desc['inv_id'],
-                               pay_desc['mrh_pass1'])
+                               pay_desc['mrh_pass1'],
+                               "Shp_item=#{pay_desc['Shp_item']}")
     pay_desc
   end
 
   def get_hash(*s)
+    puts "!!#{s.join(':')}!!"
+    puts Digest::MD5.hexdigest(s.join(':'))
+    # abort
     Digest::MD5.hexdigest(s.join(':'))
   end
 end
