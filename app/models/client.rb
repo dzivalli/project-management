@@ -103,4 +103,8 @@ class Client < ActiveRecord::Base
     end
     true
   end
+
+  def update_plan!(plan)
+    update plan: plan, paid_on: Time.now
+  end
 end

@@ -47,22 +47,6 @@ class PaymentsController < ApplicationController
     end
   end
 
-  def result
-
-    # crc = Payment.get_hash(params['OutSum'],
-    #                         params['InvId'],
-    #                         Payment.MERCHANT_PASS_2)
-    # @result = "FAIL"
-    # unless params['SignatureValue'].blank? && crc.casecmp(params['SignatureValue']) != 0
-    #   @order = Order.where(:id => params['Shp_item']).first
-    #   @order.payment.invid = params['InvId'].to_i
-    #   @order.payment.status =
-    #   @order.payment.save
-    #   # ...
-    #   @result = "OK#{params['InvId']}"
-    # end
-  end
-
   private
 
   def payment_params

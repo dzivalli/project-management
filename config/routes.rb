@@ -82,4 +82,9 @@ Rails.application.routes.draw do
   get 'settings/general'
   get 'settings/email'
   patch 'settings/update'
+
+  # routes for Robokassa
+  get 'robo/result'
+  get 'robo/success'
+  get 'robo/failure'
 end

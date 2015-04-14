@@ -1,12 +1,13 @@
 class Invoice < ActiveRecord::Base
   belongs_to :company, -> { with_deleted }
+  belongs_to :plan
 
   has_many :items, dependent: :destroy
   has_many :payments
 
   acts_as_paranoid
 
-  enum status: ['черновик', 'счет выставлен']
+  enum status: ['черновик', 'счет выставлен', 'оплачен']
 
   scope :client_invoices, -> (client) { where(company: client.companies.ids) }
 
@@ -16,6 +17,10 @@ class Invoice < ActiveRecord::Base
   MERCHANT_PASS_1 = 'djkhsfsdf88'
   MERCHANT_PASS_2 = 'esrwaahjl88'
   SERVICES_URL = ''
+
+  def get_paid!
+    update status: 'оплачен'
+  end
 
   def self.from_project(params)
     company = Project.find(params[:project]).company
@@ -96,10 +101,12 @@ class Invoice < ActiveRecord::Base
     pay_desc['inv_id']    = id
     pay_desc['inv_desc']  = notes
     pay_desc['out_summ']  = amount_due.to_s
-    pay_desc['shp_item']  = ''
     pay_desc['in_curr']   = ""
     pay_desc['culture']   = "ru"
     pay_desc['encoding']  = "utf-8"
+
+    pay_desc['shp_item']  = plan_id if plan_id
+
     # crc
     pay_desc['crc'] = get_hash(pay_desc['mrh_login'],
                                pay_desc['out_summ'],
@@ -110,9 +117,6 @@ class Invoice < ActiveRecord::Base
   end
 
   def get_hash(*s)
-    puts "!!#{s.join(':')}!!"
-    puts Digest::MD5.hexdigest(s.join(':'))
-    # abort
     Digest::MD5.hexdigest(s.join(':'))
   end
 end

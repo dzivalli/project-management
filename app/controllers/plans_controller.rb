@@ -43,9 +43,10 @@ class PlansController < ApplicationController
 
   def generate
     plan = Plan.paid[params[:plan].to_i - 1]
-    @invoice = Invoice.new company_id: current_user.company.id,
+    @invoice = Invoice.new company_id: current_user.company,
                            due_date: Time.now + 1.week,
-                           status: 'черновик'
+                           status: 'черновик',
+                           plan_id: plan
     @invoice.items << Item.from_plan!(plan)
     @invoice.generate_reference!
     if @invoice.save

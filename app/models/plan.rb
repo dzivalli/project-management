@@ -1,5 +1,6 @@
 class Plan < ActiveRecord::Base
   has_many :clients
+  has_many :invoices
 
   scope :trial, -> { find_by(term: 1, cost: nil) }
   scope :unlimited, -> { find_by(term: 999, cost: nil) }
