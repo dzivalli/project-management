@@ -19,12 +19,6 @@ class Invoice < ActiveRecord::Base
   SERVICES_URL = ''
 
   def get_paid!(amount)
-    payments.create amount: amount,
-                    company: company,
-                    payment_method: PaymentMethod.online,
-                    payment_date: Time.now,
-                    trans: Payment.generate_trans
-
     if amount_due == amount.to_i
       update status: 'оплачен'
     elsif amount_due == 0 && amount.to_i > 0
@@ -32,6 +26,12 @@ class Invoice < ActiveRecord::Base
     else
       update status: 'оплачен частично'
     end
+
+    payments.create amount: amount,
+                    company: company,
+                    payment_method: PaymentMethod.online,
+                    payment_date: Time.now,
+                    trans: Payment.generate_trans
   end
 
   def self.from_project(params)

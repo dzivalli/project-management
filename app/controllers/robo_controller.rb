@@ -15,13 +15,13 @@ class RoboController < ApplicationController
 
   def success
     if @invoice
-      redirect_to invoice_path(invoice), notice: 'Счет успешно оплачен'
+      redirect_to invoice_path(@invoice), notice: 'Счет успешно оплачен'
     end
   end
 
   def failure
     if @invoice
-      redirect_to invoice_path(invoice), alert: 'Счет не оплачен!'
+      redirect_to invoice_path(@invoice), alert: 'Счет не оплачен!'
     end
   end
 
