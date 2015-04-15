@@ -74,15 +74,9 @@ class Invoice < ActiveRecord::Base
     total - amount_due
   end
 
+  # TODO check all payments?
   def payment_status
-    if payments.none?
-      'неоплачен'
-    elsif amount_due == 0
-      'оплачен'
-    elsif amount_due > 0
-      'оплачен частично'
-    end
-
+    status
   end
 
   def invoiced!
@@ -124,7 +118,7 @@ class Invoice < ActiveRecord::Base
                                pay_desc['out_summ'],
                                pay_desc['inv_id'],
                                pay_desc['mrh_pass1'],
-                               "Shp_item=#{pay_desc['Shp_item']}")
+                               "Shp_item=#{pay_desc['shp_item']}")
     pay_desc
   end
 

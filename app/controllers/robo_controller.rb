@@ -8,7 +8,7 @@ class RoboController < ApplicationController
   def result
     if @invoice && @invoice.check_params?(params)
       @invoice.get_paid!(params['OutSum'])
-      client.update_plan!(invoice.plan) if @invoice.plan
+      client.update_plan!(@invoice.plan) if @invoice.plan
       render layout: false, plain: "OK#{@invoice.id}"
     end
   end
