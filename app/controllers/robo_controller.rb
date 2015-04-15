@@ -6,8 +6,11 @@ class RoboController < ApplicationController
   before_action :find_invoice
 
   def result
-    sum = params['OutSum']
+    sum = params['OutSum'].to_i
     crc = params['SignatureValue']
+    puts sum, crc
+    puts (crc == @invoice.pay_hash['crc'])
+    puts (sum == @invoice.pay_hash['out_summ'])
     if @invoice && crc == @invoice.pay_hash['crc'] && sum == @invoice.pay_hash['out_summ']
       @invoice.get_paid!
       client.update_plan!(invoice.plan) if @invoice.plan
