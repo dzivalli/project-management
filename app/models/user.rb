@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
   acts_as_paranoid
 
 
-  scope :customer_users, -> (client) { where(client: client).where.not(id: client.owner.id) }
+  scope :customer_users, -> (client) { where(client: client) }
   scope :customer_staff, -> (client) { where(client: client, role: Role.where(name: %w(staff admin))) }
 
 
