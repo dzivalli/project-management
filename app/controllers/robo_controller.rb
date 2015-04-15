@@ -1,4 +1,8 @@
 class RoboController < ApplicationController
+  skip_before_action :authenticate_user!
+  skip_before_action :check_client_plan!
+  skip_before_action :authorize_resource
+
   before_action :find_invoice
 
   def result
