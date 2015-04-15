@@ -7,7 +7,7 @@ class Invoice < ActiveRecord::Base
 
   acts_as_paranoid
 
-  enum status: ['черновик', 'счет выставлен', 'оплачен']
+  enum status: ['черновик', 'счет выставлен', 'оплачен', 'оплачен частично', 'переплачен']
 
   scope :client_invoices, -> (client) { where(company: client.companies.ids) }
 
@@ -18,8 +18,20 @@ class Invoice < ActiveRecord::Base
   MERCHANT_PASS_2 = 'esrwaahjl88'
   SERVICES_URL = ''
 
-  def get_paid!
-    update status: 'оплачен'
+  def get_paid!(amount)
+    payments.create amount: amount,
+                    company: company,
+                    payment_method: PaymentMethod.online,
+                    payment_date: Time.now,
+                    trans: Payment.generate_trans
+
+    if amount_due == amount.to_i
+      update status: 'оплачен'
+    elsif amount_due == 0 && amount.to_i > 0
+      update status: 'переплачен'
+    else
+      update status: 'оплачен частично'
+    end
   end
 
   def self.from_project(params)
@@ -117,6 +129,11 @@ class Invoice < ActiveRecord::Base
   end
 
   def get_hash(*s)
-    Digest::MD5.hexdigest(s.join(':'))
+    Digest::MD5.hexdigest(s.join(':')).upcase
+  end
+
+  def check_params?(params)
+    crc = get_hash(params['OutSum'], params['InvId'], MERCHANT_PASS_2, "Shp_item=#{params['Shp_item']}")
+    crc == params['SignatureValue']
   end
 end

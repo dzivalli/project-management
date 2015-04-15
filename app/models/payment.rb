@@ -7,11 +7,11 @@ class Payment < ActiveRecord::Base
 
   scope :client_payments, -> (client) { where(company_id: client.companies.ids ) }
 
-  def generate_trans
+  def self.generate_trans
     begin
       trans = rand(100000..999999)
     end while Payment.pluck(:trans).include?(trans)
-    self.trans = trans
+    trans
   end
 
 end

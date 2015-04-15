@@ -8,14 +8,14 @@ class PaymentsController < ApplicationController
     @payment = Payment.new
     @payment.payment_date = Time.now.strftime("%d-%m-%Y")
     @payment.amount = Invoice.find(params[:invoice_id]).amount_due
-    @payment.generate_trans
+    @payment.trans = Payment.generate_trans
     @payment_methods = PaymentMethod.all
     render layout: 'modal'
   end
 
   def create
     invoice = Invoice.client_invoices(client).find params[:invoice_id]
-    payment = Payment.new payment_params.merge(invoice: invoice, company: invoice.company)
+    payment = invoice.payments.build payment_params.merge(company: invoice.company)
     store do
       payment.save
     end

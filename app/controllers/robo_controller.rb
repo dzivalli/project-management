@@ -6,31 +6,23 @@ class RoboController < ApplicationController
   before_action :find_invoice
 
   def result
-    sum = params['OutSum'].to_i
-    crc = params['SignatureValue']
-    puts sum, crc
-    puts (crc == @invoice.pay_hash['crc'])
-    puts (sum == @invoice.pay_hash['out_summ'])
-    if @invoice && crc == @invoice.pay_hash['crc'] && sum == @invoice.pay_hash['out_summ']
-      @invoice.get_paid!
+    if @invoice && @invoice.check_params?(params)
+      @invoice.get_paid!(params['OutSum'])
       client.update_plan!(invoice.plan) if @invoice.plan
       render layout: false, plain: "OK#{@invoice.id}"
     end
-    not_found
   end
 
   def success
     if @invoice
       redirect_to invoice_path(invoice), notice: 'Счет успешно оплачен'
     end
-    not_found
   end
 
   def failure
     if @invoice
       redirect_to invoice_path(invoice), alert: 'Счет не оплачен!'
     end
-    not_found
   end
 
   private
