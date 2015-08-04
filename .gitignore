@@ -18,3 +18,4 @@
 /vendor/tpl
 
 /config/database.yml
+/config/secrets.yml
