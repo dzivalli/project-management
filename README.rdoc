@@ -1,28 +1,9 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Just for example of my previous code.
 
-Things you may want to cover:
+The code is horrible. Controllers are fat, some business logic should be moved
+to the separated classes. Commits should be smaller. There are no tests at all
+so it is turned into a torment to test it manually at the end.
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+But it helped me to know better Rails and some gems.
