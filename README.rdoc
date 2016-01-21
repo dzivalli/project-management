@@ -1,9 +1,7 @@
 == README
 
-Just for example of my previous code.
+Example of my previous code (first test project).
 
 The code is horrible. Controllers are fat, some business logic should be moved
-to the separated classes. Commits should be smaller. There are no tests at all
-so it is turned into a torment to test it manually at the end.
+to the separated classes and etc. There are no tests at all.
 
-But it helped me to know better Rails and some gems.
